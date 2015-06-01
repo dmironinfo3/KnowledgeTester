@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model KnowledgeTester.Models.LoginModel
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Test your .NET knowledge. </h1>
+                <h2>Now. For free.</h2>
+            </hgroup>
+            <p>Sign up today and start the testing process. </p>
+        </div>
+    </section>
+}
+@using (Ajax.BeginForm("Login", "Home", new { FormMethod.Post }, null, new { Id = "LoginForm" }))
+{
+    <div style="display: table-caption;">
+        @Html.TextBoxFor(m => m.UserName, new { @id = "userName", @placeholder = "Username", @style = "width: 250px; height:20px;" })
+        @Html.ValidationMessageFor(m => m.UserName)
+        @Html.PasswordFor(m => m.Password, new { @id = "password", @placeholder = "Password", @style = "width: 250px; height:20px;" })
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <input type="submit" value="Submit" />
+    <span style="cursor: pointer;" onclick="hintClick()">
+        Hint</span> <a href="../Register">Register</a>
+}
+<script>
+    function hintClick() {
+        $.ajax({
+            url: '@Url.Action("GetHint", "Home")',
+            data: { userName: $("#userName").val() },
+            type: 'POST',
+            success: function (data) {
+                alert(data);
+            }
+        });
+    }
+</script>

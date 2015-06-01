@@ -1,0 +1,101 @@
+﻿@using KnowledgeTester.Helpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KnowledgeTester.Models.SubcategoryModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+@using (Ajax.BeginForm("Save", "Subcategory", new { FormMethod.Post }, null, new { Id = "subcategoryForm" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "modelId" })
+    <div class="menuDiv">
+        <span class="menuLink" onclick="document.location.href = '../../Category/Index/?id='+'@SessionWrapper.CurrentCategoryId'">
+            Back</span> <span class="menuLink" onclick=" $(this).closest('form').submit(); ">Save</span>
+        <label>
+            Subcategory Panel</label>
+    </div>
+    <div class="menuDiv" style="margin-bottom: 40px; margin-top: 10px;">
+        <label style="font-weight: normal;">&nbsp;category</label>
+        <label>
+            @Model.CategoryName</label>
+    </div>
+
+    <div class="roundBordered">
+        @Html.TextBoxFor(m => m.Name, new { @id = "name", @placeholder = "Subcategory Name", @style = "width: 98%; height:20px;" })
+    </div>
+    if (ViewBag.IsExistingSubcategory != null && (bool)ViewBag.IsExistingSubcategory)
+    {
+    <div class="roundBordered" style="text-align: right;" id="subcategories">
+        <span>Questions</span>
+        <input type="button" value="Add" onclick="addQuestion() " /><input type="button"
+            value="Edit" onclick=" editQuestion() " /><input type="button" value="Delete" onclick="deleteQuestion()" />
+        <script type="text/javascript">
+            function editQuestion() {
+                document.location.href = '../../Question/Index?id=' + getQuestionSelectedId();
+            }
+
+            function addQuestion() {
+                document.location.href = '../../Question/Index?id=00000000-0000-0000-0000-000000000000';
+            }
+
+            function deleteQuestion() {
+                $.ajax({
+                    url: '@Url.Action("DeleteQuestion", "Subcategory")',
+                    data: { id: getQuestionSelectedId() },
+                    type: 'POST',
+                    success: function (data) {
+                        alert(data);
+                        document.location.href = document.location.href;
+                    }
+                });
+            }
+
+            function getQuestionSelectedId() {
+                var rowId = $("#jqGridQuestions").jqGrid('getGridParam', 'selrow');
+                var rowData = jQuery("#jqGridQuestions").getRowData(rowId);
+                var colData = rowData['Id'];
+                return colData;
+            }
+
+            $(document).ready(function () {
+
+                $("#jqGridQuestions").jqGrid({
+                    url: '@Url.Action("GetQuestions", "Subcategory")',
+                    mtype: "GET",
+                    datatype: "json",
+                    colModel: [
+                            { label: 'Question Id', name: 'Id', width: 300, sortable: false },
+                            { label: 'Text', name: 'Text', width: 250, sortable: false },
+                            { label: 'Multiple', name: 'Multiple', width: 100, sortable: false },
+                            { label: 'Usability', name: 'Usability', width: 100, sortable: false }
+                        ],
+                    viewrecords: true,
+                    width: 750,
+                    rowNum: 20,
+                    pager: "#jqGridPagerQuestions",
+                    jsonReader: {
+                        root: "rows",
+                        page: "page",
+                        total: "total",
+                        records: "records",
+                        repeatitems: false,
+                        userdata: "userdata"
+                    }
+                });
+
+
+            });
+
+        </script>
+        <table id="jqGridQuestions">
+        </table>
+        <div id="jqGridPagerQuestions">
+        </div>
+    </div>
+    }
+}

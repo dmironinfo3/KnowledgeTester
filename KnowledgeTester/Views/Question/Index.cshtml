@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KnowledgeTester.Helpers
+@model KnowledgeTester.Models.QuestionModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+@using (Ajax.BeginForm("Save", "Question", new { FormMethod.Post }, null, new { Id = "questionForm" }))
+{
+    @Html.HiddenFor(m => m.SubcategoryName)
+    @Html.HiddenFor(m => m.Id, new { @id = "modelId" })
+    @Html.HiddenFor(m => m.IsMultiple, new { @id = "isMultipleHidden" })
+    <div class="menuDiv">
+        <span class="menuLink" onclick=" document.location.href = '../../Subcategory/Index/?id=' + '@SessionWrapper.CurrentSubcategoryId' ">
+            Back</span> <span class="menuLink" onclick=" $(this).closest('form').submit(); ">Save</span>
+        <label>
+            Question Panel</label>
+    </div>
+    <div class="menuDiv" style="margin-bottom: 40px; margin-top: 10px;">
+        <label style="font-weight: normal;">
+            &nbsp;subcategory</label>
+        <label>
+            @Model.SubcategoryName</label>
+    </div>
+
+    <div class="roundBordered">
+        <span>Question Text</span>
+        @Html.TextAreaFor(m => m.Text, new { @id = "text", @placeholder = "Question", @style = "width: 98%; height:100px; max-width: 98%; max-height:100px;" })
+    </div>
+    if (ViewBag.IsExistingQuestion != null && (bool)ViewBag.IsExistingQuestion)
+    {
+        <div class="roundBordered">
+            <div style="display: flex;"><span class="spanFirstChild">Multiple Answer</span>@Html.CheckBoxFor(m => m.IsMultiple, new { @style = "margin-left:10px; margin-top:3px;", @disabled = "disabled"})
+                 <span class="menuLink" onclick=" addNewAnswer()" style="padding: 3px  0px 0px 480px">
+                                                   Add New</span></div>
+            @for (int i = 0; i < Model.Answers.Count; i++)
+            {
+                @Html.HiddenFor(m => m.Answers[i].Id, new { @id = "hiddenAns" + i });
+                <div style="display: flex;">@Html.CheckBoxFor(a => a.Answers[i].IsCorrect, new { @style = "margin-right:10px; margin-top:14px;", @id = "answerCheck" + i, @class = "questionChecks", @onchange = "onCheckChange()" })
+                    @Html.TextBoxFor(m => m.Answers[i].Text, new { @id = "answerText" + i, @style = "width:550px;" })<span class="menuLink" onclick="deleteAnswer('@Model.Answers[i].Id')">delete</span></div>
+            }
+            @Html.ValidationMessageFor(m => m.Answers)
+            <script type="text/javascript">
+                function deleteAnswer(ansId) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteAnswer", "Question")',
+                        data: { id: ansId, questionId: $("#modelId").val() },
+                        type: 'POST',
+                        success: function (data) {
+                            document.location.href = document.location.href;
+                        }
+                    });
+                }
+
+                function addNewAnswer() {
+                    $.ajax({
+                        url: '@Url.Action("AddNewAnswer", "Question")',
+                        data: { id: $("#modelId").val() },
+                        type: 'POST',
+                        success: function (data) {
+                            document.location.href = document.location.href;
+                        }
+                    });
+                }
+
+                function onCheckChange() {
+                    var all = $(".questionChecks");
+                    var count = 0;
+                    for (var i = 0; i < all.length; i++) {
+                        if ($(all[i]).attr('checked') === 'checked') {
+                            count = count + 1;
+                        }
+                    }
+                    if (count >= 2) {
+                        $("#IsMultiple").attr('checked', true);
+                        $("#isMultipleHidden").val('True');
+                    }
+                    if (count <= 1) {
+                        $("#IsMultiple").attr('checked', false);
+                        $("#isMultipleHidden").val('False');
+                    }
+                }
+            </script>
+        </div>
+    }
+      <div class="roundBordered">
+            <span>Argumentation Text</span>
+            @Html.TextAreaFor(m => m.CorrectArgument, new { @id = "argument", @placeholder = "Argumentation", @style = "width: 98%; height:100px; max-width: 98%; max-height:100px;" })
+    
+        </div>
+}
+<div class="roundBordered">
+    Note: Please select at least one correct answer. Answers count should be between
+    3 and 6</div>

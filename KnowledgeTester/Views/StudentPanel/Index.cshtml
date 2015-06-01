@@ -1,0 +1,207 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KnowledgeTester.Models.StudentPanelModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+<div class="menuDiv">
+    <span class="menuLink" onclick="menuClick('Subscribe');">Subscribe for a test</span>
+    <span class="menuLink" onclick="menuClick('Upcoming');">Upcoming tests</span>
+    <span class="menuLink" onclick="menuClick('Finished');">Finished tests</span>
+    <span class="menuLink" onclick="logout();">Logout</span>
+</div>
+@if (Model.HasOngoingTest)
+{
+    <div class="roundBordered" style="border: 2px solid red; text-align: right;">
+        <span style="color: darkred;"><strong>@Model.OngoingTest.Name</strong>&nbsp;is ongoing!</span> <span class="startButton" onclick="startOngoingTest('@Model.OngoingTest.Id')">Start now!</span>
+</div>
+}
+<div class="roundBordered">
+    <span>@Model.DisplayName</span>
+</div>
+<div class="roundBordered" style="text-align: right; display: none;" id="tests">
+    <span>Subscribe for a test</span>
+    <input type="button" value="Subscribe" onclick="subscribeForTest()" />
+    <script type="text/javascript">
+        
+        function startOngoingTest(testid) {
+            document.location.href = '../../TakeTest/Index?id=' + testid;
+        }
+
+        function subscribeForTest() {
+            $.ajax({
+                url: '@Url.Action("Subscribe", "StudentPanel")',
+                data: { id: getTestSelectedId() },
+                type: 'POST',
+                success: function (data) {
+                    alert(data);
+                    document.location.href = document.location.href;
+                }
+            });
+        }
+        
+        function getTestSelectedId() {
+            var rowId =$("#jqGridTests").jqGrid('getGridParam','selrow');  
+            var rowData = jQuery("#jqGridTests").getRowData(rowId);
+            var colData = rowData['Id'];
+            return colData;
+        }
+
+        $(document).ready(function () {
+            $("#jqGridTests").jqGrid({
+                url: '@Url.Action("GetTests", "StudentPanel")',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
+                    { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
+                    { label: 'Duration', name: 'Duration', width: 100,sortable: false }
+                ],
+                viewrecords: true,
+                width: 750,
+                height: 250,
+                rowNum: 20,
+                pager: "#jqGridPagerTests",
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    userdata: "userdata"
+                },
+            });
+        });
+
+    </script>
+    <table id="jqGridTests">
+    </table>
+    <div id="jqGridPagerTests">
+    </div>
+</div>
+<div class="roundBordered" style="text-align: right;" id="upcoming">
+    <span>Upcoming tests</span>
+    <input type="button" value="Unsubscribe" onclick="unsubscribeForTest()" />
+    <script type="text/javascript">
+       
+        function unsubscribeForTest() {
+            $.ajax({
+                url: '@Url.Action("Unsubscribe", "StudentPanel")',
+                data: { id: getUpcomingSelectedId() },
+                type: 'POST',
+                success: function (data) {
+                    alert(data);
+                    document.location.href = document.location.href;
+                }
+            });
+           
+        }
+        
+        function getUpcomingSelectedId() {
+            var rowId =$("#jqGridUpcomingTests").jqGrid('getGridParam','selrow');  
+            var rowData = jQuery("#jqGridUpcomingTests").getRowData(rowId);
+            var colData = rowData['Id'];
+            return colData;
+        }
+
+        $(document).ready(function () {
+            $("#jqGridUpcomingTests").jqGrid({
+                url: '@Url.Action("GetMyTests", "StudentPanel")',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
+                    { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
+                    { label: 'Duration', name: 'Duration', width: 100,sortable: false }
+                ],
+                viewrecords: true,
+                width: 750,
+                height: 250,
+                rowNum: 20,
+                pager: "#jqGridPagerUpcomingTests",
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    userdata: "userdata"
+                },
+            });
+        });
+
+    </script>
+    <table id="jqGridUpcomingTests">
+    </table>
+    <div id="jqGridPagerUpcomingTests">
+    </div>
+</div>
+<div class="roundBordered" style="text-align: right; display: none;" id="finished">
+    <span>Finished tests</span>
+    <script type="text/javascript">
+       
+        $(document).ready(function () {
+            $("#jqGridFinishedTests").jqGrid({
+                url: '@Url.Action("GetFinishedTests", "StudentPanel")',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 300,sortable: false },
+                    { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
+                    { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
+                    { label: 'Score', name: 'Score', width: 50,sortable: false }
+                ],
+                viewrecords: true,
+                width: 750,
+                height: 250,
+                rowNum: 20,
+                pager: "#jqGridPagerFinishedTests",
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    userdata: "userdata"
+                },
+            });
+        });
+
+    </script>
+    <table id="jqGridFinishedTests">
+    </table>
+    <div id="jqGridPagerFinishedTests">
+    </div>
+</div>
+<script>
+
+    function menuClick(link) {
+        closeAll();
+
+        if (link === 'Subscribe') {
+            $("#tests").show(500);
+        }
+        if (link === 'Upcoming') {
+            $("#upcoming").show(500);
+        }
+        if (link === 'Finished') {
+            $("#finished").show(500);
+        }
+    }
+
+    function closeAll() {
+        $("#tests").hide(250);
+        $("#upcoming").hide(250);
+        $("#finished").hide(250);
+    }
+</script>

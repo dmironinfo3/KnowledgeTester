@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KnowledgeTester.Models.CategoryModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+@using (Ajax.BeginForm("Save", "Category", new { FormMethod.Post }, null, new { Id = "categoryForm" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "modelId" })
+    <div class="menuDiv">
+        <span class="menuLink" onclick="document.location.href = '../../AdminPanel'">Back</span>
+        <span class="menuLink" onclick=" $(this).closest('form').submit(); ">Save</span>
+        <label>Category Panel</label>
+    </div>
+    <div class="roundBordered">
+        @Html.TextBoxFor(m => m.Name, new { @id = "name", @placeholder = "Category Name", @style = "width: 98%; height:20px;" })
+    </div>
+    if (ViewBag.IsExistingCategory != null && (bool)ViewBag.IsExistingCategory)
+    {
+    <div class="roundBordered" style="text-align: right;" id="subcategories">
+        <span>Subcategories</span>
+        <input type="button" value="Add" onclick="addSubCategory()" /><input type="button"
+            value="Edit" onclick="editSubCategory()" /><input type="button" value="Delete" onclick="deleteSubCategory()" />
+        <script type="text/javascript">
+            function editSubCategory() {
+                document.location.href = '../../SubCategory/Index?id=' + getSubCategoriesSelectedId();
+            }
+
+            function addSubCategory() {
+                document.location.href = '../../SubCategory/Index?id=00000000-0000-0000-0000-000000000000';
+            }
+
+            function deleteSubCategory() {
+                $.ajax({
+                    url: '@Url.Action("DeleteSubcategory", "Category")',
+                    data: { id: getSubCategoriesSelectedId() },
+                    type: 'POST',
+                    success: function (data) {
+                        alert(data);
+                        document.location.href = document.location.href;
+                    }
+                });
+            }
+
+            function getSubCategoriesSelectedId() {
+                var rowId = $("#jqGridSubcategories").jqGrid('getGridParam', 'selrow');
+                var rowData = jQuery("#jqGridSubcategories").getRowData(rowId);
+                var colData = rowData['Id'];
+                return colData;
+            }
+
+            $(document).ready(function () {
+
+                $("#jqGridSubcategories").jqGrid({
+                    url: '@Url.Action("GetSubcategories", "Category")',
+                    mtype: "GET",
+                    datatype: "json",
+                    colModel: [
+                    { label: 'Subcategory Id', name: 'Id', width: 300, sortable: false },
+                    { label: 'Subcategory Name', name: 'Name', width: 300, sortable: false },
+                    { label: 'Questions', name: 'Questions', width: 150, sortable: false }
+                ],
+                    viewrecords: true,
+                    width: 750,
+                    rowNum: 20,
+                    pager: "#jqGridPagerSubcategories",
+                    jsonReader: {
+                        root: "rows",
+                        page: "page",
+                        total: "total",
+                        records: "records",
+                        repeatitems: false,
+                        userdata: "userdata"
+                    }
+                });
+
+
+            });
+ 
+        </script>
+        <table id="jqGridSubcategories">
+        </table>
+        <div id="jqGridPagerSubcategories">
+        </div>
+    </div>
+    }
+
+}

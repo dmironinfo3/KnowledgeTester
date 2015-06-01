@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KnowledgeTester.Models.TakeTestModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+@using (Ajax.BeginForm("SubmitTest", "TakeTest", new { FormMethod.Post }, null, new { Id = "testForm" }))
+{
+    @Html.HiddenFor(a=>a.TimeElapsed, new {@id="timeElapsedHidden"})
+    <div class="roundBordered" style="position: fixed; margin-left: 800px; width: 50px;
+        margin-top: 0px; font-size: 17px; text-align: center; font-weight: bold; color: white;
+        background-color: darkred;" id="time">
+    </div>
+    <div class="roundBordered finishTestBtn" style="position: fixed; margin-left: 800px;
+        width: 50px; margin-top: 60px; font-size: 17px; text-align: center;" id="saveBtn"
+        onclick="$(this).closest('form').submit(); ">
+        Finish
+    </div>
+    @Html.HiddenFor(a => a.TestId)
+    for (int i = 0; i < Model.Questions.Count; i++)
+    {
+    @Html.HiddenFor(a => a.Questions[i].Id)
+    <div class="roundBordered redBorder">
+        <span>@Model.Questions[i].Text</span>
+        @for (int j = 0; j < Model.Questions[i].Answers.Count; j++)
+        {
+            @Html.HiddenFor(a => a.Questions[i].Answers[j].Id, new { @id = "answerId" + i })
+            <div style="display: flex;">@Html.CheckBoxFor(a => a.Questions[i].Answers[j].IsSelected, new { @style = "margin-right:10px; ", @id = "answerCheck" + i.ToString() + j.ToString(), @class = "questionChecks checkFor" + i, @onchange = "changeQuestion(" + i + ")" })
+                <span>@Model.Questions[i].Answers[j].Text</span>
+            </div>
+        }
+        <span class="menuLink" onclick="actArgumentation('textArg'+@i)">Argumentation</span>
+        @Html.TextAreaFor(m => m.Questions[i].Argument, new { @id = "textArg" + i, @placeholder = "Argumentation", @style = "width: 98%; height:50px; max-width: 98%; max-height:100px; display:none;", @onchange = "changeQuestion(" + i + ")" })
+    </div>
+    }
+}
+
+<script type="text/javascript">
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                handleExpiry();
+            }
+        }, 1000);
+    }
+
+    jQuery(function ($) {
+        var fiveMinutes = 60 * @Model.DurationMinutes,
+        display = $('#time');
+        startTimer(fiveMinutes, display);
+    });
+    $(document).ready(function () {
+        for (var i = 0; i < 10; i++) {
+            changeQuestion(i); // when binding model
+        }
+    });
+    
+    function handleExpiry() {
+        $("#timeElapsedHidden").val(true);
+        $("#testForm").submit();
+        alert('The test time is elapsed! \n Your existing answers were saved. You will be redirected to main panel');
+               
+    }
+
+    function changeQuestion(i) {
+        var all = $(".checkFor" + i);
+        var arg = $("#textArg" + i);
+
+        var count = 0;
+        for (var r = 0; r < all.length; r++) {
+            if ($(all[r]).attr('checked') === 'checked') {
+                count = count + 1;
+            }
+        }
+        var div;
+
+        if (count >= 1 && arg.val() !== '') {
+            div = all[0].closest(".roundBordered");
+            $(div).removeClass("redBorder");
+        } else {
+            div = all[0].closest(".roundBordered");
+            $(div).addClass("redBorder");
+        }
+
+        var allRounds = $(".redBorder");
+
+        if (allRounds.length === 0) {
+            $("#saveBtn").show();
+        } else {
+            $("#saveBtn").hide();
+        }
+    }
+
+    function actArgumentation(field) {
+        var id = "#" + field;
+        if ($(id).css('display') == 'none') {
+            $(id).show(100);
+        } else {
+            $(id).hide(100);
+        }
+    }
+</script>

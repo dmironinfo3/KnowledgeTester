@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KnowledgeTester.Helpers
+@model KnowledgeTester.Models.TestModel
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert('@ViewBag.Message');
+    </script>
+}
+@using (Ajax.BeginForm("Save", "Test", new { FormMethod.Post }, null, new { Id = "testForm" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "modelId" })
+    <div class="menuDiv">
+        <span class="menuLink" onclick="document.location.href = '../../AdminPanel'">Back</span>
+        <span class="menuLink" onclick=" $(this).closest('form').submit(); ">Save</span>
+        <label>
+            Test Panel</label>
+    </div>
+
+    <div class="roundBordered">
+        @Html.TextBoxFor(m => m.Name, new { @id = "name", @placeholder = "Test Name", @style = "width: 98%; height:20px;" })
+    </div>
+    <div class="roundBordered">
+        <div class="formRow">
+            <label>
+                Start Date</label>
+            @Html.TextBoxFor(m => m.StartDate, new { @id = "startDate" })</div>
+        <div class="formRow">
+            <label>
+                End Date</label>
+            @Html.TextBoxFor(m => m.EndDate, new { @id = "endDate" })</div>
+        <div class="formRow">
+            <label>
+                Duration (minutes)</label>
+            @Html.TextBoxFor(m => m.Duration, new { @id = "duration", @type = "number" })
+        </div>
+        <div class="formRow">
+            <label>
+                Subcategory</label>
+            @Html.DropDownListFor(m => m.SubcategoryId, new SelectList(
+                                          Model.Subcategories,
+                                          "Id",
+                                          "Name",
+                                          Model.SubcategoryId))
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery('#startDate').datetimepicker();
+        jQuery('#endDate').datetimepicker();
+    </script>
+}

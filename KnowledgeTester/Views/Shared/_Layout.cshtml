@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Knowledge Tester</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ <!-- The jQuery library is a prerequisite for all jqSuite products -->
+    <script type="text/ecmascript" src="../../Scripts/jquery-1.7.2.min.js"></script> 
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="../../Scripts/jqGrid/grid.locale-en.js"></script>
+    <!-- This is the Javascript file of jqGrid -->   
+    <script type="text/ecmascript" src="../../Scripts/jqGrid/jquery.jqGrid.min.js"></script>
+    <script type="text/ecmascript" src="../../Scripts/jquery.datetimepicker.js"></script>
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../Content/themes/base/jquery-ui.css" />
+    <!-- The link to the CSS that the grid needs -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../Content/jquery.jqGrid/ui.jqgrid.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../Content/jquery.datetimepicker.css" />
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink(".NET Knowledge Tester", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+            </div>
+        </div>
+    </header>
+    <script type="text/javascript">
+        function logout() {
+            $.ajax({
+                url: '@Url.Action("Logout", "Home")',
+                type: 'POST',
+                success: function (data) {
+                    document.location.href = '../Home';
+                }
+            });
+        }
+    </script>
+    <div id="body" style="margin-top: 50px;">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+    </div>
+    <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - .NET Knowledge Tester</p>
+                </div>
+            </div>
+        </footer>
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>
