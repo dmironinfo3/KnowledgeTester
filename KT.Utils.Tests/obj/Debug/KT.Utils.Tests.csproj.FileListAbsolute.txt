@@ -1,0 +1,12 @@
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.Utils.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.Utils.Tests.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.DB.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.DTOs.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.Utils.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\nunit.framework.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.DB.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.DTOs.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\bin\Debug\KT.Utils.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\obj\Debug\KT.Utils.Tests.csprojResolveAssemblyReference.cache
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\obj\Debug\KT.Utils.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Utils.Tests\obj\Debug\KT.Utils.Tests.pdb

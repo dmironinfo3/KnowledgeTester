@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -34,7 +36,7 @@ namespace KnowledgeTester.Controllers
 				return RedirectToAction("Index", "Subcategory", new { id = SessionWrapper.CurrentSubcategoryId });
 			}
 
-			var subCatName = KT.DB.Helpers.Subcategories.GetById(SessionWrapper.CurrentSubcategoryId).Name;
+			var subCatName = ServicesFactory.GetService<IKtSubcategoriesService>().GetById(SessionWrapper.CurrentSubcategoryId).Name;
 
 			if (id.Value.Equals(Guid.Empty))
 			{
@@ -42,7 +44,7 @@ namespace KnowledgeTester.Controllers
 				return View(m);
 			}
 
-			var q = KT.DB.Helpers.Questions.GetById(id.Value);
+			var q = ServicesFactory.GetService<IKtQuestionsService>().GetById(id.Value);
 
 			if (q != null)
 			{
@@ -68,14 +70,15 @@ namespace KnowledgeTester.Controllers
 			}
 
 			_qId = model.Id.Equals(Guid.Empty) ?
-				KT.DB.Helpers.Questions.Save(model.Text, SessionWrapper.CurrentSubcategoryId) :
-				KT.DB.Helpers.Questions.Save(model.Text, SessionWrapper.CurrentSubcategoryId, model.Id, model.IsMultiple, model.CorrectArgument);
+				ServicesFactory.GetService<IKtQuestionsService>().Save(model.Text, SessionWrapper.CurrentSubcategoryId) :
+				ServicesFactory.GetService<IKtQuestionsService>().Save(model.Text, 
+					SessionWrapper.CurrentSubcategoryId, model.Id, model.IsMultiple, model.CorrectArgument);
 
 			if (model.Answers != null)
 			{
 				foreach (var ans in model.Answers)
 				{
-					KT.DB.Helpers.Answers.Save(ans.Id, ans.Text, ans.IsCorrect);
+					ServicesFactory.GetService<IKtAnswersService>().Save(ans.Id, ans.Text, ans.IsCorrect);
 				}
 			}
 
@@ -85,14 +88,14 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult AddNewAnswer(Guid id)
 		{
-			KT.DB.Helpers.Answers.AddEmpyFor(id);
+			ServicesFactory.GetService<IKtAnswersService>().AddEmpyFor(id);
 			return RedirectToAction("Index", "Question", new { id });
 		}
 
 		[HttpPost]
 		public ActionResult DeleteAnswer(Guid id, Guid questionId)
 		{
-			KT.DB.Helpers.Answers.Delete(id);
+			ServicesFactory.GetService<IKtAnswersService>().Delete(id);
 			return RedirectToAction("Index", "Question", new { id = questionId });
 		}
 	}

@@ -8,81 +8,59 @@
         <EntityContainer Name="KTModelStoreContainer">
           <EntitySet Name="Answers" EntityType="KTModel.Store.Answers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="KTModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GeneratedAnswers" EntityType="KTModel.Store.GeneratedAnswers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GeneratedQuestions" EntityType="KTModel.Store.GeneratedQuestions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GeneratedTests" EntityType="KTModel.Store.GeneratedTests" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Questions" EntityType="KTModel.Store.Questions" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Students" EntityType="KTModel.Store.Students" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StudentTests" EntityType="KTModel.Store.StudentTests" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Subcategories" EntityType="KTModel.Store.Subcategories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Subscriptions" EntityType="KTModel.Store.Subscriptions" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tests" EntityType="KTModel.Store.Tests" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK__Answers__Questio__0AD2A005" Association="KTModel.Store.FK__Answers__Questio__0AD2A005">
+          <EntitySet Name="Users" EntityType="KTModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_Answers_Questionid" Association="KTModel.Store.fk_Answers_Questionid">
             <End Role="Questions" EntitySet="Questions" />
             <End Role="Answers" EntitySet="Answers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Questions__Subca__07F6335A" Association="KTModel.Store.FK__Questions__Subca__07F6335A">
-            <End Role="Subcategories" EntitySet="Subcategories" />
-            <End Role="Questions" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTe__Q10Id__37A5467C" Association="KTModel.Store.FK__StudentTe__Q10Id__37A5467C">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTe__Stude__2D27B809" Association="KTModel.Store.FK__StudentTe__Stude__2D27B809">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTe__TestI__2E1BDC42" Association="KTModel.Store.FK__StudentTe__TestI__2E1BDC42">
-            <End Role="Tests" EntitySet="Tests" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q1Id__2F10007B" Association="KTModel.Store.FK__StudentTes__Q1Id__2F10007B">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q2Id__300424B4" Association="KTModel.Store.FK__StudentTes__Q2Id__300424B4">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q3Id__30F848ED" Association="KTModel.Store.FK__StudentTes__Q3Id__30F848ED">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q4Id__31EC6D26" Association="KTModel.Store.FK__StudentTes__Q4Id__31EC6D26">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q5Id__32E0915F" Association="KTModel.Store.FK__StudentTes__Q5Id__32E0915F">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q6Id__33D4B598" Association="KTModel.Store.FK__StudentTes__Q6Id__33D4B598">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q7Id__34C8D9D1" Association="KTModel.Store.FK__StudentTes__Q7Id__34C8D9D1">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q8Id__35BCFE0A" Association="KTModel.Store.FK__StudentTes__Q8Id__35BCFE0A">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q9Id__36B12243" Association="KTModel.Store.FK__StudentTes__Q9Id__36B12243">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="StudentTests" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Subcatego__Categ__03317E3D" Association="KTModel.Store.FK__Subcatego__Categ__03317E3D">
+          <AssociationSet Name="fk_Categories_users" Association="KTModel.Store.fk_Categories_users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Subcategories" EntitySet="Subcategories" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__Stude__15502E78" Association="KTModel.Store.FK__Subscript__Stude__15502E78">
-            <End Role="Students" EntitySet="Students" />
+          <AssociationSet Name="fk_GeneratedAnswers_Answers" Association="KTModel.Store.fk_GeneratedAnswers_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="GeneratedAnswers" EntitySet="GeneratedAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedAnswers_GeneratedQuestionId" Association="KTModel.Store.fk_GeneratedAnswers_GeneratedQuestionId">
+            <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+            <End Role="GeneratedAnswers" EntitySet="GeneratedAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedQuestions_GeneratedTestId" Association="KTModel.Store.fk_GeneratedQuestions_GeneratedTestId">
+            <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+            <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedQuestions_QuestionId" Association="KTModel.Store.fk_GeneratedQuestions_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedTests_TestId" Association="KTModel.Store.fk_GeneratedTests_TestId">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedTests_Username" Association="KTModel.Store.fk_GeneratedTests_Username">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_SubcategoryId" Association="KTModel.Store.fk_Questions_SubcategoryId">
+            <End Role="Subcategories" EntitySet="Subcategories" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Subscriptions_StudentId" Association="KTModel.Store.fk_Subscriptions_StudentId">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__TestI__182C9B23" Association="KTModel.Store.FK__Subscript__TestI__182C9B23">
+          <AssociationSet Name="fk_Subscriptions_TestId" Association="KTModel.Store.fk_Subscriptions_TestId">
             <End Role="Tests" EntitySet="Tests" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tests__Subcatego__0DAF0CB0" Association="KTModel.Store.FK__Tests__Subcatego__0DAF0CB0">
+          <AssociationSet Name="fk_tests_SubcategoryId" Association="KTModel.Store.fk_tests_SubcategoryId">
             <End Role="Subcategories" EntitySet="Subcategories" />
             <End Role="Tests" EntitySet="Tests" />
           </AssociationSet>
@@ -102,6 +80,37 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedByUser" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="GeneratedAnswers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GeneratedQuestionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AnswerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsSelected" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneratedQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GeneratedTestId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QuestionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ArgumentText" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneratedTests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="TestId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsFinished" Type="bit" Nullable="false" />
+          <Property Name="IsVerified" Type="bit" Nullable="false" />
+          <Property Name="MaxScore" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -112,45 +121,6 @@
           <Property Name="CorrectArgument" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SubcategoryId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MultipleAnswer" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Students">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="PasswordHint" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="StudentTests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="StudentUsername" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="TestId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q1Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q1Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q2Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q2Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q3Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q3Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q4Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q4Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q5Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q5Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q6Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q6Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q7Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q7Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q8Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q8Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q9Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q9Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Q10Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Q10Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Score" Type="int" />
-          <Property Name="Finished" Type="bit" />
         </EntityType>
         <EntityType Name="Subcategories">
           <Key>
@@ -177,10 +147,24 @@
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="MinutesDuration" Type="int" Nullable="false" />
           <Property Name="SubcategoryId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Answers__Questio__0AD2A005">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="PasswordHint" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Answers_Questionid">
+          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="KTModel.Store.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -191,8 +175,106 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Questions__Subca__07F6335A">
-          <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="1" />
+        <Association Name="fk_Categories_users">
+          <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Categories" Type="KTModel.Store.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="CreatedByUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedAnswers_Answers">
+          <End Role="Answers" Type="KTModel.Store.Answers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneratedAnswers" Type="KTModel.Store.GeneratedAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedAnswers">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedAnswers_GeneratedQuestionId">
+          <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneratedAnswers" Type="KTModel.Store.GeneratedAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneratedQuestions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedAnswers">
+              <PropertyRef Name="GeneratedQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedQuestions_GeneratedTestId">
+          <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneratedTests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedQuestions">
+              <PropertyRef Name="GeneratedTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedQuestions_QuestionId">
+          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
+          <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedQuestions">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedTests_TestId">
+          <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedTests">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedTests_Username">
+          <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="GeneratedTests">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_SubcategoryId">
+          <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subcategories">
@@ -203,167 +285,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudentTe__Q10Id__37A5467C">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q10Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTe__Stude__2D27B809">
-          <End Role="Students" Type="KTModel.Store.Students" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="StudentUsername" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTe__TestI__2E1BDC42">
-          <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tests">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="TestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q1Id__2F10007B">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q1Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q2Id__300424B4">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q2Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q3Id__30F848ED">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q3Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q4Id__31EC6D26">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q4Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q5Id__32E0915F">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q5Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q6Id__33D4B598">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q6Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q7Id__34C8D9D1">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q7Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q8Id__35BCFE0A">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q8Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q9Id__36B12243">
-          <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
-          <End Role="StudentTests" Type="KTModel.Store.StudentTests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTests">
-              <PropertyRef Name="Q9Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Subcatego__Categ__03317E3D">
-          <End Role="Categories" Type="KTModel.Store.Categories" Multiplicity="1" />
-          <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Subcategories">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Subscript__Stude__15502E78">
-          <End Role="Students" Type="KTModel.Store.Students" Multiplicity="1" />
+        <Association Name="fk_Subscriptions_StudentId">
+          <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Subscriptions" Type="KTModel.Store.Subscriptions" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Students">
+            <Principal Role="Users">
               <PropertyRef Name="Username" />
             </Principal>
             <Dependent Role="Subscriptions">
@@ -371,8 +299,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Subscript__TestI__182C9B23">
-          <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1" />
+        <Association Name="fk_Subscriptions_TestId">
+          <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Subscriptions" Type="KTModel.Store.Subscriptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
@@ -383,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tests__Subcatego__0DAF0CB0">
+        <Association Name="fk_tests_SubcategoryId">
           <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="1" />
           <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -402,78 +332,56 @@
         <EntityContainer Name="KTEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Answers" EntityType="KTModel.Answer" />
           <EntitySet Name="Categories" EntityType="KTModel.Category" />
+          <EntitySet Name="GeneratedQuestions" EntityType="KTModel.GeneratedQuestion" />
+          <EntitySet Name="GeneratedTests" EntityType="KTModel.GeneratedTest" />
           <EntitySet Name="Questions" EntityType="KTModel.Question" />
-          <EntitySet Name="Students" EntityType="KTModel.Student" />
           <EntitySet Name="Subcategories" EntityType="KTModel.Subcategory" />
           <EntitySet Name="Tests" EntityType="KTModel.Test" />
-          <AssociationSet Name="FK__Answers__Questio__0AD2A005" Association="KTModel.FK__Answers__Questio__0AD2A005">
+          <EntitySet Name="Users" EntityType="KTModel.User" />
+          <AssociationSet Name="fk_Answers_Questionid" Association="KTModel.fk_Answers_Questionid">
             <End Role="Question" EntitySet="Questions" />
             <End Role="Answer" EntitySet="Answers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subcatego__Categ__03317E3D" Association="KTModel.FK__Subcatego__Categ__03317E3D">
+          <AssociationSet Name="fk_Categories_users" Association="KTModel.fk_Categories_users">
+            <End Role="User" EntitySet="Users" />
             <End Role="Category" EntitySet="Categories" />
-            <End Role="Subcategory" EntitySet="Subcategories" />
           </AssociationSet>
-          <AssociationSet Name="FK__Questions__Subca__07F6335A" Association="KTModel.FK__Questions__Subca__07F6335A">
+          <AssociationSet Name="fk_GeneratedQuestions_GeneratedTestId" Association="KTModel.fk_GeneratedQuestions_GeneratedTestId">
+            <End Role="GeneratedTest" EntitySet="GeneratedTests" />
+            <End Role="GeneratedQuestion" EntitySet="GeneratedQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedQuestions_QuestionId" Association="KTModel.fk_GeneratedQuestions_QuestionId">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="GeneratedQuestion" EntitySet="GeneratedQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedTests_TestId" Association="KTModel.fk_GeneratedTests_TestId">
+            <End Role="Test" EntitySet="Tests" />
+            <End Role="GeneratedTest" EntitySet="GeneratedTests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneratedTests_Username" Association="KTModel.fk_GeneratedTests_Username">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GeneratedTest" EntitySet="GeneratedTests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_SubcategoryId" Association="KTModel.fk_Questions_SubcategoryId">
             <End Role="Subcategory" EntitySet="Subcategories" />
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tests__Subcatego__0DAF0CB0" Association="KTModel.FK__Tests__Subcatego__0DAF0CB0">
+          <AssociationSet Name="fk_tests_SubcategoryId" Association="KTModel.fk_tests_SubcategoryId">
             <End Role="Subcategory" EntitySet="Subcategories" />
             <End Role="Test" EntitySet="Tests" />
           </AssociationSet>
           <AssociationSet Name="Subscriptions" Association="KTModel.Subscriptions">
-            <End Role="Student" EntitySet="Students" />
+            <End Role="User" EntitySet="Users" />
             <End Role="Test" EntitySet="Tests" />
           </AssociationSet>
-          <EntitySet Name="StudentTests" EntityType="KTModel.StudentTest" />
-          <AssociationSet Name="FK__StudentTe__Q10Id__37A5467C" Association="KTModel.FK__StudentTe__Q10Id__37A5467C">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
+          <EntitySet Name="GeneratedAnswers" EntityType="KTModel.GeneratedAnswer" />
+          <AssociationSet Name="fk_GeneratedAnswers_Answers" Association="KTModel.fk_GeneratedAnswers_Answers">
+            <End Role="Answer" EntitySet="Answers" />
+            <End Role="GeneratedAnswer" EntitySet="GeneratedAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q1Id__2F10007B" Association="KTModel.FK__StudentTes__Q1Id__2F10007B">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q2Id__300424B4" Association="KTModel.FK__StudentTes__Q2Id__300424B4">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q3Id__30F848ED" Association="KTModel.FK__StudentTes__Q3Id__30F848ED">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q4Id__31EC6D26" Association="KTModel.FK__StudentTes__Q4Id__31EC6D26">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q5Id__32E0915F" Association="KTModel.FK__StudentTes__Q5Id__32E0915F">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q6Id__33D4B598" Association="KTModel.FK__StudentTes__Q6Id__33D4B598">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q7Id__34C8D9D1" Association="KTModel.FK__StudentTes__Q7Id__34C8D9D1">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q8Id__35BCFE0A" Association="KTModel.FK__StudentTes__Q8Id__35BCFE0A">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTes__Q9Id__36B12243" Association="KTModel.FK__StudentTes__Q9Id__36B12243">
-            <End Role="Question" EntitySet="Questions" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTe__Stude__2D27B809" Association="KTModel.FK__StudentTe__Stude__2D27B809">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudentTe__TestI__2E1BDC42" Association="KTModel.FK__StudentTe__TestI__2E1BDC42">
-            <End Role="Test" EntitySet="Tests" />
-            <End Role="StudentTest" EntitySet="StudentTests" />
+          <AssociationSet Name="fk_GeneratedAnswers_GeneratedQuestionId" Association="KTModel.fk_GeneratedAnswers_GeneratedQuestionId">
+            <End Role="GeneratedQuestion" EntitySet="GeneratedQuestions" />
+            <End Role="GeneratedAnswer" EntitySet="GeneratedAnswers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Answer">
@@ -484,7 +392,8 @@
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsCorrect" Nullable="false" />
           <Property Type="Guid" Name="QuestionId" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="KTModel.FK__Answers__Questio__0AD2A005" FromRole="Answer" ToRole="Question" />
+          <NavigationProperty Name="Question" Relationship="KTModel.fk_Answers_Questionid" FromRole="Answer" ToRole="Question" />
+          <NavigationProperty Name="GeneratedAnswers" Relationship="KTModel.fk_GeneratedAnswers_Answers" FromRole="Answer" ToRole="GeneratedAnswer" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -492,7 +401,35 @@
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Subcategories" Relationship="KTModel.FK__Subcatego__Categ__03317E3D" FromRole="Category" ToRole="Subcategory" />
+          <Property Type="String" Name="CreatedByUser" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="KTModel.fk_Categories_users" FromRole="Category" ToRole="User" />
+        </EntityType>
+        <EntityType Name="GeneratedQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GeneratedTestId" Nullable="false" />
+          <Property Type="Guid" Name="QuestionId" Nullable="false" />
+          <Property Type="String" Name="ArgumentText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GeneratedTest" Relationship="KTModel.fk_GeneratedQuestions_GeneratedTestId" FromRole="GeneratedQuestion" ToRole="GeneratedTest" />
+          <NavigationProperty Name="Question" Relationship="KTModel.fk_GeneratedQuestions_QuestionId" FromRole="GeneratedQuestion" ToRole="Question" />
+          <NavigationProperty Name="GeneratedAnswers" Relationship="KTModel.fk_GeneratedAnswers_GeneratedQuestionId" FromRole="GeneratedQuestion" ToRole="GeneratedAnswer" />
+        </EntityType>
+        <EntityType Name="GeneratedTest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="TestId" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinished" Nullable="false" />
+          <Property Type="Boolean" Name="IsVerified" Nullable="false" />
+          <Property Type="Int32" Name="MaxScore" Nullable="false" />
+          <Property Type="Int32" Name="Score" Nullable="false" />
+          <NavigationProperty Name="GeneratedQuestions" Relationship="KTModel.fk_GeneratedQuestions_GeneratedTestId" FromRole="GeneratedTest" ToRole="GeneratedQuestion" />
+          <NavigationProperty Name="Test" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="GeneratedTest" ToRole="Test" />
+          <NavigationProperty Name="User" Relationship="KTModel.fk_GeneratedTests_Username" FromRole="GeneratedTest" ToRole="User" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -503,29 +440,9 @@
           <Property Type="String" Name="CorrectArgument" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="SubcategoryId" Nullable="false" />
           <Property Type="Boolean" Name="MultipleAnswer" Nullable="false" />
-          <NavigationProperty Name="Answers" Relationship="KTModel.FK__Answers__Questio__0AD2A005" FromRole="Question" ToRole="Answer" />
-          <NavigationProperty Name="Subcategory" Relationship="KTModel.FK__Questions__Subca__07F6335A" FromRole="Question" ToRole="Subcategory" />
-          <NavigationProperty Name="StudentTests" Relationship="KTModel.FK__StudentTe__Q10Id__37A5467C" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests1" Relationship="KTModel.FK__StudentTes__Q1Id__2F10007B" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests2" Relationship="KTModel.FK__StudentTes__Q2Id__300424B4" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests3" Relationship="KTModel.FK__StudentTes__Q3Id__30F848ED" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests4" Relationship="KTModel.FK__StudentTes__Q4Id__31EC6D26" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests5" Relationship="KTModel.FK__StudentTes__Q5Id__32E0915F" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests6" Relationship="KTModel.FK__StudentTes__Q6Id__33D4B598" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests7" Relationship="KTModel.FK__StudentTes__Q7Id__34C8D9D1" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests8" Relationship="KTModel.FK__StudentTes__Q8Id__35BCFE0A" FromRole="Question" ToRole="StudentTest" />
-          <NavigationProperty Name="StudentTests9" Relationship="KTModel.FK__StudentTes__Q9Id__36B12243" FromRole="Question" ToRole="StudentTest" />
-          </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="PasswordHint" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tests" Relationship="KTModel.Subscriptions" FromRole="Student" ToRole="Test" />
-          <NavigationProperty Name="StudentTests" Relationship="KTModel.FK__StudentTe__Stude__2D27B809" FromRole="Student" ToRole="StudentTest" />
+          <NavigationProperty Name="Answers" Relationship="KTModel.fk_Answers_Questionid" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="GeneratedQuestions" Relationship="KTModel.fk_GeneratedQuestions_QuestionId" FromRole="Question" ToRole="GeneratedQuestion" />
+          <NavigationProperty Name="Subcategory" Relationship="KTModel.fk_Questions_SubcategoryId" FromRole="Question" ToRole="Subcategory" />
         </EntityType>
         <EntityType Name="Subcategory">
           <Key>
@@ -534,9 +451,8 @@
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="CategoryId" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="KTModel.FK__Subcatego__Categ__03317E3D" FromRole="Subcategory" ToRole="Category" />
-          <NavigationProperty Name="Questions" Relationship="KTModel.FK__Questions__Subca__07F6335A" FromRole="Subcategory" ToRole="Question" />
-          <NavigationProperty Name="Tests" Relationship="KTModel.FK__Tests__Subcatego__0DAF0CB0" FromRole="Subcategory" ToRole="Test" />
+          <NavigationProperty Name="Questions" Relationship="KTModel.fk_Questions_SubcategoryId" FromRole="Subcategory" ToRole="Question" />
+          <NavigationProperty Name="Tests" Relationship="KTModel.fk_tests_SubcategoryId" FromRole="Subcategory" ToRole="Test" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -547,12 +463,27 @@
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
           <Property Type="Int32" Name="MinutesDuration" Nullable="false" />
           <Property Type="Guid" Name="SubcategoryId" Nullable="false" />
-          <Property Type="DateTime" Name="EndDate" />
-          <NavigationProperty Name="Subcategory" Relationship="KTModel.FK__Tests__Subcatego__0DAF0CB0" FromRole="Test" ToRole="Subcategory" />
-          <NavigationProperty Name="Students" Relationship="KTModel.Subscriptions" FromRole="Test" ToRole="Student" />
-          <NavigationProperty Name="StudentTests" Relationship="KTModel.FK__StudentTe__TestI__2E1BDC42" FromRole="Test" ToRole="StudentTest" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
+          <NavigationProperty Name="GeneratedTests" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="Test" ToRole="GeneratedTest" />
+          <NavigationProperty Name="Subcategory" Relationship="KTModel.fk_tests_SubcategoryId" FromRole="Test" ToRole="Subcategory" />
+          <NavigationProperty Name="Users" Relationship="KTModel.Subscriptions" FromRole="Test" ToRole="User" />
         </EntityType>
-        <Association Name="FK__Answers__Questio__0AD2A005">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordHint" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="KTModel.fk_Categories_users" FromRole="User" ToRole="Category" />
+          <NavigationProperty Name="GeneratedTests" Relationship="KTModel.fk_GeneratedTests_Username" FromRole="User" ToRole="GeneratedTest" />
+          <NavigationProperty Name="Tests" Relationship="KTModel.Subscriptions" FromRole="User" ToRole="Test" />
+        </EntityType>
+        <Association Name="fk_Answers_Questionid">
           <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
           <End Type="KTModel.Answer" Role="Answer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -564,19 +495,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Subcatego__Categ__03317E3D">
-          <End Type="KTModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="KTModel.Subcategory" Role="Subcategory" Multiplicity="*" />
+        <Association Name="fk_Categories_users">
+          <End Type="KTModel.User" Role="User" Multiplicity="1" />
+          <End Type="KTModel.Category" Role="Category" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
             </Principal>
-            <Dependent Role="Subcategory">
-              <PropertyRef Name="CategoryId" />
+            <Dependent Role="Category">
+              <PropertyRef Name="CreatedByUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Questions__Subca__07F6335A">
+        <Association Name="fk_GeneratedQuestions_GeneratedTestId">
+          <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="1" />
+          <End Type="KTModel.GeneratedQuestion" Role="GeneratedQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneratedTest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedQuestion">
+              <PropertyRef Name="GeneratedTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedQuestions_QuestionId">
+          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="KTModel.GeneratedQuestion" Role="GeneratedQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedQuestion">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedTests_TestId">
+          <End Type="KTModel.Test" Role="Test" Multiplicity="1" />
+          <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneratedTest">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneratedTests_Username">
+          <End Type="KTModel.User" Role="User" Multiplicity="1" />
+          <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="GeneratedTest">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_SubcategoryId">
           <End Type="KTModel.Subcategory" Role="Subcategory" Multiplicity="1" />
           <End Type="KTModel.Question" Role="Question" Multiplicity="*" />
           <ReferentialConstraint>
@@ -588,7 +567,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tests__Subcatego__0DAF0CB0">
+        <Association Name="fk_tests_SubcategoryId">
           <End Type="KTModel.Subcategory" Role="Subcategory" Multiplicity="1" />
           <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
           <ReferentialConstraint>
@@ -601,192 +580,41 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Subscriptions">
-          <End Type="KTModel.Student" Role="Student" Multiplicity="*" />
+          <End Type="KTModel.User" Role="User" Multiplicity="*" />
           <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
         </Association>
-        <EntityType Name="StudentTest">
+        <EntityType Name="GeneratedAnswer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="String" Name="StudentUsername" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="TestId" Nullable="false" />
-          <Property Type="Guid" Name="Q1Id" Nullable="false" />
-          <Property Type="String" Name="Q1Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q2Id" Nullable="false" />
-          <Property Type="String" Name="Q2Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q3Id" Nullable="false" />
-          <Property Type="String" Name="Q3Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q4Id" Nullable="false" />
-          <Property Type="String" Name="Q4Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q5Id" Nullable="false" />
-          <Property Type="String" Name="Q5Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q6Id" Nullable="false" />
-          <Property Type="String" Name="Q6Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q7Id" Nullable="false" />
-          <Property Type="String" Name="Q7Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q8Id" Nullable="false" />
-          <Property Type="String" Name="Q8Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q9Id" Nullable="false" />
-          <Property Type="String" Name="Q9Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="Q10Id" Nullable="false" />
-          <Property Type="String" Name="Q10Answer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="Score" />
-          <Property Type="Boolean" Name="Finished" />
-          <NavigationProperty Name="Question" Relationship="KTModel.FK__StudentTe__Q10Id__37A5467C" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question1" Relationship="KTModel.FK__StudentTes__Q1Id__2F10007B" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question2" Relationship="KTModel.FK__StudentTes__Q2Id__300424B4" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question3" Relationship="KTModel.FK__StudentTes__Q3Id__30F848ED" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question4" Relationship="KTModel.FK__StudentTes__Q4Id__31EC6D26" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question5" Relationship="KTModel.FK__StudentTes__Q5Id__32E0915F" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question6" Relationship="KTModel.FK__StudentTes__Q6Id__33D4B598" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question7" Relationship="KTModel.FK__StudentTes__Q7Id__34C8D9D1" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question8" Relationship="KTModel.FK__StudentTes__Q8Id__35BCFE0A" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Question9" Relationship="KTModel.FK__StudentTes__Q9Id__36B12243" FromRole="StudentTest" ToRole="Question" />
-          <NavigationProperty Name="Student" Relationship="KTModel.FK__StudentTe__Stude__2D27B809" FromRole="StudentTest" ToRole="Student" />
-          <NavigationProperty Name="Test" Relationship="KTModel.FK__StudentTe__TestI__2E1BDC42" FromRole="StudentTest" ToRole="Test" />
+          <Property Type="Guid" Name="GeneratedQuestionId" Nullable="false" />
+          <Property Type="Guid" Name="AnswerId" Nullable="false" />
+          <Property Type="Boolean" Name="IsSelected" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="KTModel.fk_GeneratedAnswers_Answers" FromRole="GeneratedAnswer" ToRole="Answer" />
+          <NavigationProperty Name="GeneratedQuestion" Relationship="KTModel.fk_GeneratedAnswers_GeneratedQuestionId" FromRole="GeneratedAnswer" ToRole="GeneratedQuestion" />
         </EntityType>
-        <Association Name="FK__StudentTe__Q10Id__37A5467C">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
+        <Association Name="fk_GeneratedAnswers_Answers">
+          <End Type="KTModel.Answer" Role="Answer" Multiplicity="1" />
+          <End Type="KTModel.GeneratedAnswer" Role="GeneratedAnswer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="Answer">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q10Id" />
+            <Dependent Role="GeneratedAnswer">
+              <PropertyRef Name="AnswerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudentTes__Q1Id__2F10007B">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
+        <Association Name="fk_GeneratedAnswers_GeneratedQuestionId">
+          <End Type="KTModel.GeneratedQuestion" Role="GeneratedQuestion" Multiplicity="1" />
+          <End Type="KTModel.GeneratedAnswer" Role="GeneratedAnswer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Question">
+            <Principal Role="GeneratedQuestion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q1Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q2Id__300424B4">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q2Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q3Id__30F848ED">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q3Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q4Id__31EC6D26">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q4Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q5Id__32E0915F">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q5Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q6Id__33D4B598">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q6Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q7Id__34C8D9D1">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q7Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q8Id__35BCFE0A">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q8Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTes__Q9Id__36B12243">
-          <End Type="KTModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="Q9Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTe__Stude__2D27B809">
-          <End Type="KTModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="StudentUsername" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudentTe__TestI__2E1BDC42">
-          <End Type="KTModel.Test" Role="Test" Multiplicity="1" />
-          <End Type="KTModel.StudentTest" Role="StudentTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Test">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentTest">
-              <PropertyRef Name="TestId" />
+            <Dependent Role="GeneratedAnswer">
+              <PropertyRef Name="GeneratedQuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -809,7 +637,31 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="KTModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CreatedByUser" ColumnName="CreatedByUser" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneratedQuestions">
+            <EntityTypeMapping TypeName="KTModel.GeneratedQuestion">
+              <MappingFragment StoreEntitySet="GeneratedQuestions">
+                <ScalarProperty Name="ArgumentText" ColumnName="ArgumentText" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="GeneratedTestId" ColumnName="GeneratedTestId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneratedTests">
+            <EntityTypeMapping TypeName="KTModel.GeneratedTest">
+              <MappingFragment StoreEntitySet="GeneratedTests">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="MaxScore" ColumnName="MaxScore" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="IsFinished" ColumnName="IsFinished" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -822,16 +674,6 @@
                 <ScalarProperty Name="CorrectArgument" ColumnName="CorrectArgument" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="KTModel.Student">
-              <MappingFragment StoreEntitySet="Students">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PasswordHint" ColumnName="PasswordHint" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -856,41 +698,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KTModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHint" ColumnName="PasswordHint" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Subscriptions" TypeName="KTModel.Subscriptions" StoreEntitySet="Subscriptions">
             <EndProperty Name="Test">
               <ScalarProperty Name="Id" ColumnName="TestId" />
             </EndProperty>
-            <EndProperty Name="Student">
+            <EndProperty Name="User">
               <ScalarProperty Name="Username" ColumnName="StudentId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="StudentTests">
-            <EntityTypeMapping TypeName="KTModel.StudentTest">
-              <MappingFragment StoreEntitySet="StudentTests">
-                <ScalarProperty Name="Finished" ColumnName="Finished" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
-                <ScalarProperty Name="Q10Answer" ColumnName="Q10Answer" />
-                <ScalarProperty Name="Q10Id" ColumnName="Q10Id" />
-                <ScalarProperty Name="Q9Answer" ColumnName="Q9Answer" />
-                <ScalarProperty Name="Q9Id" ColumnName="Q9Id" />
-                <ScalarProperty Name="Q8Answer" ColumnName="Q8Answer" />
-                <ScalarProperty Name="Q8Id" ColumnName="Q8Id" />
-                <ScalarProperty Name="Q7Answer" ColumnName="Q7Answer" />
-                <ScalarProperty Name="Q7Id" ColumnName="Q7Id" />
-                <ScalarProperty Name="Q6Answer" ColumnName="Q6Answer" />
-                <ScalarProperty Name="Q6Id" ColumnName="Q6Id" />
-                <ScalarProperty Name="Q5Answer" ColumnName="Q5Answer" />
-                <ScalarProperty Name="Q5Id" ColumnName="Q5Id" />
-                <ScalarProperty Name="Q4Answer" ColumnName="Q4Answer" />
-                <ScalarProperty Name="Q4Id" ColumnName="Q4Id" />
-                <ScalarProperty Name="Q3Answer" ColumnName="Q3Answer" />
-                <ScalarProperty Name="Q3Id" ColumnName="Q3Id" />
-                <ScalarProperty Name="Q2Answer" ColumnName="Q2Answer" />
-                <ScalarProperty Name="Q2Id" ColumnName="Q2Id" />
-                <ScalarProperty Name="Q1Answer" ColumnName="Q1Answer" />
-                <ScalarProperty Name="Q1Id" ColumnName="Q1Id" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
-                <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
+          <EntitySetMapping Name="GeneratedAnswers">
+            <EntityTypeMapping TypeName="KTModel.GeneratedAnswer">
+              <MappingFragment StoreEntitySet="GeneratedAnswers">
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="GeneratedQuestionId" ColumnName="GeneratedQuestionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -916,83 +750,62 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="KTModel">
-        <EntityTypeShape EntityType="KTModel.Answer" Width="1.5" PointX="4.5" PointY="0.5" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="KTModel.Category" Width="1.5" PointX="0.625" PointY="0.625" Height="1.5956835937499978" />
-        <EntityTypeShape EntityType="KTModel.Question" Width="1.5" PointX="7.5" PointY="1.875" Height="4.2879036458333353" />
-        <EntityTypeShape EntityType="KTModel.Student" Width="1.5" PointX="15" PointY="5.75" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="KTModel.Subcategory" Width="1.5" PointX="3.125" PointY="4.875" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="KTModel.Test" Width="1.5" PointX="5.625" PointY="7.875" Height="2.7494921875000031" />
-        <AssociationConnector Association="KTModel.FK__Answers__Questio__0AD2A005" >
-          <ConnectorPoint PointX="7.5" PointY="2.1776432291666654" />
-          <ConnectorPoint PointX="6" PointY="2.1776432291666654" />
+        <EntityTypeShape EntityType="KTModel.Answer" Width="1.5" PointX="9.5" PointY="8" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="KTModel.Category" Width="1.5" PointX="0.75" PointY="1.25" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="KTModel.GeneratedQuestion" Width="1.5" PointX="7.375" PointY="4.875" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="KTModel.GeneratedTest" Width="1.5" PointX="4.875" PointY="4.25" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="KTModel.Question" Width="1.5" PointX="7.375" PointY="8.375" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="KTModel.Subcategory" Width="1.5" PointX="14.375" PointY="4.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="KTModel.Test" Width="1.5" PointX="10.75" PointY="0.875" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="KTModel.User" Width="1.5" PointX="7.5" PointY="0.75" Height="2.9417936197916674" />
+        <AssociationConnector Association="KTModel.fk_Answers_Questionid" >
+          <ConnectorPoint PointX="8.875" PointY="9.2737939453125" />
+          <ConnectorPoint PointX="9.5" PointY="9.2737939453125" />
         </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__Subcatego__Categ__03317E3D" >
-          <ConnectorPoint PointX="1.375" PointY="2.2206835937499978" />
-          <ConnectorPoint PointX="1.375" PointY="5.9612939453125016" />
-          <ConnectorPoint PointX="3.125" PointY="5.9612939453125016" />
+        <AssociationConnector Association="KTModel.fk_Categories_users" >
+          <ConnectorPoint PointX="7.5" PointY="2.1439925130208337" />
+          <ConnectorPoint PointX="2.25" PointY="2.1439925130208337" />
         </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__Questions__Subca__07F6335A" >
-          <ConnectorPoint PointX="4.625" PointY="5.5189518229166659" />
-          <ConnectorPoint PointX="7.5" PointY="5.5189518229166659" />
+        <AssociationConnector Association="KTModel.fk_GeneratedQuestions_GeneratedTestId" >
+          <ConnectorPoint PointX="6.375" PointY="6.0333968098958337" />
+          <ConnectorPoint PointX="7.375" PointY="6.0333968098958337" />
         </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__Tests__Subcatego__0DAF0CB0" >
-          <ConnectorPoint PointX="3.875" PointY="7.0475878906250031" />
-          <ConnectorPoint PointX="3.875" PointY="9.24974609375" />
-          <ConnectorPoint PointX="5.625" PointY="9.24974609375" />
+        <AssociationConnector Association="KTModel.fk_GeneratedQuestions_QuestionId" >
+          <ConnectorPoint PointX="8.125" PointY="8.375" />
+          <ConnectorPoint PointX="8.125" PointY="7.2398893229166665" />
+        </AssociationConnector>
+        <AssociationConnector Association="KTModel.fk_GeneratedTests_TestId" >
+          <ConnectorPoint PointX="12.03125" PointY="3.6244921875000031" />
+          <ConnectorPoint PointX="12.03125" PointY="4.53125" />
+          <ConnectorPoint PointX="6.375" PointY="4.53125" />
+        </AssociationConnector>
+        <AssociationConnector Association="KTModel.fk_GeneratedTests_Username" >
+          <ConnectorPoint PointX="7.5" PointY="2.9491455664062443" />
+          <ConnectorPoint PointX="5.625" PointY="2.9491455664062443" />
+          <ConnectorPoint PointX="5.625" PointY="4.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="KTModel.fk_Questions_SubcategoryId" >
+          <ConnectorPoint PointX="15.125" PointY="6.6052864583333388" />
+          <ConnectorPoint PointX="15.125" PointY="10.583639322916669" />
+          <ConnectorPoint PointX="8.875" PointY="10.583639322916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="KTModel.fk_tests_SubcategoryId" >
+          <ConnectorPoint PointX="15.125" PointY="4.625" />
+          <ConnectorPoint PointX="15.125" PointY="2.2497460937500016" />
+          <ConnectorPoint PointX="12.25" PointY="2.2497460937500016" />
         </AssociationConnector>
         <AssociationConnector Association="KTModel.Subscriptions" >
-          <ConnectorPoint PointX="15" PointY="7.0502013229166662" />
-          <ConnectorPoint PointX="6.375" PointY="7.0502013229166662" />
-          <ConnectorPoint PointX="6.375" PointY="7.875" />
+          <ConnectorPoint PointX="9" PointY="2.2497460937500016" />
+          <ConnectorPoint PointX="10.75" PointY="2.2497460937500016" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="KTModel.StudentTest" Width="1.5" PointX="17.25" PointY="2.125" Height="8.1339322916666674" />
-        <AssociationConnector Association="KTModel.FK__StudentTe__Q10Id__37A5467C" >
-          <ConnectorPoint PointX="9" PointY="3.90625" />
-          <ConnectorPoint PointX="17.25" PointY="3.90625" />
+        <EntityTypeShape EntityType="KTModel.GeneratedAnswer" Width="1.5" PointX="10.25" PointY="4.875" Height="2.1725878906249996" />
+        <AssociationConnector Association="KTModel.fk_GeneratedAnswers_Answers" >
+          <ConnectorPoint PointX="10.625" PointY="8" />
+          <ConnectorPoint PointX="10.625" PointY="7.047587890625" />
         </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q1Id__2F10007B" >
-          <ConnectorPoint PointX="9" PointY="4.859375" />
-          <ConnectorPoint PointX="17.25" PointY="4.859375" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q2Id__300424B4" >
-          <ConnectorPoint PointX="9" PointY="2.953125" />
-          <ConnectorPoint PointX="17.25" PointY="2.953125" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q3Id__30F848ED" >
-          <ConnectorPoint PointX="9" PointY="4.3828125" />
-          <ConnectorPoint PointX="17.25" PointY="4.3828125" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q4Id__31EC6D26" >
-          <ConnectorPoint PointX="9" PointY="3.4296875" />
-          <ConnectorPoint PointX="17.25" PointY="3.4296875" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q5Id__32E0915F" >
-          <ConnectorPoint PointX="9" PointY="5.3359375" />
-          <ConnectorPoint PointX="17.25" PointY="5.3359375" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q6Id__33D4B598" >
-          <ConnectorPoint PointX="9" PointY="2.4765625" />
-          <ConnectorPoint PointX="17.25" PointY="2.4765625" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q7Id__34C8D9D1" >
-          <ConnectorPoint PointX="9" PointY="4.14453125" />
-          <ConnectorPoint PointX="17.25" PointY="4.14453125" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q8Id__35BCFE0A" >
-          <ConnectorPoint PointX="9" PointY="3.66796875" />
-          <ConnectorPoint PointX="17.25" PointY="3.66796875" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTes__Q9Id__36B12243" >
-          <ConnectorPoint PointX="9" PointY="4.62109375" />
-          <ConnectorPoint PointX="17.25" PointY="4.62109375" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTe__Stude__2D27B809" >
-          <ConnectorPoint PointX="16.5" PointY="6.8362939453125" />
-          <ConnectorPoint PointX="17.25" PointY="6.8362939453125" />
-        </AssociationConnector>
-        <AssociationConnector Association="KTModel.FK__StudentTe__TestI__2E1BDC42" >
-          <ConnectorPoint PointX="7.125" PointY="9.1220100911458335" />
-          <ConnectorPoint PointX="17.25" PointY="9.1220100911458335" />
+        <AssociationConnector Association="KTModel.fk_GeneratedAnswers_GeneratedQuestionId" >
+          <ConnectorPoint PointX="8.875" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="10.25" PointY="5.9612939453125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

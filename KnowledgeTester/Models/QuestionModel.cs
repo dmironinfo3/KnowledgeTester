@@ -4,19 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using KT.DB;
 using KT.DB.Objects;
+using KT.DTOs.Objects;
 using KnowledgeTester.Helpers;
 
 namespace KnowledgeTester.Models
 {
 	public class QuestionModel
 	{
-		public QuestionModel(Question question, string subcategoryName)
+		public QuestionModel(QuestionDto question, string subcategoryName)
 		{
 			Text = question.Text;
-			IsMultiple = question.MultipleAnswer;
+			IsMultiple = question.MultipleResponse;
 			Id = question.Id;
 			SubcategoryName = subcategoryName;
-			CorrectArgument = question.CorrectArgument;
+			CorrectArgument = question.Argument;
 			Answers = question.Answers.ToList().Select(ans => new AnswerModel(ans)).ToList();
 		}
 

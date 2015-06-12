@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KT.DTOs.Objects;
+using KT.ServiceInterfaces;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Models
 {
 	public class StudentPanelModel
 	{
-		public StudentPanelModel(KT.DB.Student st)
+		public StudentPanelModel(UserDto dto)
 		{
-			DisplayName = st.Username;
+			DisplayName = dto.Username;
 
-			if (st.Tests != null && st.Tests.Count > 0)
+			if (dto.MyTests != null && dto.MyTests.Any())
 			{
-				foreach (var test in st.Tests)
+				foreach (var test in dto.MyTests)
 				{
-					if (KT.DB.Helpers.StudentTests.IsValidInProgress(test.Id,st.Username))
+					if (ServicesFactory.GetService<IKtUserTestsService>().IsValidInProgress(test.Id, dto.Username))
 					{
-						
-							HasOngoingTest = true;
-							OngoingTest = new TestModel(test);
-							return;
-						
+						HasOngoingTest = true;
+						OngoingTest = new TestModel(test.Test);
+						return;
 					}
 				}
 			}

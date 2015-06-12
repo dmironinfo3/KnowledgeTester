@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="KTModelStoreContainer">
+    <EntitySet Name="Answers" EntityType="KTModel.Store.Answers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="KTModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneratedAnswers" EntityType="KTModel.Store.GeneratedAnswers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneratedQuestions" EntityType="KTModel.Store.GeneratedQuestions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneratedTests" EntityType="KTModel.Store.GeneratedTests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Questions" EntityType="KTModel.Store.Questions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subcategories" EntityType="KTModel.Store.Subcategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subscriptions" EntityType="KTModel.Store.Subscriptions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tests" EntityType="KTModel.Store.Tests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="KTModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_Answers_Questionid" Association="KTModel.Store.fk_Answers_Questionid">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Categories_users" Association="KTModel.Store.fk_Categories_users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedAnswers_Answers" Association="KTModel.Store.fk_GeneratedAnswers_Answers">
+      <End Role="Answers" EntitySet="Answers" />
+      <End Role="GeneratedAnswers" EntitySet="GeneratedAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedAnswers_GeneratedQuestionId" Association="KTModel.Store.fk_GeneratedAnswers_GeneratedQuestionId">
+      <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+      <End Role="GeneratedAnswers" EntitySet="GeneratedAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedQuestions_GeneratedTestId" Association="KTModel.Store.fk_GeneratedQuestions_GeneratedTestId">
+      <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+      <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedQuestions_QuestionId" Association="KTModel.Store.fk_GeneratedQuestions_QuestionId">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="GeneratedQuestions" EntitySet="GeneratedQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedTests_TestId" Association="KTModel.Store.fk_GeneratedTests_TestId">
+      <End Role="Tests" EntitySet="Tests" />
+      <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_GeneratedTests_Username" Association="KTModel.Store.fk_GeneratedTests_Username">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="GeneratedTests" EntitySet="GeneratedTests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Questions_SubcategoryId" Association="KTModel.Store.fk_Questions_SubcategoryId">
+      <End Role="Subcategories" EntitySet="Subcategories" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Subscriptions_StudentId" Association="KTModel.Store.fk_Subscriptions_StudentId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Subscriptions" EntitySet="Subscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Subscriptions_TestId" Association="KTModel.Store.fk_Subscriptions_TestId">
+      <End Role="Tests" EntitySet="Tests" />
+      <End Role="Subscriptions" EntitySet="Subscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tests_SubcategoryId" Association="KTModel.Store.fk_tests_SubcategoryId">
+      <End Role="Subcategories" EntitySet="Subcategories" />
+      <End Role="Tests" EntitySet="Tests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Answers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsCorrect" Type="bit" Nullable="false" />
+    <Property Name="QuestionId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedByUser" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="GeneratedAnswers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GeneratedQuestionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AnswerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneratedQuestions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GeneratedTestId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="QuestionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ArgumentText" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneratedTests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="TestId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsFinished" Type="bit" Nullable="false" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
+    <Property Name="MaxScore" Type="int" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectArgument" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubcategoryId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MultipleAnswer" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subcategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subscriptions">
+    <Key>
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="TestId" />
+    </Key>
+    <Property Name="StudentId" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="TestId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="MinutesDuration" Type="int" Nullable="false" />
+    <Property Name="SubcategoryId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="PasswordHint" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Answers_Questionid">
+    <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Answers" Type="KTModel.Store.Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Categories_users">
+    <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Categories" Type="KTModel.Store.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Categories">
+        <PropertyRef Name="CreatedByUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedAnswers_Answers">
+    <End Role="Answers" Type="KTModel.Store.Answers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GeneratedAnswers" Type="KTModel.Store.GeneratedAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Answers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedAnswers">
+        <PropertyRef Name="AnswerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedAnswers_GeneratedQuestionId">
+    <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GeneratedAnswers" Type="KTModel.Store.GeneratedAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeneratedQuestions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedAnswers">
+        <PropertyRef Name="GeneratedQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedQuestions_GeneratedTestId">
+    <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeneratedTests">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedQuestions">
+        <PropertyRef Name="GeneratedTestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedQuestions_QuestionId">
+    <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="1" />
+    <End Role="GeneratedQuestions" Type="KTModel.Store.GeneratedQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedQuestions">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedTests_TestId">
+    <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tests">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedTests">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_GeneratedTests_Username">
+    <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GeneratedTests" Type="KTModel.Store.GeneratedTests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="GeneratedTests">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Questions_SubcategoryId">
+    <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Questions" Type="KTModel.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="SubcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Subscriptions_StudentId">
+    <End Role="Users" Type="KTModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Subscriptions" Type="KTModel.Store.Subscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Subscriptions">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Subscriptions_TestId">
+    <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Subscriptions" Type="KTModel.Store.Subscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tests">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscriptions">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tests_SubcategoryId">
+    <End Role="Subcategories" Type="KTModel.Store.Subcategories" Multiplicity="1" />
+    <End Role="Tests" Type="KTModel.Store.Tests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tests">
+        <PropertyRef Name="SubcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

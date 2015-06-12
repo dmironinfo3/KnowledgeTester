@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Models
 {
 	public class CategoryModel
 	{
-		public CategoryModel(KT.DB.Category cat)
+		public CategoryModel(CategoryDto cat)
 		{
 			Name = cat.Name;
 			Id = cat.Id;

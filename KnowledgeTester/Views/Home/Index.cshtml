@@ -2,17 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 @model KnowledgeTester.Models.LoginModel
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>Test your .NET knowledge. </h1>
-                <h2>Now. For free.</h2>
-            </hgroup>
-            <p>Sign up today and start the testing process. </p>
-        </div>
-    </section>
-}
+
 @using (Ajax.BeginForm("Login", "Home", new { FormMethod.Post }, null, new { Id = "LoginForm" }))
 {
     <div style="display: table-caption;">

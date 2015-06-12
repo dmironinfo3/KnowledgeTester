@@ -29,5 +29,13 @@ namespace KnowledgeTester.Models
 		[Required(ErrorMessage = "Password hint is required")]
 		[StringLength(1024, ErrorMessage = "Password hint too long!")]
 		public string PassHint { get; set; }
+
+		[Required(ErrorMessage = "First name is required")]
+		[StringLength(1024, ErrorMessage = "First name too long!")]
+		public string Firstname { get; set; }
+
+		[Required(ErrorMessage = "Last name is required")]
+		[StringLength(1024, ErrorMessage = "First name too long!")]
+		public string LastName { get; set; }
 	}
 }

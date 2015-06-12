@@ -6,6 +6,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using KT.Logger;
+using KnowledgeTester.Code;
+using KnowledgeTester.Ninject;
+using KnowledgeTester.WCFServices;
 
 namespace KnowledgeTester
 {
@@ -23,6 +27,19 @@ namespace KnowledgeTester
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 			AuthConfig.RegisterAuth();
+
+			//WCF service
+			KtServices.Init();
+
+			//Logger Section
+			KtLogger.Init();
+
+			//Binding kernel
+			var kernel = (new Bindings()).LoadNinjectBindings();
+
+			//Init service factory which will provide needed service on demand
+			ServicesFactory.Init(kernel);
+
 		}
 	}
 }

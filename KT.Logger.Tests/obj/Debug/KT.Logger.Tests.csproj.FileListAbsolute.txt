@@ -1,0 +1,9 @@
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\KT.Logger.Tests.dll.config
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\KT.Logger.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\KT.Logger.Tests.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\KT.Logger.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\nunit.framework.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\bin\Debug\KT.Logger.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\obj\Debug\KT.Logger.Tests.csprojResolveAssemblyReference.cache
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\obj\Debug\KT.Logger.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger.Tests\obj\Debug\KT.Logger.Tests.pdb

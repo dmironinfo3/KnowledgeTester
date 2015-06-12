@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using KT.DB.Objects;
+using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Models
 {
 	public class TakeQuestionModel
 	{
-		public TakeQuestionModel(OngoingQuestion ongoingQuestion)
+		public TakeQuestionModel(GeneratedQuestionDto ongoingQuestion)
 		{
-			Argument = ongoingQuestion.Argument;
+			Argument = ongoingQuestion.Question.Argument;
 			Answers = new List<TakeAnswerModel>();
-			Text = ongoingQuestion.Text;
-			Id = ongoingQuestion.Id;
+			Text = ongoingQuestion.Question.Text;
+			Id = ongoingQuestion.Question.Id;
 
-			foreach (var q in ongoingQuestion.Answers)
+			foreach (var q in ongoingQuestion.SelectedAnswers)
 			{
-				Answers.Add(new TakeAnswerModel()
+				Answers.Add(new TakeAnswerModel
 					{
 						Id = q.Id,
 						IsSelected = q.IsSelected,
-						Text = q.Text
+						Text = q.Answer.Text
 					});
 			}
 		}

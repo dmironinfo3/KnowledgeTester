@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using KT.DB;
+using KT.DTOs.Objects;
 using KnowledgeTester.Helpers;
 
 namespace KnowledgeTester.Models
@@ -31,14 +32,14 @@ namespace KnowledgeTester.Models
 
 		public List<SubcategoryModel> Subcategories { get; set; }
 
-		public TestModel(Test test)
+		public TestModel(TestDto test)
 		{
 			Id = test.Id;
 			Name = test.Name;
-			StartDate = test.StartDate;
-			EndDate = test.EndDate;
-			Duration = test.MinutesDuration;
-			SubcategoryId = test.SubcategoryId;
+			StartDate = test.StartTime;
+			EndDate = test.EndTime;
+			Duration = test.Duration;
+			SubcategoryId = test.Subcategory.Id;
 		}
 
 		public TestModel()

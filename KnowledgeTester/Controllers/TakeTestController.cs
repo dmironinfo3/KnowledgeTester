@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KT.DB.Objects;
+using KT.DTOs.Objects;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -16,7 +19,7 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult Index(Guid? id)
 		{
-			
+
 			if (id == null)
 			{
 				ViewBag.Message = "Please select a valid test to take!";
@@ -25,14 +28,14 @@ namespace KnowledgeTester.Controllers
 
 			if (!id.Value.Equals(Guid.Empty))
 			{
-				if (!KT.DB.Helpers.StudentTests.IsValidInProgress(id.Value, SessionWrapper.Student.Username))
+				if (!ServicesFactory.GetService<IKtUserTestsService>().IsValidInProgress(id.Value, SessionWrapper.Student.Username))
 				{
 					ViewBag.Message = "Please select a valid test to take!";
 					return RedirectToAction("Index", "StudentPanel");
 				}
 
-				OngoingTest test;
-				var testGenerated = KT.DB.Helpers.StudentTests.IsTestGenerated(id.Value, SessionWrapper.Student.Username, out test);
+				GeneratedTestDto test;
+				var testGenerated = ServicesFactory.GetService<IKtUserTestsService>().IsTestGenerated(id.Value, SessionWrapper.Student.Username, out test);
 
 				if (testGenerated)
 				{
@@ -40,7 +43,7 @@ namespace KnowledgeTester.Controllers
 				}
 				else
 				{
-					test = KT.DB.Helpers.StudentTests.GenerateTest(id.Value, SessionWrapper.Student.Username);
+					test = ServicesFactory.GetService<IKtUserTestsService>().GenerateTest(id.Value, SessionWrapper.Student.Username);
 					return View(new TakeTestModel(test));
 				}
 			}
@@ -72,18 +75,21 @@ namespace KnowledgeTester.Controllers
 		{
 			foreach (var q in model.Questions)
 			{
-				var ans = CompressAnswer(q.Answers, q.Argument);
 
-				KT.DB.Helpers.Answers.SaveTestAnswer(SessionWrapper.Student.Username, model.TestId, q.Id, ans);
+				foreach (var ans in q.Answers)
+				{
+					ServicesFactory.GetService<IKtAnswersService>().SaveTestAnswer(ans.Id, ans.IsSelected);
+
+				}
 			}
 
-			KT.DB.Helpers.StudentTests.FinishTest(SessionWrapper.Student.Username, model.TestId);
+			ServicesFactory.GetService<IKtUserTestsService>().FinishTest(SessionWrapper.Student.Username, model.TestId);
 		}
 
 		private string CompressAnswer(IEnumerable<TakeAnswerModel> answers, string argument)
 		{
 			var takeAnswerModels = answers as IList<TakeAnswerModel> ?? answers.ToList();
-			if(takeAnswerModels.Count(a => !a.IsSelected) == takeAnswerModels.Count)
+			if (takeAnswerModels.Count(a => !a.IsSelected) == takeAnswerModels.Count)
 			{
 				return string.Empty;
 			}

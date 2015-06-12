@@ -1,0 +1,6 @@
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\bin\Debug\KT.DB.dll.config
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\bin\Debug\KT.DB.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\bin\Debug\KT.DB.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\obj\Debug\KT.DB.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\obj\Debug\KT.DB.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DB\obj\Debug\KT.Database.csprojResolveAssemblyReference.cache

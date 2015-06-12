@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KT.DB;
+using KT.DTOs.Objects;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -36,7 +39,7 @@ namespace KnowledgeTester.Controllers
 				return View(m);
 			}
 
-			var cat = KT.DB.Helpers.Categories.GetById(id.Value);
+			var cat = ServicesFactory.GetService<IKtCategoriesService>().GetById(id.Value);
 
 			if (cat != null)
 			{
@@ -63,18 +66,18 @@ namespace KnowledgeTester.Controllers
 			}
 
 			_catId = model.Id.Equals(Guid.Empty) ?
-				KT.DB.Helpers.Categories.Save(model.Name) :
-				KT.DB.Helpers.Categories.Save(model.Name, model.Id);
+				ServicesFactory.GetService<IKtCategoriesService>().Save(model.Name) :
+				ServicesFactory.GetService<IKtCategoriesService>().Save(model.Name, model.Id);
 
 			return RedirectToAction("Index", "Category", new { id = _catId });
 		}
 
 		public ActionResult GetSubcategories()
 		{
-			var s = new List<Subcategory>();
+			var s = new List<SubcategoryDto>();
 			if (!SessionWrapper.CurrentCategoryId.Equals(Guid.Empty))
 			{
-				s = KT.DB.Helpers.Subcategories.GetByCategory(SessionWrapper.CurrentCategoryId);
+				s = ServicesFactory.GetService<IKtSubcategoriesService>().GetByCategory(SessionWrapper.CurrentCategoryId).ToList();
 			}
 
 			var result = new
@@ -88,7 +91,7 @@ namespace KnowledgeTester.Controllers
 						{
 							Id = row.Id,
 							Name = row.Name,
-							Questions = KT.DB.Helpers.Questions.GetCountBySubcategory(row.Id)
+							Questions = ServicesFactory.GetService<IKtQuestionsService>().GetCountBySubcategory(row.Id)
 						}).ToArray()
 			};
 
@@ -98,7 +101,7 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteSubcategory(Guid id)
 		{
-			KT.DB.Helpers.Subcategories.Delete(id);
+			ServicesFactory.GetService<IKtSubcategoriesService>().Delete(id);
 
 			return Json("Subcategory is deleted!", JsonRequestBehavior.AllowGet);
 		}

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KT.DB;
+using KT.DTOs.Objects;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -29,14 +32,14 @@ namespace KnowledgeTester.Controllers
 				ViewBag.Message = "Please select a valid subcategory!";
 				return RedirectToAction("Index", "Category", new { id = SessionWrapper.CurrentCategoryId });
 			}
-			var catName = KT.DB.Helpers.Categories.GetById(SessionWrapper.CurrentCategoryId).Name;
+			var catName = ServicesFactory.GetService<IKtCategoriesService>().GetById(SessionWrapper.CurrentCategoryId).Name;
 			if (id.Value.Equals(Guid.Empty))
 			{
 				var m = new SubcategoryModel(catName);
 				return View(m);
 			}
 
-			var subCat = KT.DB.Helpers.Subcategories.GetById(id.Value);
+			var subCat = ServicesFactory.GetService<IKtSubcategoriesService>().GetById(id.Value);
 
 			if (subCat != null)
 			{
@@ -63,8 +66,8 @@ namespace KnowledgeTester.Controllers
 			}
 
 			_subcatId = model.Id.Equals(Guid.Empty) ?
-				KT.DB.Helpers.Subcategories.Save(model.Name, SessionWrapper.CurrentCategoryId) :
-				KT.DB.Helpers.Subcategories.Save(model.Name, SessionWrapper.CurrentCategoryId, model.Id);
+				ServicesFactory.GetService<IKtSubcategoriesService>().Save(model.Name, SessionWrapper.CurrentCategoryId) :
+				ServicesFactory.GetService<IKtSubcategoriesService>().Save(model.Name, SessionWrapper.CurrentCategoryId, model.Id);
 
 			return RedirectToAction("Index", "Subcategory", new { id = _subcatId });
 		}
@@ -72,17 +75,17 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteQuestion(Guid id)
 		{
-			KT.DB.Helpers.Questions.Delete(id);
+			ServicesFactory.GetService<IKtQuestionsService>().Delete(id);
 
 			return Json("Question is deleted!", JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult GetQuestions()
 		{
-			var s = new List<Question>();
+			var s = new List<QuestionDto>();
 			if (!SessionWrapper.CurrentSubcategoryId.Equals(Guid.Empty))
 			{
-				s = KT.DB.Helpers.Questions.GetBySubcategory(SessionWrapper.CurrentSubcategoryId);
+				s = ServicesFactory.GetService<IKtQuestionsService>().GetBySubcategory(SessionWrapper.CurrentSubcategoryId).ToList();
 			}
 
 			var result = new
@@ -91,13 +94,13 @@ namespace KnowledgeTester.Controllers
 				page = 1,
 				records = s.Count,
 				rows = (from row in s
-						orderby KT.DB.Helpers.Questions.GetUsability(row.Id) descending 
+						orderby ServicesFactory.GetService<IKtQuestionsService>().GetUsability(row.Id) descending 
 						select new
 						{
 							Id = row.Id,
 							Text = row.Text.Substring(0, row.Text.Length < 25 ? row.Text.Length : 25) + (row.Text.Length < 25 ? string.Empty : "..."),
-							Multiple = row.MultipleAnswer.ToString().ToLower(),
-							Usability = KT.DB.Helpers.Questions.GetUsability(row.Id) + " %"
+							Multiple = row.MultipleResponse.ToString().ToLower(),
+							Usability = ServicesFactory.GetService<IKtQuestionsService>().GetUsability(row.Id) + " %"
 						}).ToArray()
 			};
 

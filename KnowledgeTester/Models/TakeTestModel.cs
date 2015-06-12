@@ -4,24 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using KT.DB.Objects;
+using KT.DTOs.Objects;
 using KnowledgeTester.Helpers;
 
 namespace KnowledgeTester.Models
 {
 	public class TakeTestModel
 	{
-		public TakeTestModel(OngoingTest test)
+		public TakeTestModel(GeneratedTestDto test)
 		{
-			Username = test.Username;
-			TestId = test.TestId;
+			Username = test.User.Username;
+			TestId = test.Test.Id;
 			Questions = new List<TakeQuestionModel>();
 
-			DurationMinutes = test.Duration;
+			DurationMinutes = test.Test.Duration;
 
-			foreach (var q in test.Questions)
+			foreach (var q in test.GeneratedQuestions)
 			{
-				var t = test.Questions.First(a => a.Id == q.Id);
-
 				Questions.Add(new TakeQuestionModel(q));
 			}
 		}

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PolMessage Type="TransactionResponse" Version="1">
+	<TranResult TranName="QuoteDetail" Completed="N" ErrorCount="2"></TranResult>
+	<SchemeResult Ref="LP_Externalised" Completed="N" ErrorCount="2">
+		<ErrorDetail ErrorCode="10506" Reason="Multiple Schemes Configured For Ref LP_Externalised DictId 10 DictVer 7500" ></ErrorDetail>
+		<ErrorDetail ErrorCode="11225" Reason="Failed to Get Scheme Info" StepCount="5" StepId="OpenScheme" ></ErrorDetail>
+	</SchemeResult>
+</PolMessage>

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -31,7 +33,7 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult GetCategories()
 		{
-			var categories = KT.DB.Helpers.Categories.GetAll();
+			var categories = ServicesFactory.GetService<IKtCategoriesService>().GetAll().ToList();
 
 			var result = new
 			{
@@ -44,7 +46,7 @@ namespace KnowledgeTester.Controllers
 						{
 							row.Id,
 							row.Name,
-							Subcategories = KT.DB.Helpers.Subcategories.GetCountByCategory(row.Id)
+							Subcategories = ServicesFactory.GetService<IKtSubcategoriesService>().GetCountByCategory(row.Id)
 						}).ToArray()
 			};
 
@@ -54,14 +56,14 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteCategory(Guid id)
 		{
-			KT.DB.Helpers.Categories.Delete(id);
+			ServicesFactory.GetService<IKtCategoriesService>().Delete(id);
 
 			return Json("Category is deleted!", JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult GetTests()
 		{
-			var tests = KT.DB.Helpers.Tests.GetAll();
+			var tests = ServicesFactory.GetService<IKtTestService>().GetAll().ToList();
 
 			var result = new
 			{
@@ -69,14 +71,14 @@ namespace KnowledgeTester.Controllers
 				page = 1,
 				records = tests.Count,
 				rows = (from row in tests
-						orderby row.StartDate descending
+						orderby row.StartTime descending
 						select new
 						{
 							Id = row.Id,
 							Name = row.Name.Substring(0, row.Name.Length < 25 ? row.Name.Length : 25) + (row.Name.Length < 25 ? string.Empty : "..."),
-							StartDate = row.StartDate.ToString("dd.MM.yy HH:mm"),
-							Subscriptions = row.Students.Count,
-							Duration = row.MinutesDuration,
+							StartDate = row.StartTime.ToString("dd.MM.yy HH:mm"),
+							Subscriptions = row.SubscribedUsers.Count(),
+							Duration = row.Duration,
 							Subcategory = row.Subcategory.Name,
 						}).ToArray()
 			};
@@ -88,7 +90,7 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteTest(Guid id)
 		{
-			KT.DB.Helpers.Tests.Delete(id);
+			ServicesFactory.GetService<IKtTestService>().Delete(id);
 
 			return Json("Test is deleted!", JsonRequestBehavior.AllowGet);
 		}

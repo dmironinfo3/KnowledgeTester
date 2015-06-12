@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using KT.DB;
+using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Models
 {
@@ -12,7 +13,7 @@ namespace KnowledgeTester.Models
 		public string Text { get; set; }
 		public Guid Id { get; set; }
 
-		public AnswerModel(Answer ans)
+		public AnswerModel(AnswerDto ans)
 		{
 			IsCorrect = ans.IsCorrect;
 			Text = ans.Text;

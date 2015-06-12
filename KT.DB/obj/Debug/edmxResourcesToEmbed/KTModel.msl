@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KTModelStoreContainer" CdmEntityContainer="KTEntities">
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="KTModel.Answer">
+        <MappingFragment StoreEntitySet="Answers">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="KTModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CreatedByUser" ColumnName="CreatedByUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneratedQuestions">
+      <EntityTypeMapping TypeName="KTModel.GeneratedQuestion">
+        <MappingFragment StoreEntitySet="GeneratedQuestions">
+          <ScalarProperty Name="ArgumentText" ColumnName="ArgumentText" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="GeneratedTestId" ColumnName="GeneratedTestId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneratedTests">
+      <EntityTypeMapping TypeName="KTModel.GeneratedTest">
+        <MappingFragment StoreEntitySet="GeneratedTests">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="MaxScore" ColumnName="MaxScore" />
+          <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+          <ScalarProperty Name="IsFinished" ColumnName="IsFinished" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="KTModel.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="MultipleAnswer" ColumnName="MultipleAnswer" />
+          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+          <ScalarProperty Name="CorrectArgument" ColumnName="CorrectArgument" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subcategories">
+      <EntityTypeMapping TypeName="KTModel.Subcategory">
+        <MappingFragment StoreEntitySet="Subcategories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tests">
+      <EntityTypeMapping TypeName="KTModel.Test">
+        <MappingFragment StoreEntitySet="Tests">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+          <ScalarProperty Name="MinutesDuration" ColumnName="MinutesDuration" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="KTModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PasswordHint" ColumnName="PasswordHint" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Subscriptions" TypeName="KTModel.Subscriptions" StoreEntitySet="Subscriptions">
+      <EndProperty Name="Test">
+        <ScalarProperty Name="Id" ColumnName="TestId" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="StudentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="GeneratedAnswers">
+      <EntityTypeMapping TypeName="KTModel.GeneratedAnswer">
+        <MappingFragment StoreEntitySet="GeneratedAnswers">
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+          <ScalarProperty Name="GeneratedQuestionId" ColumnName="GeneratedQuestionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

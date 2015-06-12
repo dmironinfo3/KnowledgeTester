@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using KT.DB;
+using KT.DTOs.Objects;
 using KnowledgeTester.Models;
 
 namespace KnowledgeTester.Helpers
@@ -30,11 +31,11 @@ namespace KnowledgeTester.Helpers
 		}
 
 		private const string StudentId = "StudentId";
-		public static Student Student
+		public static UserDto Student
 		{
 			get
 			{
-				return (KT.DB.Student)HttpContext.Current.Session[StudentId];
+				return (UserDto)HttpContext.Current.Session[StudentId];
 			}
 			set
 			{

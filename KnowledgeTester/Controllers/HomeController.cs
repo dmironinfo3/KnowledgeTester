@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
 using KT.DB.Helpers;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
+using KnowledgeTester.WCFServices;
 using Newtonsoft.Json;
 
 namespace KnowledgeTester.Controllers
 {
 	public class HomeController : Controller
 	{
+		
 		public ActionResult Index()
 		{
 			if (SessionWrapper.UserIsAdmin)
@@ -43,11 +48,12 @@ namespace KnowledgeTester.Controllers
 				return RedirectToAction("Index", "AdminPanel");
 			}
 
-			var valid = Students.Authenticate(pageModel.UserName, pageModel.Password);
+			var valid = ServicesFactory.GetService<IKtUsersService>().
+			Authenticate(pageModel.UserName, pageModel.Password);
 
 			if (valid)
 			{
-				SessionWrapper.Student =  Students.GetByKey(pageModel.UserName);
+				SessionWrapper.Student = ServicesFactory.GetService<IKtUsersService>().GetByKey(pageModel.UserName);
 				return RedirectToAction("Index", "StudentPanel");
 			}
 
@@ -111,7 +117,7 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult GetHint(string userName)
 		{
-			var value = Students.GetStudentHint(userName);
+			var value = ServicesFactory.GetService<IKtUsersService>().GetStudentHint(userName);
 
 			return Json(value, JsonRequestBehavior.AllowGet);
 		}

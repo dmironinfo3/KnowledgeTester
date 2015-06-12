@@ -19,23 +19,17 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("KTModel", "FK__Answers__Questio__0AD2A005", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Answer), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__Subcatego__Categ__03317E3D", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Category), "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Subcategory), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__Questions__Subca__07F6335A", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Question), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__Tests__Subcatego__0DAF0CB0", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "Subscriptions", "Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Student), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test))]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTe__Q10Id__37A5467C", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q1Id__2F10007B", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q2Id__300424B4", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q3Id__30F848ED", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q4Id__31EC6D26", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q5Id__32E0915F", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q6Id__33D4B598", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q7Id__34C8D9D1", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q8Id__35BCFE0A", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTes__Q9Id__36B12243", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTe__Stude__2D27B809", "Student", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Student), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "FK__StudentTe__TestI__2E1BDC42", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Test), "StudentTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.StudentTest), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_Answers_Questionid", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Answer), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_Categories_users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.User), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Category), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.GeneratedTest), "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedQuestion), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedQuestions_QuestionId", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedQuestion), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedTests_TestId", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Test), "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedTest), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedTests_Username", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.User), "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedTest), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_Questions_SubcategoryId", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Question), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_tests_SubcategoryId", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "Subscriptions", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.User), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test))]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedAnswers_Answers", "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Answer), "GeneratedAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedAnswer), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.GeneratedQuestion), "GeneratedAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedAnswer), true)]
 
 #endregion
 
@@ -122,6 +116,38 @@ namespace KT.DB
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<GeneratedQuestion> GeneratedQuestions
+        {
+            get
+            {
+                if ((_GeneratedQuestions == null))
+                {
+                    _GeneratedQuestions = base.CreateObjectSet<GeneratedQuestion>("GeneratedQuestions");
+                }
+                return _GeneratedQuestions;
+            }
+        }
+        private ObjectSet<GeneratedQuestion> _GeneratedQuestions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GeneratedTest> GeneratedTests
+        {
+            get
+            {
+                if ((_GeneratedTests == null))
+                {
+                    _GeneratedTests = base.CreateObjectSet<GeneratedTest>("GeneratedTests");
+                }
+                return _GeneratedTests;
+            }
+        }
+        private ObjectSet<GeneratedTest> _GeneratedTests;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Question> Questions
         {
             get
@@ -134,22 +160,6 @@ namespace KT.DB
             }
         }
         private ObjectSet<Question> _Questions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Student> Students
-        {
-            get
-            {
-                if ((_Students == null))
-                {
-                    _Students = base.CreateObjectSet<Student>("Students");
-                }
-                return _Students;
-            }
-        }
-        private ObjectSet<Student> _Students;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -186,18 +196,34 @@ namespace KT.DB
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<StudentTest> StudentTests
+        public ObjectSet<User> Users
         {
             get
             {
-                if ((_StudentTests == null))
+                if ((_Users == null))
                 {
-                    _StudentTests = base.CreateObjectSet<StudentTest>("StudentTests");
+                    _Users = base.CreateObjectSet<User>("Users");
                 }
-                return _StudentTests;
+                return _Users;
             }
         }
-        private ObjectSet<StudentTest> _StudentTests;
+        private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GeneratedAnswer> GeneratedAnswers
+        {
+            get
+            {
+                if ((_GeneratedAnswers == null))
+                {
+                    _GeneratedAnswers = base.CreateObjectSet<GeneratedAnswer>("GeneratedAnswers");
+                }
+                return _GeneratedAnswers;
+            }
+        }
+        private ObjectSet<GeneratedAnswer> _GeneratedAnswers;
 
         #endregion
 
@@ -220,19 +246,27 @@ namespace KT.DB
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the GeneratedQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGeneratedQuestions(GeneratedQuestion generatedQuestion)
+        {
+            base.AddObject("GeneratedQuestions", generatedQuestion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GeneratedTests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGeneratedTests(GeneratedTest generatedTest)
+        {
+            base.AddObject("GeneratedTests", generatedTest);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Questions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToQuestions(Question question)
         {
             base.AddObject("Questions", question);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Students EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStudents(Student student)
-        {
-            base.AddObject("Students", student);
         }
     
         /// <summary>
@@ -252,11 +286,19 @@ namespace KT.DB
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the StudentTests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToStudentTests(StudentTest studentTest)
+        public void AddToUsers(User user)
         {
-            base.AddObject("StudentTests", studentTest);
+            base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GeneratedAnswers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGeneratedAnswers(GeneratedAnswer generatedAnswer)
+        {
+            base.AddObject("GeneratedAnswers", generatedAnswer);
         }
 
         #endregion
@@ -408,16 +450,16 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Answers__Questio__0AD2A005", "Question")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Answers_Questionid", "Question")]
         public Question Question
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__Answers__Questio__0AD2A005", "Question").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_Answers_Questionid", "Question").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__Answers__Questio__0AD2A005", "Question").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_Answers_Questionid", "Question").Value = value;
             }
         }
         /// <summary>
@@ -429,13 +471,35 @@ namespace KT.DB
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__Answers__Questio__0AD2A005", "Question");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_Answers_Questionid", "Question");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__Answers__Questio__0AD2A005", "Question", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.fk_Answers_Questionid", "Question", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedAnswers_Answers", "GeneratedAnswer")]
+        public EntityCollection<GeneratedAnswer> GeneratedAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedAnswer>("KTModel.fk_GeneratedAnswers_Answers", "GeneratedAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedAnswer>("KTModel.fk_GeneratedAnswers_Answers", "GeneratedAnswer", value);
                 }
             }
         }
@@ -459,11 +523,13 @@ namespace KT.DB
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Category CreateCategory(global::System.Guid id, global::System.String name)
+        /// <param name="createdByUser">Initial value of the CreatedByUser property.</param>
+        public static Category CreateCategory(global::System.Guid id, global::System.String name, global::System.String createdByUser)
         {
             Category category = new Category();
             category.Id = id;
             category.Name = name;
+            category.CreatedByUser = createdByUser;
             return category;
         }
 
@@ -521,6 +587,30 @@ namespace KT.DB
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedByUser
+        {
+            get
+            {
+                return _CreatedByUser;
+            }
+            set
+            {
+                OnCreatedByUserChanging(value);
+                ReportPropertyChanging("CreatedByUser");
+                _CreatedByUser = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CreatedByUser");
+                OnCreatedByUserChanged();
+            }
+        }
+        private global::System.String _CreatedByUser;
+        partial void OnCreatedByUserChanging(global::System.String value);
+        partial void OnCreatedByUserChanged();
 
         #endregion
 
@@ -533,18 +623,801 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Subcatego__Categ__03317E3D", "Subcategory")]
-        public EntityCollection<Subcategory> Subcategories
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Categories_users", "User")]
+        public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Subcategory>("KTModel.FK__Subcatego__Categ__03317E3D", "Subcategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_Categories_users", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_Categories_users", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_Categories_users", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Subcategory>("KTModel.FK__Subcatego__Categ__03317E3D", "Subcategory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("KTModel.fk_Categories_users", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="GeneratedAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GeneratedAnswer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GeneratedAnswer object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="generatedQuestionId">Initial value of the GeneratedQuestionId property.</param>
+        /// <param name="answerId">Initial value of the AnswerId property.</param>
+        /// <param name="isSelected">Initial value of the IsSelected property.</param>
+        public static GeneratedAnswer CreateGeneratedAnswer(global::System.Guid id, global::System.Guid generatedQuestionId, global::System.Guid answerId, global::System.Boolean isSelected)
+        {
+            GeneratedAnswer generatedAnswer = new GeneratedAnswer();
+            generatedAnswer.Id = id;
+            generatedAnswer.GeneratedQuestionId = generatedQuestionId;
+            generatedAnswer.AnswerId = answerId;
+            generatedAnswer.IsSelected = isSelected;
+            return generatedAnswer;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid GeneratedQuestionId
+        {
+            get
+            {
+                return _GeneratedQuestionId;
+            }
+            set
+            {
+                OnGeneratedQuestionIdChanging(value);
+                ReportPropertyChanging("GeneratedQuestionId");
+                _GeneratedQuestionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GeneratedQuestionId");
+                OnGeneratedQuestionIdChanged();
+            }
+        }
+        private global::System.Guid _GeneratedQuestionId;
+        partial void OnGeneratedQuestionIdChanging(global::System.Guid value);
+        partial void OnGeneratedQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid AnswerId
+        {
+            get
+            {
+                return _AnswerId;
+            }
+            set
+            {
+                OnAnswerIdChanging(value);
+                ReportPropertyChanging("AnswerId");
+                _AnswerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AnswerId");
+                OnAnswerIdChanged();
+            }
+        }
+        private global::System.Guid _AnswerId;
+        partial void OnAnswerIdChanging(global::System.Guid value);
+        partial void OnAnswerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                OnIsSelectedChanging(value);
+                ReportPropertyChanging("IsSelected");
+                _IsSelected = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsSelected");
+                OnIsSelectedChanged();
+            }
+        }
+        private global::System.Boolean _IsSelected;
+        partial void OnIsSelectedChanging(global::System.Boolean value);
+        partial void OnIsSelectedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedAnswers_Answers", "Answer")]
+        public Answer Answer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Answer>("KTModel.fk_GeneratedAnswers_Answers", "Answer").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Answer>("KTModel.fk_GeneratedAnswers_Answers", "Answer").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Answer> AnswerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Answer>("KTModel.fk_GeneratedAnswers_Answers", "Answer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Answer>("KTModel.fk_GeneratedAnswers_Answers", "Answer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion")]
+        public GeneratedQuestion GeneratedQuestion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedQuestion>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedQuestion>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GeneratedQuestion> GeneratedQuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedQuestion>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GeneratedQuestion>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="GeneratedQuestion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GeneratedQuestion : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GeneratedQuestion object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="generatedTestId">Initial value of the GeneratedTestId property.</param>
+        /// <param name="questionId">Initial value of the QuestionId property.</param>
+        /// <param name="argumentText">Initial value of the ArgumentText property.</param>
+        public static GeneratedQuestion CreateGeneratedQuestion(global::System.Guid id, global::System.Guid generatedTestId, global::System.Guid questionId, global::System.String argumentText)
+        {
+            GeneratedQuestion generatedQuestion = new GeneratedQuestion();
+            generatedQuestion.Id = id;
+            generatedQuestion.GeneratedTestId = generatedTestId;
+            generatedQuestion.QuestionId = questionId;
+            generatedQuestion.ArgumentText = argumentText;
+            return generatedQuestion;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid GeneratedTestId
+        {
+            get
+            {
+                return _GeneratedTestId;
+            }
+            set
+            {
+                OnGeneratedTestIdChanging(value);
+                ReportPropertyChanging("GeneratedTestId");
+                _GeneratedTestId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GeneratedTestId");
+                OnGeneratedTestIdChanged();
+            }
+        }
+        private global::System.Guid _GeneratedTestId;
+        partial void OnGeneratedTestIdChanging(global::System.Guid value);
+        partial void OnGeneratedTestIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid QuestionId
+        {
+            get
+            {
+                return _QuestionId;
+            }
+            set
+            {
+                OnQuestionIdChanging(value);
+                ReportPropertyChanging("QuestionId");
+                _QuestionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("QuestionId");
+                OnQuestionIdChanged();
+            }
+        }
+        private global::System.Guid _QuestionId;
+        partial void OnQuestionIdChanging(global::System.Guid value);
+        partial void OnQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ArgumentText
+        {
+            get
+            {
+                return _ArgumentText;
+            }
+            set
+            {
+                OnArgumentTextChanging(value);
+                ReportPropertyChanging("ArgumentText");
+                _ArgumentText = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ArgumentText");
+                OnArgumentTextChanged();
+            }
+        }
+        private global::System.String _ArgumentText;
+        partial void OnArgumentTextChanging(global::System.String value);
+        partial void OnArgumentTextChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest")]
+        public GeneratedTest GeneratedTest
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedTest>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedTest>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GeneratedTest> GeneratedTestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GeneratedTest>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GeneratedTest>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedQuestions_QuestionId", "Question")]
+        public Question Question
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_GeneratedQuestions_QuestionId", "Question").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_GeneratedQuestions_QuestionId", "Question").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Question> QuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.fk_GeneratedQuestions_QuestionId", "Question");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.fk_GeneratedQuestions_QuestionId", "Question", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedAnswer")]
+        public EntityCollection<GeneratedAnswer> GeneratedAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedAnswer>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedAnswer>("KTModel.fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedAnswer", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="GeneratedTest")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GeneratedTest : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GeneratedTest object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="username">Initial value of the Username property.</param>
+        /// <param name="testId">Initial value of the TestId property.</param>
+        /// <param name="isFinished">Initial value of the IsFinished property.</param>
+        /// <param name="isVerified">Initial value of the IsVerified property.</param>
+        /// <param name="maxScore">Initial value of the MaxScore property.</param>
+        /// <param name="score">Initial value of the Score property.</param>
+        public static GeneratedTest CreateGeneratedTest(global::System.Guid id, global::System.String username, global::System.Guid testId, global::System.Boolean isFinished, global::System.Boolean isVerified, global::System.Int32 maxScore, global::System.Int32 score)
+        {
+            GeneratedTest generatedTest = new GeneratedTest();
+            generatedTest.Id = id;
+            generatedTest.Username = username;
+            generatedTest.TestId = testId;
+            generatedTest.IsFinished = isFinished;
+            generatedTest.IsVerified = isVerified;
+            generatedTest.MaxScore = maxScore;
+            generatedTest.Score = score;
+            return generatedTest;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Username
+        {
+            get
+            {
+                return _Username;
+            }
+            set
+            {
+                OnUsernameChanging(value);
+                ReportPropertyChanging("Username");
+                _Username = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Username");
+                OnUsernameChanged();
+            }
+        }
+        private global::System.String _Username;
+        partial void OnUsernameChanging(global::System.String value);
+        partial void OnUsernameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid TestId
+        {
+            get
+            {
+                return _TestId;
+            }
+            set
+            {
+                OnTestIdChanging(value);
+                ReportPropertyChanging("TestId");
+                _TestId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestId");
+                OnTestIdChanged();
+            }
+        }
+        private global::System.Guid _TestId;
+        partial void OnTestIdChanging(global::System.Guid value);
+        partial void OnTestIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsFinished
+        {
+            get
+            {
+                return _IsFinished;
+            }
+            set
+            {
+                OnIsFinishedChanging(value);
+                ReportPropertyChanging("IsFinished");
+                _IsFinished = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsFinished");
+                OnIsFinishedChanged();
+            }
+        }
+        private global::System.Boolean _IsFinished;
+        partial void OnIsFinishedChanging(global::System.Boolean value);
+        partial void OnIsFinishedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsVerified
+        {
+            get
+            {
+                return _IsVerified;
+            }
+            set
+            {
+                OnIsVerifiedChanging(value);
+                ReportPropertyChanging("IsVerified");
+                _IsVerified = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsVerified");
+                OnIsVerifiedChanged();
+            }
+        }
+        private global::System.Boolean _IsVerified;
+        partial void OnIsVerifiedChanging(global::System.Boolean value);
+        partial void OnIsVerifiedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MaxScore
+        {
+            get
+            {
+                return _MaxScore;
+            }
+            set
+            {
+                OnMaxScoreChanging(value);
+                ReportPropertyChanging("MaxScore");
+                _MaxScore = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MaxScore");
+                OnMaxScoreChanged();
+            }
+        }
+        private global::System.Int32 _MaxScore;
+        partial void OnMaxScoreChanging(global::System.Int32 value);
+        partial void OnMaxScoreChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Score
+        {
+            get
+            {
+                return _Score;
+            }
+            set
+            {
+                OnScoreChanging(value);
+                ReportPropertyChanging("Score");
+                _Score = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Score");
+                OnScoreChanged();
+            }
+        }
+        private global::System.Int32 _Score;
+        partial void OnScoreChanging(global::System.Int32 value);
+        partial void OnScoreChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedQuestions_GeneratedTestId", "GeneratedQuestion")]
+        public EntityCollection<GeneratedQuestion> GeneratedQuestions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedQuestion>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedQuestion>("KTModel.fk_GeneratedQuestions_GeneratedTestId", "GeneratedQuestion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_TestId", "Test")]
+        public Test Test
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Test> TestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_Username", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_GeneratedTests_Username", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_GeneratedTests_Username", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("KTModel.fk_GeneratedTests_Username", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("KTModel.fk_GeneratedTests_Username", "User", value);
                 }
             }
         }
@@ -720,18 +1593,18 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Answers__Questio__0AD2A005", "Answer")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Answers_Questionid", "Answer")]
         public EntityCollection<Answer> Answers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Answer>("KTModel.FK__Answers__Questio__0AD2A005", "Answer");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Answer>("KTModel.fk_Answers_Questionid", "Answer");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Answer>("KTModel.FK__Answers__Questio__0AD2A005", "Answer", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Answer>("KTModel.fk_Answers_Questionid", "Answer", value);
                 }
             }
         }
@@ -742,16 +1615,38 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Questions__Subca__07F6335A", "Subcategory")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedQuestions_QuestionId", "GeneratedQuestion")]
+        public EntityCollection<GeneratedQuestion> GeneratedQuestions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedQuestion>("KTModel.fk_GeneratedQuestions_QuestionId", "GeneratedQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedQuestion>("KTModel.fk_GeneratedQuestions_QuestionId", "GeneratedQuestion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Questions_SubcategoryId", "Subcategory")]
         public Subcategory Subcategory
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Questions__Subca__07F6335A", "Subcategory").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_Questions_SubcategoryId", "Subcategory").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Questions__Subca__07F6335A", "Subcategory").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_Questions_SubcategoryId", "Subcategory").Value = value;
             }
         }
         /// <summary>
@@ -763,1553 +1658,13 @@ namespace KT.DB
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Questions__Subca__07F6335A", "Subcategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_Questions_SubcategoryId", "Subcategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Subcategory>("KTModel.FK__Questions__Subca__07F6335A", "Subcategory", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__Q10Id__37A5467C", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTe__Q10Id__37A5467C", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTe__Q10Id__37A5467C", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q1Id__2F10007B", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q1Id__2F10007B", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q1Id__2F10007B", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q2Id__300424B4", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q2Id__300424B4", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q2Id__300424B4", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q3Id__30F848ED", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests3
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q3Id__30F848ED", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q3Id__30F848ED", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q4Id__31EC6D26", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests4
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q5Id__32E0915F", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests5
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q5Id__32E0915F", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q5Id__32E0915F", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q6Id__33D4B598", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests6
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q6Id__33D4B598", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q6Id__33D4B598", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q7Id__34C8D9D1", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests7
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q8Id__35BCFE0A", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests8
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "StudentTest", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q9Id__36B12243", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests9
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q9Id__36B12243", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTes__Q9Id__36B12243", "StudentTest", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="Student")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Student : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Student object.
-        /// </summary>
-        /// <param name="username">Initial value of the Username property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="passwordHint">Initial value of the PasswordHint property.</param>
-        /// <param name="email">Initial value of the Email property.</param>
-        public static Student CreateStudent(global::System.String username, global::System.String password, global::System.String passwordHint, global::System.String email)
-        {
-            Student student = new Student();
-            student.Username = username;
-            student.Password = password;
-            student.PasswordHint = passwordHint;
-            student.Email = email;
-            return student;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Username
-        {
-            get
-            {
-                return _Username;
-            }
-            set
-            {
-                if (_Username != value)
-                {
-                    OnUsernameChanging(value);
-                    ReportPropertyChanging("Username");
-                    _Username = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Username");
-                    OnUsernameChanged();
-                }
-            }
-        }
-        private global::System.String _Username;
-        partial void OnUsernameChanging(global::System.String value);
-        partial void OnUsernameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Password
-        {
-            get
-            {
-                return _Password;
-            }
-            set
-            {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
-            }
-        }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PasswordHint
-        {
-            get
-            {
-                return _PasswordHint;
-            }
-            set
-            {
-                OnPasswordHintChanging(value);
-                ReportPropertyChanging("PasswordHint");
-                _PasswordHint = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PasswordHint");
-                OnPasswordHintChanged();
-            }
-        }
-        private global::System.String _PasswordHint;
-        partial void OnPasswordHintChanging(global::System.String value);
-        partial void OnPasswordHintChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "Subscriptions", "Test")]
-        public EntityCollection<Test> Tests
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Test>("KTModel.Subscriptions", "Test");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Test>("KTModel.Subscriptions", "Test", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__Stude__2D27B809", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTe__Stude__2D27B809", "StudentTest");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTe__Stude__2D27B809", "StudentTest", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="StudentTest")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class StudentTest : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new StudentTest object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="studentUsername">Initial value of the StudentUsername property.</param>
-        /// <param name="testId">Initial value of the TestId property.</param>
-        /// <param name="q1Id">Initial value of the Q1Id property.</param>
-        /// <param name="q1Answer">Initial value of the Q1Answer property.</param>
-        /// <param name="q2Id">Initial value of the Q2Id property.</param>
-        /// <param name="q2Answer">Initial value of the Q2Answer property.</param>
-        /// <param name="q3Id">Initial value of the Q3Id property.</param>
-        /// <param name="q3Answer">Initial value of the Q3Answer property.</param>
-        /// <param name="q4Id">Initial value of the Q4Id property.</param>
-        /// <param name="q4Answer">Initial value of the Q4Answer property.</param>
-        /// <param name="q5Id">Initial value of the Q5Id property.</param>
-        /// <param name="q5Answer">Initial value of the Q5Answer property.</param>
-        /// <param name="q6Id">Initial value of the Q6Id property.</param>
-        /// <param name="q6Answer">Initial value of the Q6Answer property.</param>
-        /// <param name="q7Id">Initial value of the Q7Id property.</param>
-        /// <param name="q7Answer">Initial value of the Q7Answer property.</param>
-        /// <param name="q8Id">Initial value of the Q8Id property.</param>
-        /// <param name="q8Answer">Initial value of the Q8Answer property.</param>
-        /// <param name="q9Id">Initial value of the Q9Id property.</param>
-        /// <param name="q9Answer">Initial value of the Q9Answer property.</param>
-        /// <param name="q10Id">Initial value of the Q10Id property.</param>
-        /// <param name="q10Answer">Initial value of the Q10Answer property.</param>
-        public static StudentTest CreateStudentTest(global::System.Guid id, global::System.String studentUsername, global::System.Guid testId, global::System.Guid q1Id, global::System.String q1Answer, global::System.Guid q2Id, global::System.String q2Answer, global::System.Guid q3Id, global::System.String q3Answer, global::System.Guid q4Id, global::System.String q4Answer, global::System.Guid q5Id, global::System.String q5Answer, global::System.Guid q6Id, global::System.String q6Answer, global::System.Guid q7Id, global::System.String q7Answer, global::System.Guid q8Id, global::System.String q8Answer, global::System.Guid q9Id, global::System.String q9Answer, global::System.Guid q10Id, global::System.String q10Answer)
-        {
-            StudentTest studentTest = new StudentTest();
-            studentTest.Id = id;
-            studentTest.StudentUsername = studentUsername;
-            studentTest.TestId = testId;
-            studentTest.Q1Id = q1Id;
-            studentTest.Q1Answer = q1Answer;
-            studentTest.Q2Id = q2Id;
-            studentTest.Q2Answer = q2Answer;
-            studentTest.Q3Id = q3Id;
-            studentTest.Q3Answer = q3Answer;
-            studentTest.Q4Id = q4Id;
-            studentTest.Q4Answer = q4Answer;
-            studentTest.Q5Id = q5Id;
-            studentTest.Q5Answer = q5Answer;
-            studentTest.Q6Id = q6Id;
-            studentTest.Q6Answer = q6Answer;
-            studentTest.Q7Id = q7Id;
-            studentTest.Q7Answer = q7Answer;
-            studentTest.Q8Id = q8Id;
-            studentTest.Q8Answer = q8Answer;
-            studentTest.Q9Id = q9Id;
-            studentTest.Q9Answer = q9Answer;
-            studentTest.Q10Id = q10Id;
-            studentTest.Q10Answer = q10Answer;
-            return studentTest;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String StudentUsername
-        {
-            get
-            {
-                return _StudentUsername;
-            }
-            set
-            {
-                OnStudentUsernameChanging(value);
-                ReportPropertyChanging("StudentUsername");
-                _StudentUsername = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("StudentUsername");
-                OnStudentUsernameChanged();
-            }
-        }
-        private global::System.String _StudentUsername;
-        partial void OnStudentUsernameChanging(global::System.String value);
-        partial void OnStudentUsernameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid TestId
-        {
-            get
-            {
-                return _TestId;
-            }
-            set
-            {
-                OnTestIdChanging(value);
-                ReportPropertyChanging("TestId");
-                _TestId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TestId");
-                OnTestIdChanged();
-            }
-        }
-        private global::System.Guid _TestId;
-        partial void OnTestIdChanging(global::System.Guid value);
-        partial void OnTestIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q1Id
-        {
-            get
-            {
-                return _Q1Id;
-            }
-            set
-            {
-                OnQ1IdChanging(value);
-                ReportPropertyChanging("Q1Id");
-                _Q1Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q1Id");
-                OnQ1IdChanged();
-            }
-        }
-        private global::System.Guid _Q1Id;
-        partial void OnQ1IdChanging(global::System.Guid value);
-        partial void OnQ1IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q1Answer
-        {
-            get
-            {
-                return _Q1Answer;
-            }
-            set
-            {
-                OnQ1AnswerChanging(value);
-                ReportPropertyChanging("Q1Answer");
-                _Q1Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q1Answer");
-                OnQ1AnswerChanged();
-            }
-        }
-        private global::System.String _Q1Answer;
-        partial void OnQ1AnswerChanging(global::System.String value);
-        partial void OnQ1AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q2Id
-        {
-            get
-            {
-                return _Q2Id;
-            }
-            set
-            {
-                OnQ2IdChanging(value);
-                ReportPropertyChanging("Q2Id");
-                _Q2Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q2Id");
-                OnQ2IdChanged();
-            }
-        }
-        private global::System.Guid _Q2Id;
-        partial void OnQ2IdChanging(global::System.Guid value);
-        partial void OnQ2IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q2Answer
-        {
-            get
-            {
-                return _Q2Answer;
-            }
-            set
-            {
-                OnQ2AnswerChanging(value);
-                ReportPropertyChanging("Q2Answer");
-                _Q2Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q2Answer");
-                OnQ2AnswerChanged();
-            }
-        }
-        private global::System.String _Q2Answer;
-        partial void OnQ2AnswerChanging(global::System.String value);
-        partial void OnQ2AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q3Id
-        {
-            get
-            {
-                return _Q3Id;
-            }
-            set
-            {
-                OnQ3IdChanging(value);
-                ReportPropertyChanging("Q3Id");
-                _Q3Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q3Id");
-                OnQ3IdChanged();
-            }
-        }
-        private global::System.Guid _Q3Id;
-        partial void OnQ3IdChanging(global::System.Guid value);
-        partial void OnQ3IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q3Answer
-        {
-            get
-            {
-                return _Q3Answer;
-            }
-            set
-            {
-                OnQ3AnswerChanging(value);
-                ReportPropertyChanging("Q3Answer");
-                _Q3Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q3Answer");
-                OnQ3AnswerChanged();
-            }
-        }
-        private global::System.String _Q3Answer;
-        partial void OnQ3AnswerChanging(global::System.String value);
-        partial void OnQ3AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q4Id
-        {
-            get
-            {
-                return _Q4Id;
-            }
-            set
-            {
-                OnQ4IdChanging(value);
-                ReportPropertyChanging("Q4Id");
-                _Q4Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q4Id");
-                OnQ4IdChanged();
-            }
-        }
-        private global::System.Guid _Q4Id;
-        partial void OnQ4IdChanging(global::System.Guid value);
-        partial void OnQ4IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q4Answer
-        {
-            get
-            {
-                return _Q4Answer;
-            }
-            set
-            {
-                OnQ4AnswerChanging(value);
-                ReportPropertyChanging("Q4Answer");
-                _Q4Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q4Answer");
-                OnQ4AnswerChanged();
-            }
-        }
-        private global::System.String _Q4Answer;
-        partial void OnQ4AnswerChanging(global::System.String value);
-        partial void OnQ4AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q5Id
-        {
-            get
-            {
-                return _Q5Id;
-            }
-            set
-            {
-                OnQ5IdChanging(value);
-                ReportPropertyChanging("Q5Id");
-                _Q5Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q5Id");
-                OnQ5IdChanged();
-            }
-        }
-        private global::System.Guid _Q5Id;
-        partial void OnQ5IdChanging(global::System.Guid value);
-        partial void OnQ5IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q5Answer
-        {
-            get
-            {
-                return _Q5Answer;
-            }
-            set
-            {
-                OnQ5AnswerChanging(value);
-                ReportPropertyChanging("Q5Answer");
-                _Q5Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q5Answer");
-                OnQ5AnswerChanged();
-            }
-        }
-        private global::System.String _Q5Answer;
-        partial void OnQ5AnswerChanging(global::System.String value);
-        partial void OnQ5AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q6Id
-        {
-            get
-            {
-                return _Q6Id;
-            }
-            set
-            {
-                OnQ6IdChanging(value);
-                ReportPropertyChanging("Q6Id");
-                _Q6Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q6Id");
-                OnQ6IdChanged();
-            }
-        }
-        private global::System.Guid _Q6Id;
-        partial void OnQ6IdChanging(global::System.Guid value);
-        partial void OnQ6IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q6Answer
-        {
-            get
-            {
-                return _Q6Answer;
-            }
-            set
-            {
-                OnQ6AnswerChanging(value);
-                ReportPropertyChanging("Q6Answer");
-                _Q6Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q6Answer");
-                OnQ6AnswerChanged();
-            }
-        }
-        private global::System.String _Q6Answer;
-        partial void OnQ6AnswerChanging(global::System.String value);
-        partial void OnQ6AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q7Id
-        {
-            get
-            {
-                return _Q7Id;
-            }
-            set
-            {
-                OnQ7IdChanging(value);
-                ReportPropertyChanging("Q7Id");
-                _Q7Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q7Id");
-                OnQ7IdChanged();
-            }
-        }
-        private global::System.Guid _Q7Id;
-        partial void OnQ7IdChanging(global::System.Guid value);
-        partial void OnQ7IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q7Answer
-        {
-            get
-            {
-                return _Q7Answer;
-            }
-            set
-            {
-                OnQ7AnswerChanging(value);
-                ReportPropertyChanging("Q7Answer");
-                _Q7Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q7Answer");
-                OnQ7AnswerChanged();
-            }
-        }
-        private global::System.String _Q7Answer;
-        partial void OnQ7AnswerChanging(global::System.String value);
-        partial void OnQ7AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q8Id
-        {
-            get
-            {
-                return _Q8Id;
-            }
-            set
-            {
-                OnQ8IdChanging(value);
-                ReportPropertyChanging("Q8Id");
-                _Q8Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q8Id");
-                OnQ8IdChanged();
-            }
-        }
-        private global::System.Guid _Q8Id;
-        partial void OnQ8IdChanging(global::System.Guid value);
-        partial void OnQ8IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q8Answer
-        {
-            get
-            {
-                return _Q8Answer;
-            }
-            set
-            {
-                OnQ8AnswerChanging(value);
-                ReportPropertyChanging("Q8Answer");
-                _Q8Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q8Answer");
-                OnQ8AnswerChanged();
-            }
-        }
-        private global::System.String _Q8Answer;
-        partial void OnQ8AnswerChanging(global::System.String value);
-        partial void OnQ8AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q9Id
-        {
-            get
-            {
-                return _Q9Id;
-            }
-            set
-            {
-                OnQ9IdChanging(value);
-                ReportPropertyChanging("Q9Id");
-                _Q9Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q9Id");
-                OnQ9IdChanged();
-            }
-        }
-        private global::System.Guid _Q9Id;
-        partial void OnQ9IdChanging(global::System.Guid value);
-        partial void OnQ9IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q9Answer
-        {
-            get
-            {
-                return _Q9Answer;
-            }
-            set
-            {
-                OnQ9AnswerChanging(value);
-                ReportPropertyChanging("Q9Answer");
-                _Q9Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q9Answer");
-                OnQ9AnswerChanged();
-            }
-        }
-        private global::System.String _Q9Answer;
-        partial void OnQ9AnswerChanging(global::System.String value);
-        partial void OnQ9AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Q10Id
-        {
-            get
-            {
-                return _Q10Id;
-            }
-            set
-            {
-                OnQ10IdChanging(value);
-                ReportPropertyChanging("Q10Id");
-                _Q10Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Q10Id");
-                OnQ10IdChanged();
-            }
-        }
-        private global::System.Guid _Q10Id;
-        partial void OnQ10IdChanging(global::System.Guid value);
-        partial void OnQ10IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Q10Answer
-        {
-            get
-            {
-                return _Q10Answer;
-            }
-            set
-            {
-                OnQ10AnswerChanging(value);
-                ReportPropertyChanging("Q10Answer");
-                _Q10Answer = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Q10Answer");
-                OnQ10AnswerChanged();
-            }
-        }
-        private global::System.String _Q10Answer;
-        partial void OnQ10AnswerChanging(global::System.String value);
-        partial void OnQ10AnswerChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Score
-        {
-            get
-            {
-                return _Score;
-            }
-            set
-            {
-                OnScoreChanging(value);
-                ReportPropertyChanging("Score");
-                _Score = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Score");
-                OnScoreChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Score;
-        partial void OnScoreChanging(Nullable<global::System.Int32> value);
-        partial void OnScoreChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Finished
-        {
-            get
-            {
-                return _Finished;
-            }
-            set
-            {
-                OnFinishedChanging(value);
-                ReportPropertyChanging("Finished");
-                _Finished = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Finished");
-                OnFinishedChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _Finished;
-        partial void OnFinishedChanging(Nullable<global::System.Boolean> value);
-        partial void OnFinishedChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__Q10Id__37A5467C", "Question")]
-        public Question Question
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTe__Q10Id__37A5467C", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTe__Q10Id__37A5467C", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> QuestionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTe__Q10Id__37A5467C", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTe__Q10Id__37A5467C", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q1Id__2F10007B", "Question")]
-        public Question Question1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q1Id__2F10007B", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q1Id__2F10007B", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q1Id__2F10007B", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q1Id__2F10007B", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q2Id__300424B4", "Question")]
-        public Question Question2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q2Id__300424B4", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q2Id__300424B4", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question2Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q2Id__300424B4", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q2Id__300424B4", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q3Id__30F848ED", "Question")]
-        public Question Question3
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q3Id__30F848ED", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q3Id__30F848ED", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question3Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q3Id__30F848ED", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q3Id__30F848ED", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q4Id__31EC6D26", "Question")]
-        public Question Question4
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question4Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q4Id__31EC6D26", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q5Id__32E0915F", "Question")]
-        public Question Question5
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q5Id__32E0915F", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q5Id__32E0915F", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question5Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q5Id__32E0915F", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q5Id__32E0915F", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q6Id__33D4B598", "Question")]
-        public Question Question6
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q6Id__33D4B598", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q6Id__33D4B598", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question6Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q6Id__33D4B598", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q6Id__33D4B598", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q7Id__34C8D9D1", "Question")]
-        public Question Question7
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question7Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q7Id__34C8D9D1", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q8Id__35BCFE0A", "Question")]
-        public Question Question8
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question8Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q8Id__35BCFE0A", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTes__Q9Id__36B12243", "Question")]
-        public Question Question9
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q9Id__36B12243", "Question").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q9Id__36B12243", "Question").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Question> Question9Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("KTModel.FK__StudentTes__Q9Id__36B12243", "Question");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("KTModel.FK__StudentTes__Q9Id__36B12243", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__Stude__2D27B809", "Student")]
-        public Student Student
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("KTModel.FK__StudentTe__Stude__2D27B809", "Student").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("KTModel.FK__StudentTe__Stude__2D27B809", "Student").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Student> StudentReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("KTModel.FK__StudentTe__Stude__2D27B809", "Student");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Student>("KTModel.FK__StudentTe__Stude__2D27B809", "Student", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__TestI__2E1BDC42", "Test")]
-        public Test Test
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.FK__StudentTe__TestI__2E1BDC42", "Test").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.FK__StudentTe__TestI__2E1BDC42", "Test").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Test> TestReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.FK__StudentTe__TestI__2E1BDC42", "Test");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("KTModel.FK__StudentTe__TestI__2E1BDC42", "Test", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Subcategory>("KTModel.fk_Questions_SubcategoryId", "Subcategory", value);
                 }
             }
         }
@@ -2433,56 +1788,18 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Subcatego__Categ__03317E3D", "Category")]
-        public Category Category
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("KTModel.FK__Subcatego__Categ__03317E3D", "Category").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("KTModel.FK__Subcatego__Categ__03317E3D", "Category").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Category> CategoryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("KTModel.FK__Subcatego__Categ__03317E3D", "Category");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Category>("KTModel.FK__Subcatego__Categ__03317E3D", "Category", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Questions__Subca__07F6335A", "Question")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Questions_SubcategoryId", "Question")]
         public EntityCollection<Question> Questions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Question>("KTModel.FK__Questions__Subca__07F6335A", "Question");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Question>("KTModel.fk_Questions_SubcategoryId", "Question");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Question>("KTModel.FK__Questions__Subca__07F6335A", "Question", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Question>("KTModel.fk_Questions_SubcategoryId", "Question", value);
                 }
             }
         }
@@ -2493,18 +1810,18 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Tests__Subcatego__0DAF0CB0", "Test")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_tests_SubcategoryId", "Test")]
         public EntityCollection<Test> Tests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Test>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Test");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Test>("KTModel.fk_tests_SubcategoryId", "Test");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Test>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Test", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Test>("KTModel.fk_tests_SubcategoryId", "Test", value);
                 }
             }
         }
@@ -2531,7 +1848,8 @@ namespace KT.DB
         /// <param name="startDate">Initial value of the StartDate property.</param>
         /// <param name="minutesDuration">Initial value of the MinutesDuration property.</param>
         /// <param name="subcategoryId">Initial value of the SubcategoryId property.</param>
-        public static Test CreateTest(global::System.Guid id, global::System.String name, global::System.DateTime startDate, global::System.Int32 minutesDuration, global::System.Guid subcategoryId)
+        /// <param name="endDate">Initial value of the EndDate property.</param>
+        public static Test CreateTest(global::System.Guid id, global::System.String name, global::System.DateTime startDate, global::System.Int32 minutesDuration, global::System.Guid subcategoryId, global::System.DateTime endDate)
         {
             Test test = new Test();
             test.Id = id;
@@ -2539,6 +1857,7 @@ namespace KT.DB
             test.StartDate = startDate;
             test.MinutesDuration = minutesDuration;
             test.SubcategoryId = subcategoryId;
+            test.EndDate = endDate;
             return test;
         }
 
@@ -2672,9 +1991,9 @@ namespace KT.DB
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndDate
+        public global::System.DateTime EndDate
         {
             get
             {
@@ -2689,8 +2008,8 @@ namespace KT.DB
                 OnEndDateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _EndDate;
-        partial void OnEndDateChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _EndDate;
+        partial void OnEndDateChanging(global::System.DateTime value);
         partial void OnEndDateChanged();
 
         #endregion
@@ -2704,16 +2023,38 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__Tests__Subcatego__0DAF0CB0", "Subcategory")]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_TestId", "GeneratedTest")]
+        public EntityCollection<GeneratedTest> GeneratedTests
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedTest>("KTModel.fk_GeneratedTests_TestId", "GeneratedTest");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedTest>("KTModel.fk_GeneratedTests_TestId", "GeneratedTest", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_tests_SubcategoryId", "Subcategory")]
         public Subcategory Subcategory
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Subcategory").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_tests_SubcategoryId", "Subcategory").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Subcategory").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_tests_SubcategoryId", "Subcategory").Value = value;
             }
         }
         /// <summary>
@@ -2725,13 +2066,13 @@ namespace KT.DB
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Subcategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Subcategory>("KTModel.fk_tests_SubcategoryId", "Subcategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Subcategory>("KTModel.FK__Tests__Subcatego__0DAF0CB0", "Subcategory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Subcategory>("KTModel.fk_tests_SubcategoryId", "Subcategory", value);
                 }
             }
         }
@@ -2742,18 +2083,257 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "Subscriptions", "Student")]
-        public EntityCollection<Student> Students
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "Subscriptions", "User")]
+        public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student>("KTModel.Subscriptions", "Student");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("KTModel.Subscriptions", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student>("KTModel.Subscriptions", "Student", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("KTModel.Subscriptions", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="KTModel", Name="User")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User object.
+        /// </summary>
+        /// <param name="username">Initial value of the Username property.</param>
+        /// <param name="password">Initial value of the Password property.</param>
+        /// <param name="passwordHint">Initial value of the PasswordHint property.</param>
+        /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="lastName">Initial value of the LastName property.</param>
+        /// <param name="isAdmin">Initial value of the IsAdmin property.</param>
+        public static User CreateUser(global::System.String username, global::System.String password, global::System.String passwordHint, global::System.String email, global::System.String firstName, global::System.String lastName, global::System.Boolean isAdmin)
+        {
+            User user = new User();
+            user.Username = username;
+            user.Password = password;
+            user.PasswordHint = passwordHint;
+            user.Email = email;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.IsAdmin = isAdmin;
+            return user;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Username
+        {
+            get
+            {
+                return _Username;
+            }
+            set
+            {
+                if (_Username != value)
+                {
+                    OnUsernameChanging(value);
+                    ReportPropertyChanging("Username");
+                    _Username = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Username");
+                    OnUsernameChanged();
+                }
+            }
+        }
+        private global::System.String _Username;
+        partial void OnUsernameChanging(global::System.String value);
+        partial void OnUsernameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PasswordHint
+        {
+            get
+            {
+                return _PasswordHint;
+            }
+            set
+            {
+                OnPasswordHintChanging(value);
+                ReportPropertyChanging("PasswordHint");
+                _PasswordHint = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PasswordHint");
+                OnPasswordHintChanged();
+            }
+        }
+        private global::System.String _PasswordHint;
+        partial void OnPasswordHintChanging(global::System.String value);
+        partial void OnPasswordHintChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAdmin
+        {
+            get
+            {
+                return _IsAdmin;
+            }
+            set
+            {
+                OnIsAdminChanging(value);
+                ReportPropertyChanging("IsAdmin");
+                _IsAdmin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAdmin");
+                OnIsAdminChanged();
+            }
+        }
+        private global::System.Boolean _IsAdmin;
+        partial void OnIsAdminChanging(global::System.Boolean value);
+        partial void OnIsAdminChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_Categories_users", "Category")]
+        public EntityCollection<Category> Categories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("KTModel.fk_Categories_users", "Category");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("KTModel.fk_Categories_users", "Category", value);
                 }
             }
         }
@@ -2764,18 +2344,40 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "FK__StudentTe__TestI__2E1BDC42", "StudentTest")]
-        public EntityCollection<StudentTest> StudentTests
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_Username", "GeneratedTest")]
+        public EntityCollection<GeneratedTest> GeneratedTests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentTest>("KTModel.FK__StudentTe__TestI__2E1BDC42", "StudentTest");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GeneratedTest>("KTModel.fk_GeneratedTests_Username", "GeneratedTest");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentTest>("KTModel.FK__StudentTe__TestI__2E1BDC42", "StudentTest", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GeneratedTest>("KTModel.fk_GeneratedTests_Username", "GeneratedTest", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "Subscriptions", "Test")]
+        public EntityCollection<Test> Tests
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Test>("KTModel.Subscriptions", "Test");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Test>("KTModel.Subscriptions", "Test", value);
                 }
             }
         }

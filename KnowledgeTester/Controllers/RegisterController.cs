@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KT.DB;
+using KT.DTOs.Objects;
+using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
+using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
@@ -24,18 +27,19 @@ namespace KnowledgeTester.Controllers
 			if (!ModelState.IsValid)
 				return View("Index");
 
-			if (KT.DB.Helpers.Students.IsStudentExistent(pagemodel.Username))
+			if (ServicesFactory.GetService<IKtUsersService>().IsStudentExistent(pagemodel.Username))
 			{
 				ViewBag.Message = "This username is already registered in our database!";
 				return View("Index");
 			}
 
-			var st = KT.DB.Helpers.Students.Insert(new Student
+			var st = ServicesFactory.GetService<IKtUsersService>().Insert(new UserDto
 				{
 					Username = pagemodel.Username,
 					Email = pagemodel.Email,
 					Password = pagemodel.Password,
-					PasswordHint = pagemodel.PassHint
+					PasswordHint = pagemodel.PassHint,
+					IsAdmin = false
 				});
 
 			SessionWrapper.Student = st;

@@ -3,14 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model KnowledgeTester.Models.RegisterModel
-
 @if (ViewBag.Message != null)
 {
     <script>
         alert("@ViewBag.Message");
     </script>
 }
-
 @using (Ajax.BeginForm("Register", "Register", new { pageModel = Model }, null, new { Id = "RegisterForm" }))
 {<div style="display: table-caption;">
     @Html.TextBoxFor(m => m.Username, new { @id = "userName", @placeholder = "Username", @style = "width: 250px; height:20px;" })
@@ -19,11 +17,15 @@
     @Html.ValidationMessageFor(model => model.Password)
     @Html.PasswordFor(m => m.PasswordConfirm, new { @id = "passwordConfirm", @placeholder = "Confirm Password", @style = "width: 250px; height:20px;" })
     @Html.ValidationMessageFor(model => model.PasswordConfirm)
+    @Html.TextBoxFor(m => m.Firstname, new { @id = "firstName", @placeholder = "First Name", @style = "width: 250px; height:20px;" })
+    @Html.ValidationMessageFor(model => model.Firstname)
+    @Html.TextBoxFor(m => m.LastName, new { @id = "lastName", @placeholder = "Last Name", @style = "width: 250px; height:20px;" })
+    @Html.ValidationMessageFor(model => model.LastName)
     @Html.TextBoxFor(m => m.Email, new { @id = "email", @placeholder = "Email", @style = "width: 250px; height:20px;" })
     @Html.ValidationMessageFor(model => model.Email)
     @Html.TextBoxFor(m => m.EmailConfirm, new { @id = "emailConfirm", @placeholder = "Confirm Email", @style = "width: 250px; height:20px;" })
     @Html.ValidationMessageFor(model => model.EmailConfirm)
     @Html.TextAreaFor(m => m.PassHint, new { @id = "passHint", @placeholder = "PasswordHint", @style = "width: 250px; height:60px; max-width: 250px; max-height: 60px;" })
     @Html.ValidationMessageFor(model => model.PassHint)
-    <input type="submit" value="Submit!"/></div>
+    <input type="submit" value="Submit!" /></div>
 }
