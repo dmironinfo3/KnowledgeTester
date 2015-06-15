@@ -9,14 +9,16 @@ namespace KT.DTOs.Objects
 	[DataContract]
 	public class CategoryDto: BaseDto
 	{
-
 		[DataMember]
 		public Guid Id { get; set; }
 
 		[DataMember]
-		public UserDto CreatedBy { get; set; }
+		public string CreatedBy { get; set; }
 
 		[DataMember]
 		public string Name { get; set; }
+
+		[DataMember]
+		public IEnumerable<SubcategoryDto> Subcategories { get; set; }
 	}
 }

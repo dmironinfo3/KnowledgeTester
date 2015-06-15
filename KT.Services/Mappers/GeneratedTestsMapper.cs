@@ -17,10 +17,10 @@ namespace KT.Services.Mappers
 				Id = entity.Id,
 				IsFinished = entity.IsFinished,
 				IsValidated = entity.IsVerified,
-				User = (new UsersMapper()).Map(entity.User),
+				Username = entity.Username,
 				MaxScore = entity.MaxScore,
 				Score = entity.Score,
-				Test = (new TestsMapper()).Map(entity.Test),
+				TestId = entity.TestId,
 				GeneratedQuestions = (new GeneratedQuestionsMapper()).Map(entity.GeneratedQuestions)
 			};
 
@@ -34,10 +34,10 @@ namespace KT.Services.Mappers
 				Id = dto.Id,
 				IsFinished = dto.IsFinished,
 				IsVerified = dto.IsValidated,
-				User = (new UsersMapper()).Map(dto.User),
+				Username = dto.Username,
 				MaxScore = dto.MaxScore,
 				Score = dto.Score,
-				Test = (new TestsMapper()).Map(dto.Test),
+				TestId = dto.TestId,
 				GeneratedQuestions = (new GeneratedQuestionsMapper()).Map(dto.GeneratedQuestions)
 			};
 
@@ -46,16 +46,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<GeneratedTestDto> Map(IEnumerable<GeneratedTest> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<GeneratedTestDto>();
 		}
 
 		public EntityCollection<GeneratedTest> Map(IEnumerable<GeneratedTestDto> dtoList)
 		{
 			var collection = new EntityCollection<GeneratedTest>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

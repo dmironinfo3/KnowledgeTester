@@ -16,7 +16,7 @@ namespace KT.ServiceInterfaces
 		void Delete(Guid id);
 
 		[OperationContract]
-		IEnumerable<QuestionDto> GetBySubcategory(Guid id);
+		QuestionDto[] GetBySubcategory(Guid id);
 
 		[OperationContract]
 		double GetUsability(Guid id);
@@ -26,5 +26,8 @@ namespace KT.ServiceInterfaces
 
 		[OperationContract]
 		Guid Save(string text, Guid subCatId, Guid? qId = null, bool isMultiple = false, string argument = "");
+
+		[OperationContract]
+		QuestionDto[] GetAll();
 	}
 }

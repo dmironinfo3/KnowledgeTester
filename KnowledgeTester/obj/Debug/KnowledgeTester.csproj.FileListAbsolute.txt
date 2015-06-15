@@ -2,7 +2,8 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\Knowled
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KnowledgeTester.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\Antlr3.Runtime.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\EntityFramework.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DB.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DTOs.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.Logger.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.ServiceInterfaces.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\Microsoft.Web.Infrastructure.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\Newtonsoft.Json.dll
@@ -19,7 +20,8 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\System.
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\WebGrease.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\WebMatrix.Data.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\WebMatrix.WebData.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DB.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DTOs.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.Logger.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.ServiceInterfaces.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\Ninject.xml
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\EntityFramework.xml
@@ -37,7 +39,7 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\WebMatr
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\obj\Debug\KnowledgeTester.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\obj\Debug\KnowledgeTester.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\obj\Debug\KnowledgeTester.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.Logger.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.Logger.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DTOs.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.DTOs.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.ExcelImporter.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\EPPlus.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\KT.ExcelImporter.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KnowledgeTester\bin\EPPlus.xml

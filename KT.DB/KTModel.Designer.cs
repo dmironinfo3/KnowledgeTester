@@ -23,13 +23,13 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("KTModel", "fk_Categories_users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.User), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Category), true)]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedQuestions_GeneratedTestId", "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.GeneratedTest), "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedQuestion), true)]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedQuestions_QuestionId", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Question), "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedQuestion), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedTests_TestId", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Test), "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedTest), true)]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedTests_Username", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.User), "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedTest), true)]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_Questions_SubcategoryId", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Question), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "fk_tests_SubcategoryId", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test), true)]
-[assembly: EdmRelationshipAttribute("KTModel", "Subscriptions", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.User), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test))]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedAnswers_Answers", "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Answer), "GeneratedAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedAnswer), true)]
 [assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedAnswers_GeneratedQuestionId", "GeneratedQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.GeneratedQuestion), "GeneratedAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedAnswer), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_GeneratedTests_TestId", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Test), "GeneratedTest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.GeneratedTest), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "fk_tests_SubcategoryId", "Subcategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KT.DB.Subcategory), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test), true)]
+[assembly: EdmRelationshipAttribute("KTModel", "Subscriptions", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.User), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KT.DB.Test))]
 
 #endregion
 
@@ -180,22 +180,6 @@ namespace KT.DB
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Test> Tests
-        {
-            get
-            {
-                if ((_Tests == null))
-                {
-                    _Tests = base.CreateObjectSet<Test>("Tests");
-                }
-                return _Tests;
-            }
-        }
-        private ObjectSet<Test> _Tests;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<User> Users
         {
             get
@@ -224,6 +208,22 @@ namespace KT.DB
             }
         }
         private ObjectSet<GeneratedAnswer> _GeneratedAnswers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Test> Tests
+        {
+            get
+            {
+                if ((_Tests == null))
+                {
+                    _Tests = base.CreateObjectSet<Test>("Tests");
+                }
+                return _Tests;
+            }
+        }
+        private ObjectSet<Test> _Tests;
 
         #endregion
 
@@ -278,14 +278,6 @@ namespace KT.DB
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Tests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTests(Test test)
-        {
-            base.AddObject("Tests", test);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUsers(User user)
@@ -299,6 +291,14 @@ namespace KT.DB
         public void AddToGeneratedAnswers(GeneratedAnswer generatedAnswer)
         {
             base.AddObject("GeneratedAnswers", generatedAnswer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTests(Test test)
+        {
+            base.AddObject("Tests", test);
         }
 
         #endregion
@@ -1352,44 +1352,6 @@ namespace KT.DB
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_TestId", "Test")]
-        public Test Test
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Test> TestReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_Username", "User")]
         public User User
         {
@@ -1418,6 +1380,44 @@ namespace KT.DB
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("KTModel.fk_GeneratedTests_Username", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("KTModel", "fk_GeneratedTests_TestId", "Test")]
+        public Test Test
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Test> TestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("KTModel.fk_GeneratedTests_TestId", "Test", value);
                 }
             }
         }
@@ -2011,6 +2011,30 @@ namespace KT.DB
         private global::System.DateTime _EndDate;
         partial void OnEndDateChanging(global::System.DateTime value);
         partial void OnEndDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> QuestionCount
+        {
+            get
+            {
+                return _QuestionCount;
+            }
+            set
+            {
+                OnQuestionCountChanging(value);
+                ReportPropertyChanging("QuestionCount");
+                _QuestionCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("QuestionCount");
+                OnQuestionCountChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _QuestionCount;
+        partial void OnQuestionCountChanging(Nullable<global::System.Int32> value);
+        partial void OnQuestionCountChanged();
 
         #endregion
 

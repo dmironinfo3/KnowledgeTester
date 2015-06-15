@@ -30,13 +30,10 @@ namespace KT.DTOs.Objects
 		[DataMember]
 		public bool IsAdmin { get; set; }
 
-		[DataMember] 
-		public IEnumerable<CategoryDto> Categories { get; set; }
-
 		[DataMember]
 		public IEnumerable<TestDto> Subscriptions { get; set; }
 
 		[DataMember] 
-		public IEnumerable<GeneratedTestDto> MyTests { get; set; }
+		public IEnumerable<GeneratedTestDto> GeneratedTests { get; set; }
 	}
 }

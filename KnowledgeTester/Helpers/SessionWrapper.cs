@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using KT.DB;
 using KT.DTOs.Objects;
 using KnowledgeTester.Models;
 
@@ -31,7 +30,7 @@ namespace KnowledgeTester.Helpers
 		}
 
 		private const string StudentId = "StudentId";
-		public static UserDto Student
+		public static UserDto User
 		{
 			get
 			{
@@ -79,6 +78,19 @@ namespace KnowledgeTester.Helpers
 			set
 			{
 				HttpContext.Current.Session[CurrentQuestionAnswersId] = value;
+			}
+		}
+
+		private const string CurrentTestResultIdId = "CurrentTestResultIdId";
+		public static Guid CurrentTestResultId
+		{
+			get
+			{
+				return (Guid)HttpContext.Current.Session[CurrentTestResultIdId];
+			}
+			set
+			{
+				HttpContext.Current.Session[CurrentTestResultIdId] = value;
 			}
 		}
 

@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlXml" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -136,7 +137,17 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Code\KtExcelHandler.cs" />
     <Compile Include="Code\Log.cs" />
+    <Compile Include="Code\Utils.cs" />
+    <Compile Include="Controllers\TestResultsController.cs" />
+    <Compile Include="Controllers\TestReviewController.cs" />
+    <Compile Include="Helpers\EndDateValidator.cs" />
+    <Compile Include="Helpers\QuestionsValidator.cs" />
+    <Compile Include="Models\TestResultsModel.cs" />
+    <Compile Include="Models\TestReviewAnswerModel.cs" />
+    <Compile Include="Models\TestReviewModel.cs" />
+    <Compile Include="Models\TestReviewQuestionsModel.cs" />
     <Compile Include="Ninject\Bindings.cs" />
     <Compile Include="Ninject\ServicesFactory.cs" />
     <Compile Include="WCFServices\ServiceClient.cs" />
@@ -384,6 +395,7 @@
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Grid.mvc.readme" />
+    <None Include="KT Template.xlsx" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\StudentPanel\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
@@ -391,15 +403,17 @@
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\TakeTest\Index.cshtml" />
+    <Content Include="Views\TestResults\Index.cshtml" />
+    <Content Include="Views\TestReview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KT.DB\KT.Database.csproj">
-      <Project>{B09949D6-E56C-4E55-81D3-08EA5D29C8FA}</Project>
-      <Name>KT.Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KT.DTOs\KT.DTOs.csproj">
       <Project>{F6A8C081-B8AD-429C-833F-8A368D705280}</Project>
       <Name>KT.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KT.ExcelImporter\KT.ExcelImporter.csproj">
+      <Project>{2E0CC3BA-4F52-43AE-A866-ABAE4A53AB3E}</Project>
+      <Name>KT.ExcelImporter</Name>
     </ProjectReference>
     <ProjectReference Include="..\KT.Logger\KT.Logger.csproj">
       <Project>{BABADA30-7305-4E74-A3DE-05703EC0262B}</Project>

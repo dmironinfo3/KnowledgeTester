@@ -63,18 +63,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Tests">
-      <EntityTypeMapping TypeName="KTModel.Test">
-        <MappingFragment StoreEntitySet="Tests">
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
-          <ScalarProperty Name="MinutesDuration" ColumnName="MinutesDuration" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KTModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -88,14 +76,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Subscriptions" TypeName="KTModel.Subscriptions" StoreEntitySet="Subscriptions">
-      <EndProperty Name="Test">
-        <ScalarProperty Name="Id" ColumnName="TestId" />
-      </EndProperty>
-      <EndProperty Name="User">
-        <ScalarProperty Name="Username" ColumnName="StudentId" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="GeneratedAnswers">
       <EntityTypeMapping TypeName="KTModel.GeneratedAnswer">
         <MappingFragment StoreEntitySet="GeneratedAnswers">
@@ -106,5 +86,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Tests">
+      <EntityTypeMapping TypeName="KTModel.Test">
+        <MappingFragment StoreEntitySet="Tests">
+          <ScalarProperty Name="QuestionCount" ColumnName="QuestionCount" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+          <ScalarProperty Name="MinutesDuration" ColumnName="MinutesDuration" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Subscriptions" TypeName="KTModel.Subscriptions" StoreEntitySet="Subscriptions">
+      <EndProperty Name="Test">
+        <ScalarProperty Name="Id" ColumnName="TestId" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Username" ColumnName="StudentId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -11,24 +11,31 @@
 }
 <div class="menuDiv">
     <span class="menuLink" onclick="menuClick('Subscribe');">Subscribe for a test</span>
-    <span class="menuLink" onclick="menuClick('Upcoming');">Upcoming tests</span>
-    <span class="menuLink" onclick="menuClick('Finished');">Finished tests</span>
-    <span class="menuLink" onclick="logout();">Logout</span>
+    <span class="menuLink" onclick="menuClick('Upcoming');">Upcoming tests</span> <span
+        class="menuLink" onclick="menuClick('Finished');">Finished tests</span> <span class="menuLink"
+            onclick="logout();">Logout</span>
 </div>
 @if (Model.HasOngoingTest)
 {
     <div class="roundBordered" style="border: 2px solid red; text-align: right;">
-        <span style="color: darkred;"><strong>@Model.OngoingTest.Name</strong>&nbsp;is ongoing!</span> <span class="startButton" onclick="startOngoingTest('@Model.OngoingTest.Id')">Start now!</span>
-</div>
+        <span style="color: darkred;"><strong>@Model.OngoingTest.Name</strong>&nbsp;is ongoing!</span>
+        <span class="startButton" onclick="startOngoingTest('@Model.OngoingTest.Id')">Start
+            now!</span>
+    </div>
 }
 <div class="roundBordered">
     <span>@Model.DisplayName</span>
 </div>
 <div class="roundBordered" style="text-align: right; display: none;" id="tests">
     <span>Subscribe for a test</span>
-    <input type="button" value="Subscribe" onclick="subscribeForTest()" />
+    <input type="text" placeholder="search by name..." id="testsSearch" onkeyup="allSearchGrid()" />
     <script type="text/javascript">
         
+        function allSearchGrid() {
+            $("#jqGridTests").GridUnload();
+            getAllTests();
+        }
+
         function startOngoingTest(testid) {
             document.location.href = '../../TakeTest/Index?id=' + testid;
         }
@@ -53,13 +60,18 @@
         }
 
         $(document).ready(function () {
+            getAllTests();
+        });
+
+        function getAllTests() {
             $("#jqGridTests").jqGrid({
                 url: '@Url.Action("GetTests", "StudentPanel")',
+                 postData: {name : $("#testsSearch").val()},
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
-                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
-                    { label: 'Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Test Id', name: 'Id', width: 0.1, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 300,sortable: false },
                     { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
                     { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
                     { label: 'Duration', name: 'Duration', width: 100,sortable: false }
@@ -68,7 +80,6 @@
                 width: 750,
                 height: 250,
                 rowNum: 20,
-                pager: "#jqGridPagerTests",
                 jsonReader: {
                     root: "rows",
                     page: "page",
@@ -78,19 +89,23 @@
                     userdata: "userdata"
                 },
             });
-        });
+        }
 
     </script>
     <table id="jqGridTests">
     </table>
-    <div id="jqGridPagerTests">
-    </div>
+    <input type="button" value="Subscribe" onclick="subscribeForTest()" />
 </div>
 <div class="roundBordered" style="text-align: right;" id="upcoming">
     <span>Upcoming tests</span>
-    <input type="button" value="Unsubscribe" onclick="unsubscribeForTest()" />
+    <input type="text" placeholder="search by name..." id="upcomingSearch" onkeyup="upcomingSearchGrid()" />
     <script type="text/javascript">
        
+       function upcomingSearchGrid() {
+            $("#jqGridUpcomingTests").GridUnload();
+            getUpcomingTests();
+       }
+
         function unsubscribeForTest() {
             $.ajax({
                 url: '@Url.Action("Unsubscribe", "StudentPanel")',
@@ -112,13 +127,18 @@
         }
 
         $(document).ready(function () {
-            $("#jqGridUpcomingTests").jqGrid({
+            getUpcomingTests();
+        });
+
+        function getUpcomingTests() {
+             $("#jqGridUpcomingTests").jqGrid({
                 url: '@Url.Action("GetMyTests", "StudentPanel")',
+                postData: {name : $("#upcomingSearch").val()},
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
-                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
-                    { label: 'Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Test Id', name: 'Id', width: 0.1, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 300,sortable: false },
                     { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
                     { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
                     { label: 'Duration', name: 'Duration', width: 100,sortable: false }
@@ -127,7 +147,6 @@
                 width: 750,
                 height: 250,
                 rowNum: 20,
-                pager: "#jqGridPagerUpcomingTests",
                 jsonReader: {
                     root: "rows",
                     page: "page",
@@ -137,35 +156,44 @@
                     userdata: "userdata"
                 },
             });
-        });
+        }
 
     </script>
     <table id="jqGridUpcomingTests">
     </table>
-    <div id="jqGridPagerUpcomingTests">
-    </div>
+    <input type="button" value="Unsubscribe" onclick="unsubscribeForTest()" />
 </div>
 <div class="roundBordered" style="text-align: right; display: none;" id="finished">
     <span>Finished tests</span>
+    <input type="text" placeholder="search by name..." id="finishedSearch" onkeyup="finishedSearchGrid()" />
     <script type="text/javascript">
-       
+        function finishedSearchGrid() {
+            $("#jqGridFinishedTests").GridUnload();
+            getFinishedTests();
+        }
+
         $(document).ready(function () {
+            getFinishedTests();
+        });
+
+        function getFinishedTests() {
             $("#jqGridFinishedTests").jqGrid({
                 url: '@Url.Action("GetFinishedTests", "StudentPanel")',
+                 postData: {name : $("#finishedSearch").val()},
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
-                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
-                    { label: 'Name', name: 'Name', width: 300,sortable: false },
-                    { label: 'Subcategory', name: 'Subcategory', width: 250,sortable: false },
-                    { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
-                    { label: 'Score', name: 'Score', width: 50,sortable: false }
+                    { label: 'Test Id', name: 'Id', width: 0.1, key:true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Subcategory', name: 'Subcategory', width: 225,sortable: false },
+                    { label: 'Start Date', name: 'StartDate', width: 125,sortable: false },
+                    { label: 'Score', name: 'Score', width: 75,sortable: false },
+                    { label: 'Validated', name: 'IsValidated', width: 75,sortable: false }
                 ],
                 viewrecords: true,
                 width: 750,
                 height: 250,
                 rowNum: 20,
-                pager: "#jqGridPagerFinishedTests",
                 jsonReader: {
                     root: "rows",
                     page: "page",
@@ -175,13 +203,11 @@
                     userdata: "userdata"
                 },
             });
-        });
+        }
 
     </script>
     <table id="jqGridFinishedTests">
     </table>
-    <div id="jqGridPagerFinishedTests">
-    </div>
 </div>
 <script>
 

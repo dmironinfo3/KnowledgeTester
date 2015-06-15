@@ -8,7 +8,7 @@ using KT.DTOs.Objects;
 
 namespace KT.Services.Mappers
 {
-	public class AnswersMapper: IMapper<AnswerDto, Answer>
+	public class AnswersMapper : IMapper<AnswerDto, Answer>
 	{
 		public AnswerDto Map(Answer entity)
 		{
@@ -16,7 +16,8 @@ namespace KT.Services.Mappers
 			{
 				Id = entity.Id,
 				Text = entity.Text,
-				IsCorrect = entity.IsCorrect
+				IsCorrect = entity.IsCorrect,
+				QuestionId = entity.QuestionId
 			};
 
 			return instance;
@@ -28,7 +29,8 @@ namespace KT.Services.Mappers
 			{
 				Id = dto.Id,
 				Text = dto.Text,
-				IsCorrect = dto.IsCorrect
+				IsCorrect = dto.IsCorrect,
+				QuestionId = dto.QuestionId
 			};
 
 			return instance;
@@ -36,16 +38,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<AnswerDto> Map(IEnumerable<Answer> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<AnswerDto>();
 		}
 
 		public EntityCollection<Answer> Map(IEnumerable<AnswerDto> dtoList)
 		{
 			var collection = new EntityCollection<Answer>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

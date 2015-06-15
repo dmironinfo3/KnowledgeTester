@@ -5,18 +5,17 @@ using KT.DTOs.Objects;
 
 namespace KT.ServiceInterfaces
 {
-	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IKtSubcategoriesService" in both code and config file together.
 	[ServiceContract]
 	public interface IKtSubcategoriesService
 	{
 		[OperationContract]
-		IEnumerable<SubcategoryDto> GetAll();
+		SubcategoryDto[] GetAll();
 
 		[OperationContract]
 		void Insert(SubcategoryDto subCat);
 
 		[OperationContract]
-		IEnumerable<SubcategoryDto> GetByCategory(Guid catId);
+		SubcategoryDto[] GetByCategory(Guid catId);
 
 		[OperationContract]
 		SubcategoryDto GetById(Guid subCatId);

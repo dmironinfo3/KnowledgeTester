@@ -9,9 +9,11 @@ namespace KT.DTOs.Objects
 	[DataContract]
 	public class GeneratedAnswerDto:BaseDto
 	{
-
 		[DataMember]
 		public Guid Id { get; set; }
+
+		[DataMember]
+		public Guid GeneratedQuestionId { get; set; }
 
 		[DataMember]
 		public AnswerDto Answer { get; set; }

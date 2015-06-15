@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using KT.DB.Objects;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
@@ -19,6 +18,10 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult Index(Guid? id)
 		{
+			if (SessionWrapper.User == null || !SessionWrapper.UserIsLoggedIn)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 
 			if (id == null)
 			{
@@ -28,14 +31,14 @@ namespace KnowledgeTester.Controllers
 
 			if (!id.Value.Equals(Guid.Empty))
 			{
-				if (!ServicesFactory.GetService<IKtUserTestsService>().IsValidInProgress(id.Value, SessionWrapper.Student.Username))
+				if (!ServicesFactory.GetService<IKtUserTestsService>().IsValidInProgress(id.Value, SessionWrapper.User.Username))
 				{
 					ViewBag.Message = "Please select a valid test to take!";
 					return RedirectToAction("Index", "StudentPanel");
 				}
 
 				GeneratedTestDto test;
-				var testGenerated = ServicesFactory.GetService<IKtUserTestsService>().IsTestGenerated(id.Value, SessionWrapper.Student.Username, out test);
+				var testGenerated = ServicesFactory.GetService<IKtUserTestsService>().IsTestGenerated(id.Value, SessionWrapper.User.Username, out test);
 
 				if (testGenerated)
 				{
@@ -43,7 +46,7 @@ namespace KnowledgeTester.Controllers
 				}
 				else
 				{
-					test = ServicesFactory.GetService<IKtUserTestsService>().GenerateTest(id.Value, SessionWrapper.Student.Username);
+					test = ServicesFactory.GetService<IKtUserTestsService>().GenerateTest(id.Value, SessionWrapper.User.Username);
 					return View(new TakeTestModel(test));
 				}
 			}
@@ -52,7 +55,6 @@ namespace KnowledgeTester.Controllers
 
 			return View();
 		}
-
 
 		[HttpPost]
 		public ActionResult SubmitTest(TakeTestModel model)
@@ -75,44 +77,14 @@ namespace KnowledgeTester.Controllers
 		{
 			foreach (var q in model.Questions)
 			{
-
 				foreach (var ans in q.Answers)
 				{
 					ServicesFactory.GetService<IKtAnswersService>().SaveTestAnswer(ans.Id, ans.IsSelected);
-
 				}
 			}
 
-			ServicesFactory.GetService<IKtUserTestsService>().FinishTest(SessionWrapper.Student.Username, model.TestId);
+			ServicesFactory.GetService<IKtUserTestsService>().FinishTest(SessionWrapper.User.Username, model.TestId);
 		}
 
-		private string CompressAnswer(IEnumerable<TakeAnswerModel> answers, string argument)
-		{
-			var takeAnswerModels = answers as IList<TakeAnswerModel> ?? answers.ToList();
-			if (takeAnswerModels.Count(a => !a.IsSelected) == takeAnswerModels.Count)
-			{
-				return string.Empty;
-			}
-
-			var r = string.Empty;
-
-			foreach (var ans in takeAnswerModels)
-			{
-				if (ans.IsSelected)
-				{
-					r += ans.Id.ToString() + ",";
-				}
-			}
-			r = r.Substring(0, r.Length - 1);
-
-			r += "|" + argument;
-
-			return r;
-		}
-
-		public ActionResult SaveUnfinishedTest(TakeTestModel model)
-		{
-			return Json(true);
-		}
 	}
 }

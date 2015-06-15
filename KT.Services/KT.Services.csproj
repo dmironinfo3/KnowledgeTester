@@ -81,6 +81,9 @@
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Mappers\QuestionsMapper.cs" />
     <Compile Include="Mappers\SubcategoriesMapper.cs" />
+    <Compile Include="Mappers\TestReviewAnswerMapper.cs" />
+    <Compile Include="Mappers\TestReviewMapper.cs" />
+    <Compile Include="Mappers\TestReviewQuestionMapper.cs" />
     <Compile Include="Mappers\TestsMapper.cs" />
     <Compile Include="Mappers\UsersMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,4 +2,3 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DTOs\bin\Debug\KT.DTOs.d
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DTOs\bin\Debug\KT.DTOs.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DTOs\obj\Debug\KT.DTOs.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DTOs\obj\Debug\KT.DTOs.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.DTOs\obj\Debug\KT.DTOs.csprojResolveAssemblyReference.cache

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
-using KT.DB.Objects;
 using KT.DTOs.Objects;
 using KnowledgeTester.Helpers;
+using KnowledgeTester.Ninject;
+using KT.ServiceInterfaces;
 
 namespace KnowledgeTester.Models
 {
@@ -13,11 +14,11 @@ namespace KnowledgeTester.Models
 	{
 		public TakeTestModel(GeneratedTestDto test)
 		{
-			Username = test.User.Username;
-			TestId = test.Test.Id;
+			Username = test.Username;
+			TestId = test.TestId;
 			Questions = new List<TakeQuestionModel>();
 
-			DurationMinutes = test.Test.Duration;
+			DurationMinutes = ServicesFactory.GetService<IKtTestService>().GetById(TestId).Duration;
 
 			foreach (var q in test.GeneratedQuestions)
 			{

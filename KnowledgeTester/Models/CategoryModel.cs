@@ -17,12 +17,14 @@ namespace KnowledgeTester.Models
 
 		public CategoryModel()
 		{
-			
+
 		}
 
 		[Required]
 		public string Name { get; set; }
 		public Guid Id { get; set; }
+
+		public bool Readonly { get; set; }
 
 		public List<SubcategoryModel> Subcategories { get; set; }
 	}

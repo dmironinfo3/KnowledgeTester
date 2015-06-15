@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using KT.DB;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
 using KnowledgeTester.Ninject;
+using KT.ExcelImporter;
 
 namespace KnowledgeTester.Controllers
 {
@@ -62,7 +63,7 @@ namespace KnowledgeTester.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return RedirectToAction("Index", "Subcategory", new { id = model.Id });
+				return View("Index", model);
 			}
 
 			_subcatId = model.Id.Equals(Guid.Empty) ?
@@ -80,21 +81,26 @@ namespace KnowledgeTester.Controllers
 			return Json("Question is deleted!", JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult GetQuestions()
+		public ActionResult GetQuestions(string text)
 		{
 			var s = new List<QuestionDto>();
 			if (!SessionWrapper.CurrentSubcategoryId.Equals(Guid.Empty))
 			{
-				s = ServicesFactory.GetService<IKtQuestionsService>().GetBySubcategory(SessionWrapper.CurrentSubcategoryId).ToList();
+				s = ServicesFactory.GetService<IKtQuestionsService>().GetBySubcategory
+				(SessionWrapper.CurrentSubcategoryId).ToList();
 			}
 
+			if (!String.IsNullOrEmpty(text))
+			{
+				s = s.Where(a => a.Text.Contains(text)).ToList();
+			}
 			var result = new
 			{
 				total = (int)Math.Ceiling((double)s.Count / 10),
 				page = 1,
 				records = s.Count,
 				rows = (from row in s
-						orderby ServicesFactory.GetService<IKtQuestionsService>().GetUsability(row.Id) descending 
+						orderby ServicesFactory.GetService<IKtQuestionsService>().GetUsability(row.Id) descending
 						select new
 						{
 							Id = row.Id,
@@ -105,6 +111,42 @@ namespace KnowledgeTester.Controllers
 			};
 
 			return Json(result, JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpPost]
+		public ActionResult Upload(HttpPostedFileBase file)
+		{
+			if (file != null)
+			{
+				if (file.ContentLength > 0)
+				{
+					var fileStream = new StreamReader(file.InputStream);
+
+					var dtos = ServicesFactory.GetService<IExcelParser>().Parse(fileStream);
+
+					foreach (var dto in dtos)
+					{
+						//save question
+						var id = ServicesFactory.GetService<IKtQuestionsService>()
+							.Save(dto.Text, SessionWrapper.CurrentSubcategoryId,
+								null, dto.MultipleResponse, dto.Argument);
+
+						foreach (var ans in dto.Answers)
+						{
+							//saving answers
+							ServicesFactory.GetService<IKtAnswersService>().Save(ans.Id, id, ans.Text, ans.IsCorrect);
+						}
+					}
+				}
+			}
+
+			return RedirectToAction("Index", "Subcategory", new { id = SessionWrapper.CurrentSubcategoryId });
+		}
+
+		public FileResult DownloadTemplate()
+		{
+			var bytearray = System.IO.File.ReadAllBytes(HttpContext.Server.MapPath("~/KT Template.xlsx"));
+			return File(bytearray, "application/force-download", "KT Template.xlsx");
 		}
 	}
 }

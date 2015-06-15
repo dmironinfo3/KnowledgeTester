@@ -20,8 +20,7 @@ namespace KT.Services.Mappers
 					Password = entity.Password,
 					Email = entity.Password,
 					PasswordHint = entity.PasswordHint,
-					Categories = (new CategoriesMapper()).Map(entity.Categories),
-					MyTests = (new GeneratedTestsMapper()).Map(entity.GeneratedTests),
+					GeneratedTests = (new GeneratedTestsMapper()).Map(entity.GeneratedTests),
 					Subscriptions = (new TestsMapper()).Map(entity.Tests)
 				};
 
@@ -37,10 +36,9 @@ namespace KT.Services.Mappers
 				IsAdmin = dto.IsAdmin,
 				LastName = dto.LastName,
 				Password = dto.Password,
-				Email = dto.Password,
+				Email = dto.Email,
 				PasswordHint = dto.PasswordHint,
-				Categories = (new CategoriesMapper()).Map(dto.Categories),
-				GeneratedTests = (new GeneratedTestsMapper()).Map(dto.MyTests),
+				GeneratedTests = (new GeneratedTestsMapper()).Map(dto.GeneratedTests),
 				Tests = (new TestsMapper()).Map(dto.Subscriptions),
 			};
 
@@ -49,16 +47,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<UserDto> Map(IEnumerable<User> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<UserDto>();
 		}
 
 		public EntityCollection<User> Map(IEnumerable<UserDto> dtoList)
 		{
 			var collection = new EntityCollection<User>();
-			
-			foreach (var userDto in dtoList)
+
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(userDto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

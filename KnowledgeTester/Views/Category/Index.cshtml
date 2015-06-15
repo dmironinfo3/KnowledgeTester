@@ -24,9 +24,14 @@
     {
     <div class="roundBordered" style="text-align: right;" id="subcategories">
         <span>Subcategories</span>
-        <input type="button" value="Add" onclick="addSubCategory()" /><input type="button"
-            value="Edit" onclick="editSubCategory()" /><input type="button" value="Delete" onclick="deleteSubCategory()" />
+         <input type="text" placeholder="search by name..." id="subcatNameSearch" onkeyup="subcatSearch()" />
         <script type="text/javascript">
+            
+            function subcatSearch() {
+                $("#jqGridSubcategories").GridUnload();
+                getSubcats();
+            }
+
             function editSubCategory() {
                 document.location.href = '../../SubCategory/Index?id=' + getSubCategoriesSelectedId();
             }
@@ -55,20 +60,24 @@
             }
 
             $(document).ready(function () {
+                getSubcats();
+            });
+ 
+            function getSubcats() {
 
                 $("#jqGridSubcategories").jqGrid({
                     url: '@Url.Action("GetSubcategories", "Category")',
+                    postData: { name: $("#subcatNameSearch").val() },
                     mtype: "GET",
                     datatype: "json",
                     colModel: [
-                    { label: 'Subcategory Id', name: 'Id', width: 300, sortable: false },
-                    { label: 'Subcategory Name', name: 'Name', width: 300, sortable: false },
-                    { label: 'Questions', name: 'Questions', width: 150, sortable: false }
-                ],
+                        { label: 'Subcategory Id', name: 'Id', width: 0.1, sortable: false },
+                        { label: 'Subcategory Name', name: 'Name', width: 550, sortable: false },
+                        { label: 'Questions', name: 'Questions', width: 150, sortable: false }
+                    ],
                     viewrecords: true,
                     width: 750,
                     rowNum: 20,
-                    pager: "#jqGridPagerSubcategories",
                     jsonReader: {
                         root: "rows",
                         page: "page",
@@ -78,15 +87,13 @@
                         userdata: "userdata"
                     }
                 });
-
-
-            });
- 
+            }
         </script>
         <table id="jqGridSubcategories">
         </table>
-        <div id="jqGridPagerSubcategories">
-        </div>
+        <input type="button" value="Add" onclick="addSubCategory()" /><input type="button"
+            value="Edit" onclick="editSubCategory()" /><input type="button" value="Delete" onclick="deleteSubCategory()" />
+      
     </div>
     }
 

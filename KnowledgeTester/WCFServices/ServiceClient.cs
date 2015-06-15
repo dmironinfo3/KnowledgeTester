@@ -39,6 +39,8 @@ namespace KnowledgeTester.WCFServices
 
 		public ServiceClient(string configurationName) :
 			base(configurationName)
-		{ }
+		{
+			
+		}
 	}
 }

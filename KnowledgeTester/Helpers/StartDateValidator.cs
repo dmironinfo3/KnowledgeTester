@@ -11,9 +11,14 @@ namespace KnowledgeTester.Helpers
 	{
 		public override bool IsValid(object value)
 		{
+			if (!(value is DateTime))
+			{
+				return false;
+			}
+
 			var date = (DateTime)value;
 
-			return date.AddHours(1) < DateTime.Now;
+			return date >= DateTime.Now.AddHours(1);
 		}
 	}
 }

@@ -14,14 +14,14 @@ namespace KnowledgeTester.Models
 		{
 			DisplayName = dto.Username;
 
-			if (dto.MyTests != null && dto.MyTests.Any())
+			if (dto.Subscriptions != null && dto.Subscriptions.Any())
 			{
-				foreach (var test in dto.MyTests)
+				foreach (var test in dto.Subscriptions)
 				{
 					if (ServicesFactory.GetService<IKtUserTestsService>().IsValidInProgress(test.Id, dto.Username))
 					{
 						HasOngoingTest = true;
-						OngoingTest = new TestModel(test.Test);
+						OngoingTest = new TestModel(ServicesFactory.GetService<IKtTestService>().GetById(test.Id));
 						return;
 					}
 				}

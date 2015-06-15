@@ -7,7 +7,6 @@
     <EntitySet Name="GeneratedTests" EntityType="KTModel.GeneratedTest" />
     <EntitySet Name="Questions" EntityType="KTModel.Question" />
     <EntitySet Name="Subcategories" EntityType="KTModel.Subcategory" />
-    <EntitySet Name="Tests" EntityType="KTModel.Test" />
     <EntitySet Name="Users" EntityType="KTModel.User" />
     <AssociationSet Name="fk_Answers_Questionid" Association="KTModel.fk_Answers_Questionid">
       <End Role="Question" EntitySet="Questions" />
@@ -25,10 +24,6 @@
       <End Role="Question" EntitySet="Questions" />
       <End Role="GeneratedQuestion" EntitySet="GeneratedQuestions" />
     </AssociationSet>
-    <AssociationSet Name="fk_GeneratedTests_TestId" Association="KTModel.fk_GeneratedTests_TestId">
-      <End Role="Test" EntitySet="Tests" />
-      <End Role="GeneratedTest" EntitySet="GeneratedTests" />
-    </AssociationSet>
     <AssociationSet Name="fk_GeneratedTests_Username" Association="KTModel.fk_GeneratedTests_Username">
       <End Role="User" EntitySet="Users" />
       <End Role="GeneratedTest" EntitySet="GeneratedTests" />
@@ -36,14 +31,6 @@
     <AssociationSet Name="fk_Questions_SubcategoryId" Association="KTModel.fk_Questions_SubcategoryId">
       <End Role="Subcategory" EntitySet="Subcategories" />
       <End Role="Question" EntitySet="Questions" />
-    </AssociationSet>
-    <AssociationSet Name="fk_tests_SubcategoryId" Association="KTModel.fk_tests_SubcategoryId">
-      <End Role="Subcategory" EntitySet="Subcategories" />
-      <End Role="Test" EntitySet="Tests" />
-    </AssociationSet>
-    <AssociationSet Name="Subscriptions" Association="KTModel.Subscriptions">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Test" EntitySet="Tests" />
     </AssociationSet>
     <EntitySet Name="GeneratedAnswers" EntityType="KTModel.GeneratedAnswer" />
     <AssociationSet Name="fk_GeneratedAnswers_Answers" Association="KTModel.fk_GeneratedAnswers_Answers">
@@ -53,6 +40,19 @@
     <AssociationSet Name="fk_GeneratedAnswers_GeneratedQuestionId" Association="KTModel.fk_GeneratedAnswers_GeneratedQuestionId">
       <End Role="GeneratedQuestion" EntitySet="GeneratedQuestions" />
       <End Role="GeneratedAnswer" EntitySet="GeneratedAnswers" />
+    </AssociationSet>
+    <EntitySet Name="Tests" EntityType="KTModel.Test" />
+    <AssociationSet Name="fk_GeneratedTests_TestId" Association="KTModel.fk_GeneratedTests_TestId">
+      <End Role="Test" EntitySet="Tests" />
+      <End Role="GeneratedTest" EntitySet="GeneratedTests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tests_SubcategoryId" Association="KTModel.fk_tests_SubcategoryId">
+      <End Role="Subcategory" EntitySet="Subcategories" />
+      <End Role="Test" EntitySet="Tests" />
+    </AssociationSet>
+    <AssociationSet Name="Subscriptions" Association="KTModel.Subscriptions">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Test" EntitySet="Tests" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Answer">
@@ -99,8 +99,8 @@
     <Property Type="Int32" Name="MaxScore" Nullable="false" />
     <Property Type="Int32" Name="Score" Nullable="false" />
     <NavigationProperty Name="GeneratedQuestions" Relationship="KTModel.fk_GeneratedQuestions_GeneratedTestId" FromRole="GeneratedTest" ToRole="GeneratedQuestion" />
-    <NavigationProperty Name="Test" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="GeneratedTest" ToRole="Test" />
     <NavigationProperty Name="User" Relationship="KTModel.fk_GeneratedTests_Username" FromRole="GeneratedTest" ToRole="User" />
+    <NavigationProperty Name="Test" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="GeneratedTest" ToRole="Test" />
   </EntityType>
   <EntityType Name="Question">
     <Key>
@@ -124,20 +124,6 @@
     <Property Type="Guid" Name="CategoryId" Nullable="false" />
     <NavigationProperty Name="Questions" Relationship="KTModel.fk_Questions_SubcategoryId" FromRole="Subcategory" ToRole="Question" />
     <NavigationProperty Name="Tests" Relationship="KTModel.fk_tests_SubcategoryId" FromRole="Subcategory" ToRole="Test" />
-  </EntityType>
-  <EntityType Name="Test">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Guid" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="false" />
-    <Property Type="Int32" Name="MinutesDuration" Nullable="false" />
-    <Property Type="Guid" Name="SubcategoryId" Nullable="false" />
-    <Property Type="DateTime" Name="EndDate" Nullable="false" />
-    <NavigationProperty Name="GeneratedTests" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="Test" ToRole="GeneratedTest" />
-    <NavigationProperty Name="Subcategory" Relationship="KTModel.fk_tests_SubcategoryId" FromRole="Test" ToRole="Subcategory" />
-    <NavigationProperty Name="Users" Relationship="KTModel.Subscriptions" FromRole="Test" ToRole="User" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -202,18 +188,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_GeneratedTests_TestId">
-    <End Type="KTModel.Test" Role="Test" Multiplicity="1" />
-    <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Test">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="GeneratedTest">
-        <PropertyRef Name="TestId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_GeneratedTests_Username">
     <End Type="KTModel.User" Role="User" Multiplicity="1" />
     <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="*" />
@@ -237,22 +211,6 @@
         <PropertyRef Name="SubcategoryId" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_tests_SubcategoryId">
-    <End Type="KTModel.Subcategory" Role="Subcategory" Multiplicity="1" />
-    <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subcategory">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Test">
-        <PropertyRef Name="SubcategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Subscriptions">
-    <End Type="KTModel.User" Role="User" Multiplicity="*" />
-    <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
   </Association>
   <EntityType Name="GeneratedAnswer">
     <Key>
@@ -288,5 +246,48 @@
         <PropertyRef Name="GeneratedQuestionId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" />
+    <Property Type="Int32" Name="MinutesDuration" Nullable="false" />
+    <Property Type="Guid" Name="SubcategoryId" Nullable="false" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" />
+    <Property Type="Int32" Name="QuestionCount" />
+    <NavigationProperty Name="GeneratedTests" Relationship="KTModel.fk_GeneratedTests_TestId" FromRole="Test" ToRole="GeneratedTest" />
+    <NavigationProperty Name="Subcategory" Relationship="KTModel.fk_tests_SubcategoryId" FromRole="Test" ToRole="Subcategory" />
+    <NavigationProperty Name="Users" Relationship="KTModel.Subscriptions" FromRole="Test" ToRole="User" />
+  </EntityType>
+  <Association Name="fk_GeneratedTests_TestId">
+    <End Type="KTModel.Test" Role="Test" Multiplicity="1" />
+    <End Type="KTModel.GeneratedTest" Role="GeneratedTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneratedTest">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tests_SubcategoryId">
+    <End Type="KTModel.Subcategory" Role="Subcategory" Multiplicity="1" />
+    <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="SubcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Subscriptions">
+    <End Type="KTModel.User" Role="User" Multiplicity="*" />
+    <End Type="KTModel.Test" Role="Test" Multiplicity="*" />
   </Association>
 </Schema>

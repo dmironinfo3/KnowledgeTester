@@ -18,9 +18,9 @@ namespace KT.Services.Mappers
 				Name = entity.Name,
 				StartTime = entity.StartDate,
 				EndTime = entity.EndDate,
-				Subcategory = (new SubcategoriesMapper()).Map(entity.Subcategory),
-				SubscribedUsers = (new UsersMapper()).Map(entity.Users),
-				Duration = entity.MinutesDuration
+				SubcategoryId = entity.SubcategoryId,
+				Duration = entity.MinutesDuration,
+				Questions = entity.QuestionCount.Value,
 			};
 
 			return instance;
@@ -34,9 +34,9 @@ namespace KT.Services.Mappers
 				Name = dto.Name,
 				StartDate = dto.StartTime,
 				EndDate = dto.EndTime,
-				Subcategory = (new SubcategoriesMapper()).Map(dto.Subcategory),
-				Users = (new UsersMapper()).Map(dto.SubscribedUsers),
-				MinutesDuration = dto.Duration
+				SubcategoryId = dto.SubcategoryId,
+				MinutesDuration = dto.Duration,
+				QuestionCount = dto.Questions
 			};
 
 			return instance;
@@ -44,19 +44,34 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<TestDto> Map(IEnumerable<Test> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<TestDto>();
 		}
 
 		public EntityCollection<Test> Map(IEnumerable<TestDto> dtoList)
 		{
 			var collection = new EntityCollection<Test>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;
 		}
 	}
 }
+

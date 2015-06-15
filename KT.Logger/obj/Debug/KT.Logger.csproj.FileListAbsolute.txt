@@ -1,6 +1,5 @@
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\bin\Debug\KT.Logger.dll.config
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\bin\Debug\KT.Logger.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\bin\Debug\KT.Logger.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\obj\Debug\KT.Logger.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\obj\Debug\KT.Logger.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Logger\obj\Debug\KT.Logger.pdb

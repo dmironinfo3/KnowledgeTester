@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using KT.DB;
-using KT.DB.Objects;
 using KT.DTOs.Objects;
 using KnowledgeTester.Helpers;
 

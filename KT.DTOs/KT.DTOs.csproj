@@ -45,12 +45,17 @@
     <Compile Include="BaseDto.cs" />
     <Compile Include="Objects\AnswerDto.cs" />
     <Compile Include="Objects\CategoryDto.cs" />
+    <Compile Include="Objects\TestRestultDto.cs" />
     <Compile Include="Objects\GeneratedAnswerDto.cs" />
     <Compile Include="Objects\GeneratedQuestionDto.cs" />
     <Compile Include="Objects\GeneratedTestDto.cs" />
     <Compile Include="Objects\QuestionDto.cs" />
     <Compile Include="Objects\SubcategoryDto.cs" />
     <Compile Include="Objects\TestDto.cs" />
+    <Compile Include="Objects\TestRestultRowDto.cs" />
+    <Compile Include="Objects\TestReviewAnswerDto.cs" />
+    <Compile Include="Objects\TestReviewDto.cs" />
+    <Compile Include="Objects\TestReviewQuestionDto.cs" />
     <Compile Include="Objects\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

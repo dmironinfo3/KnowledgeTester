@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using KT.DB;
-using KT.DB.Objects;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
 using KnowledgeTester.Models;
 using KnowledgeTester.Ninject;
+using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Controllers
 {
 	public class StudentPanelController : Controller
 	{
-		//
-		// GET: /StudentPanel/
-
 		public ActionResult Index()
 		{
 			if (!SessionWrapper.UserIsLoggedIn)
@@ -24,16 +20,21 @@ namespace KnowledgeTester.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 
-			var student = ServicesFactory.GetService<IKtUsersService>().GetWithTests(SessionWrapper.Student.Username);
+			var student = ServicesFactory.GetService<IKtUsersService>().GetWithTests(SessionWrapper.User.Username);
 
 			var model = new StudentPanelModel(student);
 
 			return View(model);
 		}
 
-		public ActionResult GetMyTests()
+		public ActionResult GetMyTests(string name)
 		{
-			var tests = ServicesFactory.GetService<IKtTestService>().GetAllUpcoming(SessionWrapper.Student.Username).ToList();
+			var tests = ServicesFactory.GetService<IKtTestService>().GetAllUpcoming(SessionWrapper.User.Username).ToList();
+
+			if (!String.IsNullOrEmpty(name))
+			{
+				tests = tests.Where(a => a.Name.Contains(name)).ToList();
+			}
 
 			var result = new
 			{
@@ -47,18 +48,23 @@ namespace KnowledgeTester.Controllers
 							Id = row.Id,
 							Name = row.Name.Substring(0, row.Name.Length < 25 ? row.Name.Length : 25) + (row.Name.Length < 25 ? string.Empty : "..."),
 							StartDate = row.StartTime.ToString("dd.MM.yy HH:mm"),
-							Subscriptions = row.SubscribedUsers.Count(),
+							Subscriptions = ServicesFactory.GetService<IKtUsersService>().GetSubscriptionsFor(row.Id),
 							Duration = row.Duration,
-							Subcategory = row.Subcategory.Name,
+							Subcategory = ServicesFactory.GetService<IKtTestService>().GetSubcategoryName(row.Id),
 						}).ToArray()
 			};
 
 			return Json(result, JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult GetFinishedTests()
+		public ActionResult GetFinishedTests(string name)
 		{
-			var tests = ServicesFactory.GetService<IKtTestService>().GetFinishedTests(SessionWrapper.Student.Username).ToList();
+			var tests = ServicesFactory.GetService<IKtTestService>().GetFinishedTests(SessionWrapper.User.Username).ToList();
+
+			if (!String.IsNullOrEmpty(name))
+			{
+				tests = tests.Where(a => a.Name.Contains(name)).ToList();
+			}
 
 			var result = new
 			{
@@ -72,33 +78,39 @@ namespace KnowledgeTester.Controllers
 							Id = row.Id,
 							Name = row.Name.Substring(0, row.Name.Length < 25 ? row.Name.Length : 25) + (row.Name.Length < 25 ? string.Empty : "..."),
 							StartDate = row.StartTime.ToString("dd.MM.yy HH:mm"),
-							Score = ServicesFactory.GetService<IKtUserTestsService>().GetScore(row.Id, SessionWrapper.Student.Username),
-							Subcategory = row.Subcategory.Name,
+							Score = ServicesFactory.GetService<IKtUserTestsService>().GetScore(row.Id, SessionWrapper.User.Username),
+							Subcategory = ServicesFactory.GetService<IKtTestService>().GetSubcategoryName(row.Id),
+							IsValidated = ServicesFactory.GetService<IKtUserTestsService>().IsValidated(row.Id, SessionWrapper.User.Username),
 						}).ToArray()
 			};
 
 			return Json(result, JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult GetTests()
+		public ActionResult GetTests(string name)
 		{
-			var tests = ServicesFactory.GetService<IKtTestService>().GetAll().ToList();
+			var tests = ServicesFactory.GetService<IKtTestService>().GetAllOtherThan(SessionWrapper.User.Username).ToList();
+
+			if (!String.IsNullOrEmpty(name))
+			{
+				tests = tests.Where(a => a.Name.Contains(name)).ToList();
+			}
 
 			var result = new
 			{
 				total = (int)Math.Ceiling((double)tests.Count / 10),
 				page = 1,
 				records = tests.Count,
-				rows = (from row in tests.Where(a => !a.SubscribedUsers.Any(st => st.Username.Equals(SessionWrapper.Student.Username)))
+				rows = (from row in tests
 						orderby row.StartTime descending
 						select new
 						{
 							Id = row.Id,
 							Name = row.Name.Substring(0, row.Name.Length < 25 ? row.Name.Length : 25) + (row.Name.Length < 25 ? string.Empty : "..."),
 							StartDate = row.StartTime.ToString("dd.MM.yy HH:mm"),
-							Subscriptions = row.SubscribedUsers.Count(),
+							Subscriptions = ServicesFactory.GetService<IKtUsersService>().GetSubscriptionsFor(row.Id),
 							Duration = row.Duration,
-							Subcategory = row.Subcategory.Name,
+							Subcategory = ServicesFactory.GetService<IKtTestService>().GetSubcategoryName(row.Id),
 						}).ToArray()
 			};
 
@@ -108,14 +120,14 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Subscribe(Guid id)
 		{
-			ServicesFactory.GetService<IKtUsersService>().Subscribe(SessionWrapper.Student.Username, id);
+			ServicesFactory.GetService<IKtUsersService>().Subscribe(SessionWrapper.User.Username, id);
 			return Json("Succesfully subscribed!", JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpPost]
 		public ActionResult Unsubscribe(Guid id)
 		{
-			ServicesFactory.GetService<IKtUsersService>().Unsubscribe(SessionWrapper.Student.Username, id);
+			ServicesFactory.GetService<IKtUsersService>().Unsubscribe(SessionWrapper.User.Username, id);
 			return Json("Succesfully unsubscribed!", JsonRequestBehavior.AllowGet);
 		}
 	}

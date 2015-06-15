@@ -9,12 +9,11 @@ namespace KT.DTOs.Objects
 	[DataContract]
 	public class TestDto: BaseDto
 	{
-
 		[DataMember]
 		public Guid Id { get; set; }
 
 		[DataMember]
-		public String Name { get; set; }
+		public string Name { get; set; }
 
 		[DataMember]
 		public DateTime StartTime { get; set; }
@@ -25,11 +24,10 @@ namespace KT.DTOs.Objects
 		[DataMember]
 		public int Duration { get; set; }
 
+		[DataMember]
+		public Guid SubcategoryId { get; set; }
 
 		[DataMember]
-		public SubcategoryDto Subcategory { get; set; }
-
-		[DataMember]
-		public IEnumerable<UserDto> SubscribedUsers { get; set; }
+		public int Questions { get; set; }
 	}
 }

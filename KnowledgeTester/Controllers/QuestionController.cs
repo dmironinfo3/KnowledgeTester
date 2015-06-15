@@ -78,7 +78,7 @@ namespace KnowledgeTester.Controllers
 			{
 				foreach (var ans in model.Answers)
 				{
-					ServicesFactory.GetService<IKtAnswersService>().Save(ans.Id, ans.Text, ans.IsCorrect);
+					ServicesFactory.GetService<IKtAnswersService>().Save(ans.Id, _qId, ans.Text, ans.IsCorrect);
 				}
 			}
 

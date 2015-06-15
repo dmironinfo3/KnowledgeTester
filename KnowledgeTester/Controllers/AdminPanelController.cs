@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KnowledgeTester.Code;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Models;
 using KnowledgeTester.Ninject;
@@ -31,9 +32,14 @@ namespace KnowledgeTester.Controllers
 			return View("Index");
 		}
 
-		public ActionResult GetCategories()
+		public ActionResult GetCategories(string catName)
 		{
 			var categories = ServicesFactory.GetService<IKtCategoriesService>().GetAll().ToList();
+
+			if (!String.IsNullOrEmpty(catName))
+			{
+				categories = categories.Where(a => a.Name.Contains(catName)).ToList();
+			}
 
 			var result = new
 			{
@@ -46,6 +52,7 @@ namespace KnowledgeTester.Controllers
 						{
 							row.Id,
 							row.Name,
+							Admin = row.CreatedBy.GetFullName(),
 							Subcategories = ServicesFactory.GetService<IKtSubcategoriesService>().GetCountByCategory(row.Id)
 						}).ToArray()
 			};
@@ -61,9 +68,14 @@ namespace KnowledgeTester.Controllers
 			return Json("Category is deleted!", JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult GetTests()
+		public ActionResult GetTests(string name)
 		{
 			var tests = ServicesFactory.GetService<IKtTestService>().GetAll().ToList();
+
+			if (!String.IsNullOrEmpty(name))
+			{
+				tests = tests.Where(a => a.Name.Contains(name)).ToList();
+			}
 
 			var result = new
 			{
@@ -77,9 +89,10 @@ namespace KnowledgeTester.Controllers
 							Id = row.Id,
 							Name = row.Name.Substring(0, row.Name.Length < 25 ? row.Name.Length : 25) + (row.Name.Length < 25 ? string.Empty : "..."),
 							StartDate = row.StartTime.ToString("dd.MM.yy HH:mm"),
-							Subscriptions = row.SubscribedUsers.Count(),
+							Subscriptions = ServicesFactory.GetService<IKtUsersService>().GetSubscriptionsFor(row.Id),
 							Duration = row.Duration,
-							Subcategory = row.Subcategory.Name,
+							Subcategory = ServicesFactory.GetService<IKtTestService>().GetSubcategoryName(row.Id),
+							Finished = row.EndTime <= DateTime.Now
 						}).ToArray()
 			};
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using KT.DB;
 using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Models
@@ -20,6 +19,11 @@ namespace KnowledgeTester.Models
 		public SubcategoryModel(string categoryName)
 		{
 			CategoryName = categoryName;
+		}
+
+		public SubcategoryModel()
+		{
+			
 		}
 
 		[Required]

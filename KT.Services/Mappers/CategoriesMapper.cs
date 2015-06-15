@@ -8,7 +8,7 @@ using KT.DTOs.Objects;
 
 namespace KT.Services.Mappers
 {
-	public class CategoriesMapper: IMapper<CategoryDto, Category>
+	public class CategoriesMapper : IMapper<CategoryDto, Category>
 	{
 		public CategoryDto Map(Category entity)
 		{
@@ -16,7 +16,7 @@ namespace KT.Services.Mappers
 			{
 				Id = entity.Id,
 				Name = entity.Name,
-				CreatedBy = (new UsersMapper()).Map(entity.User)
+				CreatedBy = entity.CreatedByUser
 			};
 
 			return instance;
@@ -28,7 +28,7 @@ namespace KT.Services.Mappers
 			{
 				Id = dto.Id,
 				Name = dto.Name,
-				User = (new UsersMapper()).Map(dto.CreatedBy)
+				CreatedByUser = dto.CreatedBy
 			};
 
 			return instance;
@@ -36,16 +36,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<CategoryDto> Map(IEnumerable<Category> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<CategoryDto>();
 		}
 
 		public EntityCollection<Category> Map(IEnumerable<CategoryDto> dtoList)
 		{
 			var collection = new EntityCollection<Category>();
 
-			foreach (var cat in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(cat));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

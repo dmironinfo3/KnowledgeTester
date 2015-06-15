@@ -6,6 +6,7 @@ using KT.Logger;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Code;
 using KnowledgeTester.WCFServices;
+using KT.ExcelImporter;
 using Ninject;
 using Ninject.Modules;
 
@@ -26,6 +27,8 @@ namespace KnowledgeTester.Ninject
 			kernel.Bind<IKtUserTestsService>().ToMethod(context => KtServices.UserTestsService);
 
 			kernel.Bind<ILogger>().ToMethod(context => KtLogger.Log);
+
+			kernel.Bind<IExcelParser>().ToMethod(context => KtExcelHandler.Parser);
 
 			return kernel;
 		}

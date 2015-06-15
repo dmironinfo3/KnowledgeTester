@@ -9,7 +9,7 @@ namespace KT.ServiceInterfaces
 	public interface IKtTestService
 	{
 		[OperationContract]
-		IEnumerable<TestDto> GetAll();
+		TestDto[] GetAll();
 
 		[OperationContract]
 		void Delete(Guid id);
@@ -18,12 +18,18 @@ namespace KT.ServiceInterfaces
 		TestDto GetById(Guid testId);
 
 		[OperationContract]
-		Guid Save(string name, DateTime? startDate, DateTime? endDate, int? duration, Guid subcategoryId, Guid? id = null);
+		Guid Save(string name, DateTime? startDate, DateTime? endDate, int? duration, Guid subcategoryId, int? questions, Guid? id = null);
 
 		[OperationContract]
-		IEnumerable<TestDto> GetAllUpcoming(string username);
+		TestDto[] GetAllUpcoming(string username);
 
 		[OperationContract]
-		IEnumerable<TestDto> GetFinishedTests(string username);
+		TestDto[] GetFinishedTests(string username);
+
+		[OperationContract]
+		string GetSubcategoryName(Guid id);
+
+		[OperationContract]
+		TestDto[] GetAllOtherThan(string username);
 	}
 }

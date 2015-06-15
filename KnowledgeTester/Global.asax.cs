@@ -34,12 +34,14 @@ namespace KnowledgeTester
 			//Logger Section
 			KtLogger.Init();
 
+			//ExcelHelper Section
+			KtExcelHandler.Init();
+
 			//Binding kernel
 			var kernel = (new Bindings()).LoadNinjectBindings();
 
 			//Init service factory which will provide needed service on demand
 			ServicesFactory.Init(kernel);
-
 		}
 	}
 }

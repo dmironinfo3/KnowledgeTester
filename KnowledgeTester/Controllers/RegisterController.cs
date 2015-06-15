@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using KT.DB;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
@@ -39,10 +38,12 @@ namespace KnowledgeTester.Controllers
 					Email = pagemodel.Email,
 					Password = pagemodel.Password,
 					PasswordHint = pagemodel.PassHint,
+					FirstName = pagemodel.Firstname,
+					LastName = pagemodel.LastName,
 					IsAdmin = false
 				});
 
-			SessionWrapper.Student = st;
+			SessionWrapper.User = st;
 			return RedirectToAction("Index", "StudentPanel");
 		}
 	}

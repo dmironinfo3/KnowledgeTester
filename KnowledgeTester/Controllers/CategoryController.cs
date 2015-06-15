@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using KT.DB;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KnowledgeTester.Helpers;
@@ -43,6 +42,7 @@ namespace KnowledgeTester.Controllers
 
 			if (cat != null)
 			{
+
 				var m = new CategoryModel(cat);
 				_catId = m.Id;
 
@@ -60,24 +60,31 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Save(CategoryModel model)
 		{
-			if (!ModelState.IsValid)
+			if (!ModelState.IsValid && SessionWrapper.User != null)
 			{
 				return RedirectToAction("Index", "Category", new { id = model.Id });
 			}
 
 			_catId = model.Id.Equals(Guid.Empty) ?
-				ServicesFactory.GetService<IKtCategoriesService>().Save(model.Name) :
-				ServicesFactory.GetService<IKtCategoriesService>().Save(model.Name, model.Id);
+				ServicesFactory.GetService<IKtCategoriesService>().Save(SessionWrapper.User.Username, model.Name) :
+				ServicesFactory.GetService<IKtCategoriesService>().Save(SessionWrapper.User.Username, model.Name, model.Id);
 
 			return RedirectToAction("Index", "Category", new { id = _catId });
 		}
 
-		public ActionResult GetSubcategories()
+		public ActionResult GetSubcategories(string name)
 		{
 			var s = new List<SubcategoryDto>();
 			if (!SessionWrapper.CurrentCategoryId.Equals(Guid.Empty))
 			{
-				s = ServicesFactory.GetService<IKtSubcategoriesService>().GetByCategory(SessionWrapper.CurrentCategoryId).ToList();
+				s = ServicesFactory.GetService<IKtSubcategoriesService>().GetAll().Where(a => a.CategoryId ==
+				SessionWrapper.CurrentCategoryId).ToList();
+			}
+
+
+			if (!String.IsNullOrEmpty(name))
+			{
+				s = s.Where(a => a.Name.Contains(name)).ToList();
 			}
 
 			var result = new

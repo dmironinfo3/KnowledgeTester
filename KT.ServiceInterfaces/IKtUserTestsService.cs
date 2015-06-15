@@ -9,9 +9,6 @@ namespace KT.ServiceInterfaces
 	public interface IKtUserTestsService
 	{
 		[OperationContract]
-		void DoWork();
-
-		[OperationContract]
 		bool IsTestGenerated(Guid id, string username, out GeneratedTestDto test);
 
 		[OperationContract]
@@ -25,5 +22,23 @@ namespace KT.ServiceInterfaces
 
 		[OperationContract]
 		int GetScore(Guid testId, string username);
+
+		[OperationContract]
+		TestRestultRowDto[] GetTestResultRows(Guid testId);
+
+		[OperationContract]
+		TestRestultDto GetTestResults(Guid testId);
+
+		[OperationContract]
+		bool IsValidated(Guid id, string username);
+
+		[OperationContract]
+		TestReviewDto GetTestReview(Guid id, string user);
+
+		[OperationContract]
+		void UpdateScore(Guid testId, string username, int score);
+
+		[OperationContract]
+		void Validate(Guid testId, string username);
 	}
 }

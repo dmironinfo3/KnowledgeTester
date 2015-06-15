@@ -9,7 +9,7 @@ namespace KT.ServiceInterfaces
 	public interface IKtUsersService
 	{
 		[OperationContract]
-		IEnumerable<UserDto> GetAll();
+		UserDto[] GetAll();
 
 		[OperationContract]
 		UserDto GetWithTests(string userName);
@@ -34,5 +34,8 @@ namespace KT.ServiceInterfaces
 
 		[OperationContract]
 		void Unsubscribe(string username, Guid testId);
+
+		[OperationContract]
+		int GetSubscriptionsFor(Guid id);
 	}
 }

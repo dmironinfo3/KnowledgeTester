@@ -2,6 +2,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using KnowledgeTester.Helpers
 @model KnowledgeTester.Models.TakeTestModel
 @if (ViewBag.Message != null)
 {
@@ -11,36 +12,46 @@
 }
 @using (Ajax.BeginForm("SubmitTest", "TakeTest", new { FormMethod.Post }, null, new { Id = "testForm" }))
 {
-    @Html.HiddenFor(a=>a.TimeElapsed, new {@id="timeElapsedHidden"})
+    @Html.HiddenFor(a => a.TimeElapsed, new { @id = "timeElapsedHidden" })
+    <input type="hidden" id="questionsCount" value="@Model.Questions.Count"/>
     <div class="roundBordered" style="position: fixed; margin-left: 800px; width: 50px;
         margin-top: 0px; font-size: 17px; text-align: center; font-weight: bold; color: white;
         background-color: darkred;" id="time">
+    </div>
+    <div class="roundBordered" style="position: fixed; margin-left: 800px; width: 50px;
+        margin-top: 60px; font-size: 17px; text-align: center; font-weight: bold; color: white;
+        background-color: darkgreen;" id="qLeft">
     </div>
     <div class="roundBordered finishTestBtn" style="position: fixed; margin-left: 800px;
         width: 50px; margin-top: 60px; font-size: 17px; text-align: center;" id="saveBtn"
         onclick="$(this).closest('form').submit(); ">
         Finish
     </div>
+
+    <div class="menuDiv" style="position: fixed; margin-left: 800px; margin-top: 135px;">
+        <span class="menuLink" id="finishByUserBtn" onclick="finishByUser();" style="padding-left: 0px;">
+            Finish</span></div>
     @Html.HiddenFor(a => a.TestId)
     for (int i = 0; i < Model.Questions.Count; i++)
     {
     @Html.HiddenFor(a => a.Questions[i].Id)
-    <div class="roundBordered redBorder">
-        <span>@Model.Questions[i].Text</span>
+    <div class="roundBordered redBorder" id='containerFor_@i'>
+        <span style="font-size: 18px;">@Model.Questions[i].Text</span>
         @for (int j = 0; j < Model.Questions[i].Answers.Count; j++)
         {
             @Html.HiddenFor(a => a.Questions[i].Answers[j].Id, new { @id = "answerId" + i })
-            <div style="display: flex;">@Html.CheckBoxFor(a => a.Questions[i].Answers[j].IsSelected, new { @style = "margin-right:10px; ", @id = "answerCheck" + i.ToString() + j.ToString(), @class = "questionChecks checkFor" + i, @onchange = "changeQuestion(" + i + ")" })
+            <div style="display: flex;  margin-top: 5px;">@Html.CheckBoxFor(a => a.Questions[i].Answers[j].IsSelected, new { @style = "margin-right:10px; ", @id = "answerCheck" + i.ToString() + j.ToString(), @class = "questionChecks checkFor" + i, @onchange = "changeQuestion(" + i + ")" })
                 <span>@Model.Questions[i].Answers[j].Text</span>
             </div>
         }
-        <span class="menuLink" onclick="actArgumentation('textArg'+@i)">Argumentation</span>
+        <span class="menuLink" onclick="actArgumentation('textArg' + @i)">Argumentation</span>
         @Html.TextAreaFor(m => m.Questions[i].Argument, new { @id = "textArg" + i, @placeholder = "Argumentation", @style = "width: 98%; height:50px; max-width: 98%; max-height:100px; display:none;", @onchange = "changeQuestion(" + i + ")" })
     </div>
     }
 }
-
 <script type="text/javascript">
+   
+
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         setInterval(function () {
@@ -60,20 +71,41 @@
 
     jQuery(function ($) {
         var fiveMinutes = 60 * @Model.DurationMinutes,
-        display = $('#time');
+            display = $('#time');
         startTimer(fiveMinutes, display);
     });
     $(document).ready(function () {
+       refreshCounter();
+
         for (var i = 0; i < 10; i++) {
             changeQuestion(i); // when binding model
         }
     });
     
+    function refreshCounter() {
+        var left = $(".redBorder").length;
+        var all = $("#questionsCount").val();
+
+        var completed = all - left;
+        
+        $("#qLeft").text(completed + "/" + all);
+    }
+
     function handleExpiry() {
+       alert('The test time is elapsed! \n Your existing answers were saved. You will be redirected to main panel');
+
+        finishPrematurely();
+    }
+
+    function finishByUser() {
+        if (confirm("Are you sure you want to finish the test?\n\nIt seems that you hand't completed it yet. However, the progress made so far will be saved, but you woulnd't be able to re-start the test!")) {
+            finishPrematurely();
+        }
+    }
+
+    function finishPrematurely() {
         $("#timeElapsedHidden").val(true);
         $("#testForm").submit();
-        alert('The test time is elapsed! \n Your existing answers were saved. You will be redirected to main panel');
-               
     }
 
     function changeQuestion(i) {
@@ -100,9 +132,13 @@
 
         if (allRounds.length === 0) {
             $("#saveBtn").show();
+            $("#finishByUserBtn").hide();
         } else {
             $("#saveBtn").hide();
+            $("#finishByUserBtn").show();
         }
+
+        refreshCounter();
     }
 
     function actArgumentation(field) {

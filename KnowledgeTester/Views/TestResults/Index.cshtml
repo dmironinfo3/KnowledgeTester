@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KnowledgeTester.Helpers
+@model KnowledgeTester.Models.TestResultsModel
+<div class="menuDiv">
+    <span class="menuLink" onclick="document.location.href = '../AdminPanel'">Back</span>
+    <label>
+        Test results Panel</label></div>
+<div class="roundBordered" style="text-align: center; display: inline-flex">
+    <label style="font-size: 13px; color: darkgray; width: 33%;">
+        Test: <strong>@Model.Name</strong></label>
+    <label style="font-size: 13px; color: darkgray; width: 33%;">
+        Average Score: <strong>@Model.AverageScore</strong></label>
+    <label style="font-size: 13px; color: darkgray; width: 33%;">
+        Subscriptions: <strong>@Model.Subscriptions</strong></label>
+</div>
+<div class="roundBordered" style="text-align: right;" id="studentTests">
+    <span>Users</span>
+    <input type="text" placeholder="search by name..." id="usersNameSearch" onkeyup="usersSearch()" />
+    <script type="text/javascript">
+        function usersSearch() {
+            $("#jqUsersGrid").GridUnload();
+            getUsers();
+        }
+
+        function getUsersSelectedId() {
+            var rowId =$("#jqUsersGrid").jqGrid('getGridParam','selrow');  
+            var rowData = jQuery("#jqUsersGrid").getRowData(rowId);
+            var colData = rowData['Id'];
+            return colData;
+        }
+
+        $(document).ready(function () {
+            getUsers('');
+        });
+
+        function getUsers() {
+            $("#jqUsersGrid").jqGrid({
+                url: '@Url.Action("GetUsers", "TestResults")',
+                postData: {catName : $("#usersNameSearch").val()},
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: 'Username', name: 'Id', width: 0.1, sortable: false },
+                    { label: 'Full Name', name: 'FullName', width: 450,sortable: false },
+                    { label: 'Score', name: 'Score', width: 150,sortable: false },
+                    { label: 'Validated', name: 'Validated', width: 150,sortable: false },
+                ],
+                viewrecords: true,
+                width: 750,
+                height: 250,
+                rowNum: 20,
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    userdata: "userdata"
+                },
+            });
+        }
+
+        function review() {
+            var username = getUsersSelectedId();
+
+           if (username == undefined) {
+               return;
+           }
+
+            var testId = '@SessionWrapper.CurrentTestResultId';
+
+            document.location.href = '../TestReview/Index?id=' + testId + '&user=' + username;
+        }
+    </script>
+    <table id="jqUsersGrid">
+    </table>
+    <input type="button" value="Review" onclick="review()" />
+</div>

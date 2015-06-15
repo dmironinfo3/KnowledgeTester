@@ -21,21 +21,32 @@
     </div>
 
     <div class="roundBordered">
-        @Html.TextBoxFor(m => m.Name, new { @id = "name", @placeholder = "Test Name", @style = "width: 98%; height:20px;" })
+        @Html.TextBoxFor(m => m.Name, new { @id = "name", @placeholder = "Test Name", @style = "width: 98%; height:20px;max-width: 300px;" })
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="roundBordered">
         <div class="formRow">
             <label>
                 Start Date</label>
-            @Html.TextBoxFor(m => m.StartDate, new { @id = "startDate" })</div>
+            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy/MM/dd HH:mm}", new { @id = "startDate" })
+            @Html.ValidationMessageFor(m => m.StartDate, String.Empty, new { @style = "margin-left:10px; margin-top:10px;max-width: 300px;" })
+        </div>
         <div class="formRow">
             <label>
                 End Date</label>
-            @Html.TextBoxFor(m => m.EndDate, new { @id = "endDate" })</div>
+            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy/MM/dd HH:mm}", new { @id = "endDate" })
+            @Html.ValidationMessageFor(m => m.EndDate, String.Empty, new { @style = "margin-left:10px; margin-top:10px; max-width: 300px;" })</div>
         <div class="formRow">
             <label>
                 Duration (minutes)</label>
             @Html.TextBoxFor(m => m.Duration, new { @id = "duration", @type = "number" })
+            @Html.ValidationMessageFor(m => m.Duration, String.Empty, new { @style = "margin-left:10px; margin-top:10px;max-width: 300px;" })
+        </div>
+        <div class="formRow">
+            <label>
+                No. Of Questions</label>
+            @Html.TextBoxFor(m => m.Questions, new { @id = "questions", @type = "number" })
+            @Html.ValidationMessageFor(m => m.Questions, String.Empty, new { @style = "margin-left:10px; margin-top:10px;max-width: 300px;" })
         </div>
         <div class="formRow">
             <label>
@@ -45,6 +56,7 @@
                                           "Id",
                                           "Name",
                                           Model.SubcategoryId))
+            @Html.ValidationMessageFor(m => m.SubcategoryId, String.Empty, new { @style = "margin-left:10px; margin-top:10px;max-width: 300px;" })
         </div>
     </div>
     <script type="text/javascript">

@@ -14,10 +14,10 @@ namespace KT.DTOs.Objects
 		public Guid Id { get; set; }
 
 		[DataMember]
-		public TestDto Test { get; set; }
+		public Guid TestId { get; set; }
 
 		[DataMember]
-		public UserDto User { get; set; }
+		public string Username { get; set; }
 
 		[DataMember]
 		public IEnumerable<GeneratedQuestionDto> GeneratedQuestions { get; set; }

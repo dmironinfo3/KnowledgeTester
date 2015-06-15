@@ -43,21 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Answers.cs" />
-    <Compile Include="Helpers\Categories.cs" />
-    <Compile Include="Helpers\Questions.cs" />
-    <Compile Include="Helpers\Students.cs" />
-    <Compile Include="Helpers\StudentTests.cs" />
-    <Compile Include="Helpers\Subcategories.cs" />
-    <Compile Include="Helpers\Tests.cs" />
+    <Compile Include="CRUD\AnswersRespository.cs" />
+    <Compile Include="CRUD\CategoriesRepository.cs" />
+    <Compile Include="CRUD\CrudFactory.cs" />
+    <Compile Include="CRUD\CrudUtils.cs" />
+    <Compile Include="CRUD\GeneratedQuestionsRepository.cs" />
+    <Compile Include="CRUD\GeneratedAnswerRepository.cs" />
+    <Compile Include="CRUD\ICrud.cs" />
+    <Compile Include="CRUD\QuestionsRepository.cs" />
+    <Compile Include="CRUD\UsersRepository.cs" />
+    <Compile Include="CRUD\GeneratedTestsRepository.cs" />
+    <Compile Include="CRUD\SubcategoriesRepository.cs" />
+    <Compile Include="CRUD\TestRepository.cs" />
     <Compile Include="KTModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>KTModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Objects\OngoingAnswer.cs" />
-    <Compile Include="Objects\OngoingQuestion.cs" />
-    <Compile Include="Objects\OngoingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +71,7 @@
   <ItemGroup>
     <None Include="App.Config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

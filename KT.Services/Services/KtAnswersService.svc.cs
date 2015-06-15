@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using KT.DB;
+using KT.DB.CRUD;
 using KT.ServiceInterfaces;
 
 namespace KT.Services.Services
@@ -12,66 +14,60 @@ namespace KT.Services.Services
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
 	public class KtAnswersService : IKtAnswersService
 	{
+		private static readonly ICrud<Answer> Repository = CrudFactory<Answer>.Get();
+
 		public void AddEmpyFor(Guid id)
 		{
-			using (var db = new KTEntities())
+			var ans = new Answer
 			{
-				var ans = new Answer()
-				{
-					Id = Guid.NewGuid(),
-					Text = string.Empty,
-					IsCorrect = false,
-					QuestionId = id
-				};
+				Id = Guid.NewGuid(),
+				Text = string.Empty,
+				IsCorrect = false,
+				QuestionId = id
+			};
 
-				db.Answers.AddObject(ans);
-				db.SaveChanges();
-			}
+			Repository.Create(ans);
 		}
 
 		public void Delete(Guid id)
 		{
-			using (var db = new KTEntities())
-			{
-				var ans = db.Answers.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == id);
-
-				if (ans != null)
-				{
-					db.Answers.DeleteObject(ans);
-					db.SaveChanges();
-				}
-			}
+			Repository.Delete(a => a.Id == id);
 		}
 
-		public void Save(Guid id, string text, bool isCorrect)
+		public void Save(Guid id, Guid questionId, string text, bool isCorrect)
 		{
-			using (var db = new KTEntities())
-			{
-				var ans = db.Answers.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == id);
+			var ans = Repository.Read(a => a.Id == id);
 
-				if (ans != null)
+			if (ans != null)
+			{
+				ans.Text = text;
+				ans.IsCorrect = isCorrect;
+				Repository.Update(ans);
+			}
+			else
+			{
+				ans = new Answer
 				{
-					ans.Text = text;
-					ans.IsCorrect = isCorrect;
-					db.SaveChanges();
-				}
+					Id = Guid.NewGuid(),
+					QuestionId = questionId,
+					Text = text,
+					IsCorrect = isCorrect
+				};
+
+				Repository.Create(ans);
 			}
 		}
 
 		public void SaveTestAnswer(Guid ansId, bool selected)
 		{
-			using (var db = new KTEntities())
+			var rep = CrudFactory<GeneratedAnswer>.Get();
+
+			var ans = rep.Read(a => a.Id == ansId);
+
+			if (ans != null)
 			{
-				var answer =
-					db.GeneratedAnswers.DefaultIfEmpty(null).
-					FirstOrDefault(a => a.Id == ansId);
-
-				if (answer != null)
-				{
-					answer.IsSelected = selected;
-
-					db.SaveChanges();
-				}
+				ans.IsSelected = selected;
+				rep.Update(ans);
 			}
 		}
 	}

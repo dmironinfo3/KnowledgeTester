@@ -8,9 +8,13 @@
             onclick="logout();">Logout</span><label>Admin Panel</label></div>
 <div class="roundBordered" style="text-align: right; display: none;" id="categories">
     <span>Categories</span>
-    <input type="button" value="Add" onclick="addCategory()" /><input type="button" value="Edit"
-        onclick="editCategory()" /><input type="button" value="Delete" onclick="deleteCategory()" />
+    <input type="text" placeholder="search by name..." id="categoriesNameSearch" onkeyup="catSearch()" />
     <script type="text/javascript">
+        function catSearch() {
+            $("#jqGridCategories").GridUnload();
+            getCategories();
+        }
+
         function editCategory() {
             document.location.href = '../Category/Index?id=' + getCategoriesSelectedId();
         }
@@ -41,20 +45,25 @@
         }
 
         $(document).ready(function () {
+            getCategories('');
+        });
+
+        function getCategories() {
             $("#jqGridCategories").jqGrid({
                 url: '@Url.Action("GetCategories", "AdminPanel")',
+                postData: {catName : $("#categoriesNameSearch").val()},
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
-                    { label: 'Category Id', name: 'Id', width: 300, sortable: false },
-                    { label: 'Category Name', name: 'Name', width: 300,sortable: false },
-                    { label: 'Subcategories', name: 'Subcategories', width: 150,sortable: false }
+                    { label: 'Category Id', name: 'Id', width: 0.1, sortable: false },
+                    { label: 'Category Name', name: 'Name', width: 250,sortable: false },
+                    { label: 'Administrated By', name: 'Admin', width: 250,sortable: false },
+                    { label: 'Subcategories', name: 'Subcategories', width: 100,sortable: false }
                 ],
                 viewrecords: true,
                 width: 750,
                 height: 250,
                 rowNum: 20,
-                pager: "#jqGridPagerCategories",
                 jsonReader: {
                     root: "rows",
                     page: "page",
@@ -64,25 +73,39 @@
                     userdata: "userdata"
                 },
             });
-        });
-
+        }
     </script>
     <table id="jqGridCategories">
     </table>
-    <div id="jqGridPagerCategories">
-    </div>
+    <input type="button" value="Add" onclick="addCategory()" /><input type="button" value="Edit"
+        onclick="editCategory()" /><input type="button" value="Delete" onclick="deleteCategory()" />
 </div>
 <div class="roundBordered" style="text-align: right;" id="tests">
     <span>Tests</span>
-    <input type="button" value="Add" onclick="addCustomTest()" /><input type="button"
-        value="Edit" onclick="editTest()" /><input type="button" value="Delete" onclick="deleteTest()" />
+    <input type="text" placeholder="search by name..." id="testNameSearch" onkeyup="testSearch()" />
     <script type="text/javascript">
-        function editTest() {
-           document.location.href = '../Test/Index?id=' + getTestSelectedId();
+        function testSearch() {
+            $("#jqGridTests").GridUnload();
+            getTests();
         }
-        
+
+         function testResults() {
+            
+             var finished = isTestFinished();
+             if (finished === 'false') {
+                 alert("The test is not finised, please try again later!");
+                 return;
+             }
+            var id = getTestSelectedId();
+            document.location.href = '../TestResults/Index?id=' + id;
+         }
+
+        function editTest() {
+            document.location.href = '../Test/Index?id=' + getTestSelectedId();
+        }
+
         function addCustomTest() {
-           document.location.href = '../Test/Index?id=00000000-0000-0000-0000-000000000000';
+            document.location.href = '../Test/Index?id=00000000-0000-0000-0000-000000000000';
         }
 
         function deleteTest() {
@@ -90,39 +113,51 @@
                 url: '@Url.Action("DeleteTest", "AdminPanel")',
                 data: { id: getTestSelectedId() },
                 type: 'POST',
-                success: function (data) {
+                success: function(data) {
                     alert(data);
                     document.location.href = document.location.href;
                 }
             });
-           
+
         }
-        
+
         function getTestSelectedId() {
-            var rowId =$("#jqGridTests").jqGrid('getGridParam','selrow');  
+            var rowId = $("#jqGridTests").jqGrid('getGridParam', 'selrow');
             var rowData = jQuery("#jqGridTests").getRowData(rowId);
             var colData = rowData['Id'];
             return colData;
         }
 
-        $(document).ready(function () {
+        function isTestFinished() {
+            var rowId = $("#jqGridTests").jqGrid('getGridParam', 'selrow');
+            var rowData = jQuery("#jqGridTests").getRowData(rowId);
+            var colData = rowData['Finished'];
+            return colData;
+        }
+
+        $(document).ready(function() {
+            getTests();
+        });
+
+        function getTests() {
             $("#jqGridTests").jqGrid({
                 url: '@Url.Action("GetTests", "AdminPanel")',
+                postData: {name : $("#testNameSearch").val()},
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
-                    { label: 'Test Id', name: 'Id', width: 50, key:true, sortable: false },
-                    { label: 'Name', name: 'Name', width: 200,sortable: false },
-                    { label: 'Subcategory', name: 'Subcategory', width: 200,sortable: false },
-                    { label: 'Start Date', name: 'StartDate', width: 100,sortable: false },
+                    { label: 'Test Id', name: 'Id', width: 0.1, key: true, sortable: false },
+                    { label: 'Name', name: 'Name', width: 200, sortable: false },
+                    { label: 'Subcategory', name: 'Subcategory', width: 150, sortable: false },
+                    { label: 'Start Date', name: 'StartDate', width: 100, sortable: false },
                     { label: 'Subscriptions', name: 'Subscriptions', width: 100, sortable: false },
-                    { label: 'Duration', name: 'Duration', width: 100,sortable: false }
+                    { label: 'Duration', name: 'Duration', width: 100, sortable: false },
+                    { label: 'Finished', name: 'Finished', width: 100, sortable: false }
                 ],
                 viewrecords: true,
                 width: 750,
                 height: 250,
                 rowNum: 20,
-                pager: "#jqGridPagerTests",
                 jsonReader: {
                     root: "rows",
                     page: "page",
@@ -132,15 +167,18 @@
                     userdata: "userdata"
                 },
             });
-        });
-
+        }
     </script>
     <table id="jqGridTests">
     </table>
-    <div id="jqGridPagerTests">
-    </div>
+    <input type="button" value="Results" onclick="testResults()" />
+    <input type="button" value="Add" onclick="addCustomTest()" /><input type="button"
+        value="Edit" onclick="editTest()" /><input type="button" value="Delete" onclick="deleteTest()" />
 </div>
 <script type="text/javascript">
+
+
+
     function menuClick(link) {
         closeAll();
         if (link === 'Categories') {

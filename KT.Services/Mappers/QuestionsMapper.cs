@@ -19,7 +19,7 @@ namespace KT.Services.Mappers
 				Text = entity.Text,
 				Argument = entity.CorrectArgument,
 				MultipleResponse = entity.MultipleAnswer,
-				Subcategory = (new SubcategoriesMapper()).Map(entity.Subcategory)
+				SubcategoryId =entity.SubcategoryId
 			};
 
 			return instance;
@@ -34,7 +34,7 @@ namespace KT.Services.Mappers
 				Text = dto.Text,
 				CorrectArgument = dto.Argument,
 				MultipleAnswer = dto.MultipleResponse,
-				Subcategory = (new SubcategoriesMapper()).Map(dto.Subcategory)
+				SubcategoryId = dto.SubcategoryId
 			};
 
 			return instance;
@@ -42,16 +42,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<QuestionDto> Map(IEnumerable<Question> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<QuestionDto>();
 		}
 
 		public EntityCollection<Question> Map(IEnumerable<QuestionDto> dtoList)
 		{
 			var collection = new EntityCollection<Question>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

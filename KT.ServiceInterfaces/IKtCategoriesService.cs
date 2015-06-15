@@ -10,7 +10,7 @@ namespace KT.ServiceInterfaces
 	public interface IKtCategoriesService
 	{
 		[OperationContract]
-		IEnumerable<CategoryDto> GetAll();
+		CategoryDto[] GetAll();
 
 		[OperationContract]
 		CategoryDto GetById(Guid id);
@@ -22,6 +22,6 @@ namespace KT.ServiceInterfaces
 		void Delete(Guid id);
 
 		[OperationContract]
-		Guid Save(string name, Guid? catId = null);
+		Guid Save(string username, string name, Guid? catId = null);
 	}
 }

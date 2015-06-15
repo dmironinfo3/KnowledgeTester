@@ -55,10 +55,27 @@ namespace KnowledgeTester.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return View("Index");
+				model.Subcategories = ServicesFactory.GetService<IKtSubcategoriesService>().GetAll().
+					Select(a => new SubcategoryModel(a, string.Empty)).ToList();
+
+				ViewBag.Message = string.Empty;
+
+				foreach (var val in ModelState.Values)
+				{
+					if (val.Errors.Count > 0)
+					{
+						foreach (var error in val.Errors)
+						{
+							ViewBag.Message += error.ErrorMessage + "\n\n";
+						}
+					}
+				}
+
+				ViewBag.Message += "Please review and try again!";
+				return View("Index", model);
 			}
 
-			var id = ServicesFactory.GetService<IKtTestService>().Save(model.Name, model.StartDate, model.EndDate, model.Duration, model.SubcategoryId, model.Id);
+			var id = ServicesFactory.GetService<IKtTestService>().Save(model.Name, model.StartDate, model.EndDate, model.Duration, model.SubcategoryId, model.Questions, model.Id);
 
 			return RedirectToAction("Index", "Test", new { id });
 		}

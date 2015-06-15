@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using KT.DB;
+using KT.DB.CRUD;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KT.Services.Mappers;
@@ -14,98 +15,90 @@ namespace KT.Services.Services
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "KtQuestionsService" in code, svc and config file together.
 	public class KtQuestionsService : IKtQuestionsService
 	{
+		private static readonly ICrud<Question> Repository = CrudFactory<Question>.Get();
+
 		public int GetCountBySubcategory(Guid subCatId)
 		{
-			using (var db = new KTEntities())
-			{
-				var count = db.Questions.Count(a => a.SubcategoryId.Equals(subCatId));
-				return count;
-			}
+			var count = Repository.ReadArray(a => a.SubcategoryId.Equals(subCatId)).Count();
+			return count;
 		}
 
 		public void Delete(Guid id)
 		{
-			using (var db = new KTEntities())
-			{
-				var q = db.Questions.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == id);
-
-				db.Questions.DeleteObject(q);
-				db.SaveChanges();
-			}
+			Repository.Delete(a => a.Id == id);
 		}
 
-		public IEnumerable<QuestionDto> GetBySubcategory(Guid id)
+		public QuestionDto[] GetBySubcategory(Guid id)
 		{
-			using (var db = new KTEntities())
-			{
-				var all = db.Questions.Where(a => a.SubcategoryId == id);
-				return (new QuestionsMapper()).Map(all);
-			}
+			var relatedObjects = new[] { "Answers" };
+			var all = Repository.ReadArray(a => a.SubcategoryId == id, relatedObjects);
+			return (new QuestionsMapper()).Map(all).ToArray();
 		}
 
 		public double GetUsability(Guid id)
 		{
-			using (var db = new KTEntities())
+			var testsRepository = CrudFactory<GeneratedTest>.Get();
+			var questionsRepository = CrudFactory<GeneratedQuestion>.Get();
+
+			var q = Repository.Read(a => a.Id == id);
+
+			if (q != null)
 			{
-				var q = db.Questions.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == id);
+				var allSubcatTests = testsRepository.ReadArray(a => a.Test.Subcategory.Id == q.SubcategoryId).Count();
 
-				if (q != null)
-				{
-					var allSubcatTests = db.GeneratedQuestions.Count(a => a.GeneratedTest.Test.Subcategory.Id == q.SubcategoryId);
+				var thisQuestionUsedIn = questionsRepository.ReadArray(a => a.QuestionId == id).Count();
 
-					var thisQuestionUsedIn = db.GeneratedQuestions.Count(a => a.Id==id);
-
-					if (allSubcatTests == 0) return 0;
-					double percentage = (0 / allSubcatTests) * 100;
-					return Math.Round(percentage, 2);
-				}
-				return 0;
+				if (allSubcatTests == 0) return 0;
+				double percentage = (thisQuestionUsedIn / allSubcatTests) * 100;
+				return Math.Round(percentage, 2);
 			}
+			return 0;
 		}
 
 		public QuestionDto GetById(Guid id)
 		{
-			using (var db = new KTEntities())
-			{
-				var q = db.Questions.Include("Answers").DefaultIfEmpty(null).FirstOrDefault(a => a.Id == id);
-				return (new QuestionsMapper()).Map(q);
-			}
+			var relatedObjects = new[] { "Subcategory", "Answers" };
+			var q = Repository.Read(a => a.Id == id, relatedObjects);
+			return (new QuestionsMapper()).Map(q);
 		}
 
 		public Guid Save(string text, Guid subCatId, Guid? qId = null, bool isMultiple = false, string argument = "")
 		{
-			using (var db = new KTEntities())
+
+			if (qId.HasValue && !qId.Equals(Guid.Empty))
 			{
-				if (qId.HasValue && !qId.Equals(Guid.Empty))
+				var q = Repository.Read(a => a.Id == qId);
+
+				if (q != null)
 				{
-					var q = db.Questions.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == qId);
+					q.Text = text;
+					q.MultipleAnswer = isMultiple;
+					q.CorrectArgument = argument;
 
-					if (q != null)
-					{
-						q.Text = text;
-						q.MultipleAnswer = isMultiple;
-						q.CorrectArgument = argument;
-						db.SaveChanges();
-					}
-
-
-					return qId.Value;
+					Repository.Update(q);
 				}
-				else
-				{
-					var q = new Question
-					{
-						Text = text,
-						Id = Guid.NewGuid(),
-						SubcategoryId = subCatId,
-						CorrectArgument = argument,
-						MultipleAnswer = isMultiple
-					};
-					db.Questions.AddObject(q);
-					db.SaveChanges();
-					return q.Id;
-				}
+				return qId.Value;
 			}
+			else
+			{
+				var q = new Question
+				{
+					Text = text,
+					Id = Guid.NewGuid(),
+					SubcategoryId = subCatId,
+					CorrectArgument = argument,
+					MultipleAnswer = isMultiple
+				};
+				q = Repository.Create(q);
+				return q.Id;
+			}
+		}
+
+		public QuestionDto[] GetAll()
+		{
+			var relatedObjects = new[] { "Answers" };
+			var all = Repository.ReadArray(a => true, relatedObjects).ToList();
+			return (new QuestionsMapper()).Map(all).ToArray();
 		}
 	}
 }

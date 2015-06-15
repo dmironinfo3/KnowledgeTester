@@ -36,16 +36,31 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<GeneratedAnswerDto> Map(IEnumerable<GeneratedAnswer> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<GeneratedAnswerDto>();
 		}
+
 
 		public EntityCollection<GeneratedAnswer> Map(IEnumerable<GeneratedAnswerDto> dtoList)
 		{
 			var collection = new EntityCollection<GeneratedAnswer>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;

@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using KT.DB;
+using KT.DB.CRUD;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KT.Services.Mappers;
@@ -15,76 +16,70 @@ namespace KT.Services.Services
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "KtUserTestsService" in code, svc and config file together.
 	public class KtUserTestsService : IKtUserTestsService
 	{
-		public void DoWork()
-		{
-		}
+		private static readonly ICrud<GeneratedTest> Repository = CrudFactory<GeneratedTest>.Get();
 
 		public bool IsTestGenerated(Guid id, string username, out GeneratedTestDto test)
 		{
-			using (var db = new KTEntities())
+			var studentTest = GetTest(id, username);
+
+			var testIsGenerated = studentTest != null;
+
+			if (testIsGenerated)
 			{
-				var studentTest =
-					db.GeneratedTests
-					.Include("GeneratedQuestions")
-					.Include("User")
-					.DefaultIfEmpty(null).FirstOrDefault(a => a.TestId.Equals(id) && a.Username.Equals(username));
-
-				var testIsGenerated = studentTest != null;
-
-				if (testIsGenerated)
-				{
-					test = (new GeneratedTestsMapper()).Map(studentTest);
-					return true;
-				}
+				test = (new GeneratedTestsMapper()).Map(studentTest);
+				return true;
 			}
+
 			test = null;
 			return false;
 		}
 
 		public GeneratedTestDto GenerateTest(Guid testId, string username)
 		{
-			using (var db = new KTEntities())
+			var userRepository = CrudFactory<User>.Get();
+			var testRepository = CrudFactory<Test>.Get();
+			var questionsRepository = CrudFactory<Question>.Get();
+
+			var test = testRepository.Read(a => a.Id == testId);
+			var student = userRepository.Read(a => a.Username == username);
+
+			if (test != null && student != null)
 			{
-				var test = db.Tests.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == testId);
-				var student = db.Users.DefaultIfEmpty(null).FirstOrDefault(a => a.Username == username);
+				var subCatQuestions = questionsRepository.ReadArray(a => a.SubcategoryId == test.SubcategoryId);
+				var selectedQuestions = new List<Question>();
 
-				if (test != null && student != null)
+				var rnd = new Random();
+				for (int i = 0; i < test.QuestionCount; i++)
 				{
-					var subCatQuestions = db.Questions.Where(a => a.SubcategoryId == test.SubcategoryId).ToList();
-					var selectedQuestions = new List<Question>();
-
-					var rnd = new Random();
-					for (int i = 0; i < 10; i++)
+					var valid = false;
+					while (!valid)
 					{
-						var valid = false;
-						while (!valid)
-						{
-							var s = subCatQuestions[rnd.Next(subCatQuestions.Count)];
+						var s = subCatQuestions[rnd.Next(subCatQuestions.Length)];
 
-							if (!selectedQuestions.Select(a => a.Id).Contains(s.Id))
-							{
-								valid = true;
-								selectedQuestions.Add(s);
-							}
+						if (!selectedQuestions.Select(a => a.Id).Contains(s.Id))
+						{
+							valid = true;
+							selectedQuestions.Add(s);
 						}
 					}
-
-					var st = new GeneratedTest()
-						{
-							Id = Guid.NewGuid(),
-							IsFinished = false,
-							IsVerified = false,
-							User = student,
-							MaxScore = 10,
-							Score = 0,
-							Test = test,
-							GeneratedQuestions = GetGeneratedQuestions(selectedQuestions)
-						};
-
-					db.GeneratedTests.AddObject(st);
-					db.SaveChanges();
-					return (new GeneratedTestsMapper()).Map(st);
 				}
+
+				var st = new GeneratedTest
+				{
+					Id = Guid.NewGuid(),
+					IsFinished = false,
+					IsVerified = false,
+					User = student,
+					MaxScore = test.QuestionCount.Value,
+					Score = 0,
+					Test = test
+				};
+
+				st = Repository.Create(st);
+
+				SaveQuestions(st, selectedQuestions);
+
+				return (new GeneratedTestsMapper()).Map(GetTest(testId, username));
 			}
 
 			return null;
@@ -92,126 +87,183 @@ namespace KT.Services.Services
 
 		public void FinishTest(string username, Guid testId)
 		{
-			using (var db = new KTEntities())
+			var studentTest = GetTest(testId, username);
+
+			if (studentTest != null)
 			{
-				var studentTest =
-					db.GeneratedTests.DefaultIfEmpty(null).FirstOrDefault(a => a.Username == username && a.TestId == testId);
-
-				if (studentTest != null)
+				int score = 0;
+				foreach (var question in studentTest.GeneratedQuestions)
 				{
-					int score = 0;
-					foreach (var question in studentTest.GeneratedQuestions)
+					int add = 1;
+					foreach (var answer in question.GeneratedAnswers)
 					{
-						int add = 1;
-						foreach (var answer in question.GeneratedAnswers)
+						if ((answer.IsSelected && !answer.Answer.IsCorrect) ||
+							(answer.Answer.IsCorrect && !answer.IsSelected))
 						{
-							if ((answer.IsSelected && !answer.Answer.IsCorrect) ||
-								(answer.Answer.IsCorrect && !answer.IsSelected))
-							{
-								add = 0;
-							}
+							add = 0;
 						}
-						score += add;
 					}
-
-					studentTest.IsFinished = true;
-					studentTest.Score = score;
-					db.SaveChanges();
+					score += add;
 				}
+
+				studentTest.IsFinished = true;
+				studentTest.Score = score;
+				Repository.Update(studentTest);
 			}
+		}
+
+		private void SendEmail(string username, Guid testId)
+		{
+			//sending email;
 		}
 
 		public bool IsValidInProgress(Guid testId, string username)
 		{
-			using (var db = new KTEntities())
-			{
-				var test = db.GeneratedTests.DefaultIfEmpty(null)
-					.FirstOrDefault(a => a.TestId == testId && username == a.Username);
+			var test = GetTest(testId, username);
 
-				if (test == null)
+			if (test == null)
+			{
+				//the test wasn't generated yet
+				return true;
+			}
+
+			//the test is ongoing, need to see if it's finished
+			var ongoing = test.Test.StartDate <= DateTime.Now &&
+						  test.Test.EndDate >= DateTime.Now;
+
+			if (ongoing)
+			{
+				if (!test.IsFinished)
 				{
-					//the test wasn't generated yet
 					return true;
 				}
-
-				//the test is ongoing, need to see if it's finished
-				var ongoing = test.Test.StartDate <= DateTime.Now &&
-							  test.Test.EndDate >= DateTime.Now;
-
-				if (ongoing)
-				{
-					if (!test.IsFinished)
-					{
-						return true;
-					}
-				}
-				return false;
 			}
+			return false;
 		}
 
 		public int GetScore(Guid testId, string username)
 		{
-			using (var db = new KTEntities())
+			var tst = GetTest(testId, username);
+			if (tst != null)
+				return tst.Score;
+			return 0;
+		}
+
+		public TestRestultRowDto[] GetTestResultRows(Guid testId)
+		{
+			var tst = Repository.ReadArray(a => a.TestId == testId);
+
+			return tst.Select(t => new TestRestultRowDto()
 			{
-				var tst = db.GeneratedTests.DefaultIfEmpty(null).FirstOrDefault(a => a.TestId == testId && a.Username == username);
-				if (tst != null)
-					return tst.Score;
-				return 0;
+				Username = t.Username,
+				FullName =
+					String.Format("{0} {1} ({2})", t.User.FirstName, t.User.LastName, t.Username),
+				Score = t.Score,
+				Validated = t.IsVerified
+			}).ToArray();
+		}
+
+		public TestRestultDto GetTestResults(Guid testId)
+		{
+			var testRepository = CrudFactory<Test>.Get();
+
+			var tst = Repository.ReadArray(a => a.TestId == testId);
+			var testName = testRepository.Read(a => a.Id == testId).Name;
+
+			return new TestRestultDto
+			{
+				Subscriptions = tst.Count(),
+				Name = testName,
+				AverageScore = tst.Average(a => a.Score),
+			};
+		}
+
+		public bool IsValidated(Guid id, string username)
+		{
+			var tst = Repository.Read(a => a.TestId == id && a.Username == username);
+
+			return tst != null && tst.IsVerified;
+		}
+
+		public TestReviewDto GetTestReview(Guid id, string user)
+		{
+			var tst = GetTest(id, user);
+
+			return (new TestReviewMapper()).Map(tst);
+		}
+
+		public void UpdateScore(Guid testId, string username, int score)
+		{
+			var tst = Repository.Read(a => a.TestId == testId && a.Username == username);
+
+			if (tst != null)
+			{
+				tst.Score = score;
+				Repository.Update(tst);
 			}
 		}
 
-		private EntityCollection<GeneratedQuestion> GetGeneratedQuestions(IEnumerable<Question> selectedQuestions)
+		public void Validate(Guid testId, string username)
 		{
-			var collection = new EntityCollection<GeneratedQuestion>();
+			var tst = Repository.Read(a => a.TestId == testId && a.Username == username);
+
+			if (tst != null)
+			{
+				tst.IsVerified = true;
+				Repository.Update(tst);
+				SendEmail(username, testId);
+			}
+		}
+
+		private void SaveQuestions(GeneratedTest st, IEnumerable<Question> selectedQuestions)
+		{
+			var generatedQuestionRepository = CrudFactory<GeneratedQuestion>.Get();
+
 			foreach (var selectedQuestion in selectedQuestions)
 			{
-				collection.Add(new GeneratedQuestion()
+				var question = new GeneratedQuestion
 				{
-					Id = new Guid(),
+					Id = Guid.NewGuid(),
 					Question = selectedQuestion,
-					ArgumentText = selectedQuestion.CorrectArgument,
-					GeneratedAnswers = GetGeneratedAnswers(selectedQuestion.Answers)
-				});
+					ArgumentText = String.Empty,
+					GeneratedTestId = st.Id
+				};
+
+				question = generatedQuestionRepository.Create(question);
+
+				SaveAnswers(question, selectedQuestion.Answers);
 			}
-			return collection;
 		}
 
-		private EntityCollection<GeneratedAnswer> GetGeneratedAnswers(IEnumerable<Answer> entityCollection)
+		private void SaveAnswers(GeneratedQuestion question, IEnumerable<Answer> entityCollection)
 		{
-			var collection = new EntityCollection<GeneratedAnswer>();
+			var generatedAnswersRepository = CrudFactory<GeneratedAnswer>.Get();
+
 			foreach (var answer in entityCollection)
 			{
-				collection.Add(new GeneratedAnswer()
+				var ans = new GeneratedAnswer()
 				{
-					Id = new Guid(),
+					Id = Guid.NewGuid(),
 					IsSelected = false,
-					AnswerId = answer.Id
-				});
+					AnswerId = answer.Id,
+					GeneratedQuestionId = question.Id
+				};
+
+				generatedAnswersRepository.Create(ans);
 			}
-			return collection;
 		}
 
-		private static int IsCorrect(IEnumerable<GeneratedAnswer> list, Question question)
+		private GeneratedTest GetTest(Guid id, string username)
 		{
-			var correctIds = question.Answers.Where(a => a.IsCorrect).Select(a => a.Id).ToList();
-			var selectedIds = list.Where(a => a.IsSelected).Select(a => a.Id).ToList();
-
-			if (correctIds.Count != selectedIds.Count)
+			var relatedObjects = new[]
 			{
-				return 0;
-			}
+				"GeneratedQuestions", "GeneratedQuestions.Question", "GeneratedQuestions.GeneratedAnswers",
+				"GeneratedQuestions.GeneratedAnswers.Answer", "User"
+			};
 
-			if (selectedIds.Any(selectedId => !correctIds.Contains(selectedId)))
-			{
-				return 0;
-			}
+			var studentTest = Repository.Read(a => a.TestId.Equals(id) && a.Username.Equals(username), relatedObjects);
 
-			if (correctIds.Any(correctId => !selectedIds.Contains(correctId)))
-			{
-				return 0;
-			}
-
-			return 1;
+			return studentTest;
 		}
 	}
 }

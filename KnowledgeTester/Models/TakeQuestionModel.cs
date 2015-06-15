@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using KT.DB.Objects;
 using KT.DTOs.Objects;
 
 namespace KnowledgeTester.Models
@@ -11,7 +10,7 @@ namespace KnowledgeTester.Models
 	{
 		public TakeQuestionModel(GeneratedQuestionDto ongoingQuestion)
 		{
-			Argument = ongoingQuestion.Question.Argument;
+			Argument = ongoingQuestion.Argument;
 			Answers = new List<TakeAnswerModel>();
 			Text = ongoingQuestion.Question.Text;
 			Id = ongoingQuestion.Question.Id;

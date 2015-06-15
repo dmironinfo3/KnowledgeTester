@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using KT.DB;
+using KT.DB.CRUD;
 using KT.DTOs.Objects;
 using KT.ServiceInterfaces;
 using KT.Services.Mappers;
@@ -13,35 +14,25 @@ namespace KT.Services.Services
 {
 	public class KtUsersService : IKtUsersService
 	{
-		public IEnumerable<UserDto> GetAll()
+		private static readonly ICrud<User> Repository = CrudFactory<User>.Get();
+
+		public UserDto[] GetAll()
 		{
-			using (var db = new KTEntities())
-			{
-				return (new UsersMapper().Map(db.Users.ToList()));
-			}
+			return (new UsersMapper().Map(Repository.ReadArray(a => true))).ToArray();
 		}
 
 		public UserDto GetWithTests(string userName)
 		{
-			using (var db = new KTEntities())
-			{
-				return (new UsersMapper().Map(db.Users.Include("Tests").
-				DefaultIfEmpty(null).
-				FirstOrDefault(a => a.Username.Equals(userName))));
-			}
+			var relatedObjects = new[] { "Tests" };
+
+			return (new UsersMapper().Map(Repository.Read(a => a.Username.Equals(userName), relatedObjects)));
 		}
 
 		public UserDto GetByKey(string userName)
 		{
-			
-			using (var db = new KTEntities())
-			{
-				var user = db.Users.
-			              DefaultIfEmpty(null).
-			              FirstOrDefault(a => a.Username.Equals(userName));
+			var user = Repository.Read(a => a.Username.Equals(userName));
 
-				return user == null ? null : (new UsersMapper()).Map(user);
-			}
+			return user == null ? null : (new UsersMapper()).Map(user);
 		}
 
 		public bool IsStudentExistent(string userName)
@@ -60,12 +51,11 @@ namespace KT.Services.Services
 
 		public UserDto Insert(UserDto st)
 		{
-			using (var db = new KTEntities())
-			{
-				db.Users.AddObject((new UsersMapper()).Map(st));
-				db.SaveChanges();
-				return st;
-			}
+			var mapper = new UsersMapper();
+
+			var user = mapper.Map(st);
+			var entity = Repository.Create(user);
+			return mapper.Map(entity);
 		}
 
 		public bool Authenticate(string username, string password)
@@ -77,30 +67,35 @@ namespace KT.Services.Services
 
 		public void Subscribe(string username, Guid testId)
 		{
-			using (var db = new KTEntities())
+			var relatedObjects = new[] { "Tests" };
+			var testRepository = CrudFactory<Test>.Get();
+
+			var user = Repository.Read(a => a.Username.Equals(username), relatedObjects);
+			var test = testRepository.Read(a => a.Id.Equals(testId));
+			if (user != null)
 			{
-				var user = db.Users.Include("Tests").DefaultIfEmpty(null).FirstOrDefault(a => a.Username.Equals(username));
-				var test = db.Tests.DefaultIfEmpty(null).FirstOrDefault(a => a.Id.Equals(testId));
-				if (user != null)
-				{
-					user.Tests.Add(test);
-					db.SaveChanges();
-				}
+				user.Tests.Add(test);
+				Repository.Update(user);
 			}
 		}
 
 		public void Unsubscribe(string username, Guid testId)
 		{
-			using (var db = new KTEntities())
+			var relatedObjects = new[] { "Tests" };
+			var testRepository = CrudFactory<Test>.Get();
+
+			var user = Repository.Read(a => a.Username.Equals(username), relatedObjects);
+			var test = testRepository.Read(a => a.Id.Equals(testId));
+			if (user != null)
 			{
-				var user = db.Users.Include("Tests").DefaultIfEmpty(null).FirstOrDefault(a => a.Username.Equals(username));
-				var test = db.Tests.DefaultIfEmpty(null).FirstOrDefault(a => a.Id.Equals(testId));
-				if (user != null)
-				{
-					user.Tests.Remove(test);
-					db.SaveChanges();
-				}
+				user.Tests.Remove(test);
+				Repository.Update(user);
 			}
+		}
+
+		public int GetSubscriptionsFor(Guid id)
+		{
+			return GetAll().Count(a => a.Subscriptions.Select(b => b.Id).Contains(id));
 		}
 	}
 }

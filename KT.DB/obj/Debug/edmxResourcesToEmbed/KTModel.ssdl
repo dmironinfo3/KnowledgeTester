@@ -143,6 +143,7 @@
     <Property Name="MinutesDuration" Type="int" Nullable="false" />
     <Property Name="SubcategoryId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="QuestionCount" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

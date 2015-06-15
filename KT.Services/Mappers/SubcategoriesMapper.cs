@@ -8,7 +8,7 @@ using KT.DTOs.Objects;
 
 namespace KT.Services.Mappers
 {
-	public class SubcategoriesMapper: IMapper<SubcategoryDto, Subcategory>
+	public class SubcategoriesMapper : IMapper<SubcategoryDto, Subcategory>
 	{
 		public SubcategoryDto Map(Subcategory entity)
 		{
@@ -16,6 +16,7 @@ namespace KT.Services.Mappers
 			{
 				Id = entity.Id,
 				Questions = (new QuestionsMapper()).Map(entity.Questions),
+				Tests = (new TestsMapper()).Map(entity.Tests),
 				CategoryId = entity.CategoryId,
 				Name = entity.Name,
 			};
@@ -29,6 +30,7 @@ namespace KT.Services.Mappers
 			{
 				Id = dto.Id,
 				Questions = (new QuestionsMapper()).Map(dto.Questions),
+				Tests = (new TestsMapper()).Map(dto.Tests),
 				CategoryId = dto.CategoryId,
 				Name = dto.Name,
 			};
@@ -38,16 +40,30 @@ namespace KT.Services.Mappers
 
 		public IEnumerable<SubcategoryDto> Map(IEnumerable<Subcategory> collection)
 		{
-			return collection.Select(Map);
+			try
+			{
+				if (collection != null && collection.Any())
+				{
+					return collection.Select(Map);
+				}
+			}
+			catch
+			{
+				// ignored
+			}
+			return new List<SubcategoryDto>();
 		}
 
 		public EntityCollection<Subcategory> Map(IEnumerable<SubcategoryDto> dtoList)
 		{
 			var collection = new EntityCollection<Subcategory>();
 
-			foreach (var dto in dtoList)
+			if (dtoList != null && dtoList.Any())
 			{
-				collection.Add(Map(dto));
+				foreach (var cat in dtoList)
+				{
+					collection.Add(Map(cat));
+				}
 			}
 
 			return collection;
