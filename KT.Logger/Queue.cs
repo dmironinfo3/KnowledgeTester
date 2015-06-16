@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using KT.Logger.ObserverPattern;
 
 namespace KT.Logger
@@ -9,7 +10,7 @@ namespace KT.Logger
 	internal class Queue : Subject
 	{
 		private static ConcurrentQueue<Entry> _queue;
-
+		private static bool _queueIsWrited;
 		internal void Init()
 		{
 			_queue = new ConcurrentQueue<Entry>();
@@ -24,20 +25,26 @@ namespace KT.Logger
 
 		private void Notify()
 		{
-			var entries = new List<Entry>();
-
-			if (_queue.Count >= QueueCapacity)
+			if (_queue.Count >= QueueCapacity && !_queueIsWrited)
 			{
-				for (int i = 0; i < QueueCapacity; i++)
-				{
-					Entry ent;
-					if (_queue.TryDequeue(out ent))
-					{
-						entries.Add(ent);
-					}
-				}
-				Notify(entries);
+				(new Thread(FreeQueue)).Start();
 			}
+		}
+
+		private void FreeQueue()
+		{
+			_queueIsWrited = true;
+			var entries = new List<Entry>();
+			for (int i = 0; i < QueueCapacity; i++)
+			{
+				Entry ent;
+				if (_queue.TryDequeue(out ent))
+				{
+					entries.Add(ent);
+				}
+			}
+			Notify(entries);
+			_queueIsWrited = false;
 		}
 
 		private static int? _queueCapacity;

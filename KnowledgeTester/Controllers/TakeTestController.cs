@@ -11,18 +11,18 @@ using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
-	public class TakeTestController : Controller
+	public class TakeTestController : BaseController
 	{
 		//
 		// GET: /TakeTest/
 
 		public ActionResult Index(Guid? id)
 		{
-			if (SessionWrapper.User == null || !SessionWrapper.UserIsLoggedIn)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
-
+			
 			if (id == null)
 			{
 				ViewBag.Message = "Please select a valid test to take!";
@@ -83,7 +83,7 @@ namespace KnowledgeTester.Controllers
 				}
 			}
 
-			ServicesFactory.GetService<IKtUserTestsService>().FinishTest(SessionWrapper.User.Username, model.TestId);
+			ServicesFactory.GetService<IKtUserTestsService>().FinishTest(model.Username, model.TestId);
 		}
 
 	}

@@ -19,7 +19,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.Subcategories.Include(relatedObjects).DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
+				var test = db.Subcategories.Include(relatedObjects).AsEnumerable().DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
 				return test;
 			}
 		}
@@ -28,7 +28,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.Subcategories.Include(relatedObjects).Where(a => predicate(a));
+				var test = db.Subcategories.Include(relatedObjects).AsEnumerable().Where(a => predicate(a));
 				return test.ToArray();
 			}
 		}
@@ -53,13 +53,13 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var subcategories = db.Subcategories.Where(a => predicate(a));
+				var subcategories = db.Subcategories.AsEnumerable().Where(a => predicate(a));
 
 				foreach (var subcat in subcategories)
 				{
 					db.Subcategories.DeleteObject(subcat);
-					db.SaveChanges();
 				}
+				db.SaveChanges();
 			}
 		}
 	}

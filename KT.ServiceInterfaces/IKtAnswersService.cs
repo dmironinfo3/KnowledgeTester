@@ -14,7 +14,7 @@ namespace KT.ServiceInterfaces
 		void Delete(Guid id);
 
 		[OperationContract]
-		void Save(Guid id, Guid questionId, string text, bool isCorrect);
+		Guid Save(Guid id, Guid questionId, string text, bool isCorrect);
 
 		[OperationContract]
 		void SaveTestAnswer(Guid ansId, bool selected);

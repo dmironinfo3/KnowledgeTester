@@ -11,15 +11,15 @@ using KT.ServiceInterfaces;
 
 namespace KnowledgeTester.Controllers
 {
-    public class TestReviewController : Controller
-    {
-        //
-        // GET: /TestReview/
+	public class TestReviewController : BaseController
+	{
+		//
+		// GET: /TestReview/
 
-        public ActionResult Index(Guid? id, string user)
-        {
+		public ActionResult Index(Guid? id, string user)
+		{
 			// user rights
-			if (!SessionWrapper.UserIsAdmin)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
@@ -30,28 +30,32 @@ namespace KnowledgeTester.Controllers
 				return RedirectToAction("Index", "AdminPanel");
 			}
 
-	        var dto = ServicesFactory.GetService<IKtUserTestsService>().GetTestReview(id.Value, user);
+			var dto = ServicesFactory.GetService<IKtUserTestsService>().GetTestReview(id.Value, user);
 
-	        var model = new TestReviewModel(dto)
-	        {
-		        Username = user,
-		        TestId = id.Value
-	        };
+			var model = new TestReviewModel(dto)
+			{
+				Username = user,
+				TestId = id.Value
+			};
 
 
-	        return View(model);
-        }
+			return View(model);
+		}
 
-	    public ActionResult Validate(Guid testId, string username, int? score)
-	    {
-		    if (score != null)
-		    {
-			    ServicesFactory.GetService<IKtUserTestsService>().UpdateScore(testId, username, score.Value);
-		    }
+		public ActionResult Validate(Guid testId, string username, int? score)
+		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (score != null)
+			{
+				ServicesFactory.GetService<IKtUserTestsService>().UpdateScore(testId, username, score.Value);
+			}
 
-			ServicesFactory.GetService<IKtUserTestsService>().Validate(testId, username);
+			ServicesFactory.GetService<IKtUserTestsService>().Validate(SessionWrapper.User.Username, testId, username);
 
-		    return RedirectToAction("Index", "TestResults", new {id = SessionWrapper.CurrentTestResultId});
-	    }
-    }
+			return RedirectToAction("Index", "TestResults", new { id = SessionWrapper.CurrentTestResultId });
+		}
+	}
 }

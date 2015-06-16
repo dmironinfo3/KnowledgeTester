@@ -35,13 +35,13 @@ namespace KT.Services.Services
 			return user == null ? null : (new UsersMapper()).Map(user);
 		}
 
-		public bool IsStudentExistent(string userName)
+		public bool Exists(string userName)
 		{
 			var st = GetByKey(userName);
 			return st != null;
 		}
 
-		public string GetStudentHint(string userName)
+		public string GetHint(string userName)
 		{
 			var st = GetByKey(userName);
 			if (st != null)
@@ -74,8 +74,9 @@ namespace KT.Services.Services
 			var test = testRepository.Read(a => a.Id.Equals(testId));
 			if (user != null)
 			{
-				user.Tests.Add(test);
-				Repository.Update(user);
+				var subscriptionsRepository = CrudFactory<User>.GetSubscriptionsRepository();
+
+				subscriptionsRepository.Subscribe(user,test);
 			}
 		}
 
@@ -88,14 +89,19 @@ namespace KT.Services.Services
 			var test = testRepository.Read(a => a.Id.Equals(testId));
 			if (user != null)
 			{
-				user.Tests.Remove(test);
-				Repository.Update(user);
+				var subscriptionsRepository = CrudFactory<User>.GetSubscriptionsRepository();
+
+				subscriptionsRepository.Unsubscribe(user, test);
 			}
 		}
 
-		public int GetSubscriptionsFor(Guid id)
+		/// <summary>
+		/// Method used for testing purposes, is not accessible from IKtUsersService
+		/// </summary>
+		/// <param name="id"></param>
+		public void Delete(string username)
 		{
-			return GetAll().Count(a => a.Subscriptions.Select(b => b.Id).Contains(id));
+			Repository.Delete(a=>a.Username==username);
 		}
 	}
 }

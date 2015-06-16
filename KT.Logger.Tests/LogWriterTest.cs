@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using KT.Logger.ObserverPattern;
 using NUnit.Framework;
 
@@ -46,9 +47,7 @@ namespace KT.Logger.Tests
 			//needed to force the file switch
 			WriteEnt(11);
 
-			var files = Directory.GetFiles(Environment.CurrentDirectory, "ktLog*.txt");
-
-			Assert.That(files.Length, Is.GreaterThanOrEqualTo(2));
+			Assert.That(Completed(2), Is.True);
 		}
 
 		[Test]
@@ -56,13 +55,14 @@ namespace KT.Logger.Tests
 		{
 			WriteEnt(11);
 
+			var completed = Completed(1);
+
 			var files = Directory.GetFiles(Environment.CurrentDirectory, "ktLog*.txt");
 
 			var file = files.First();
 
-			Assert.AreNotEqual(files.Length, 0);
+			Assert.That(completed, Is.True);
 			Assert.IsNotNull(file);
-
 			Assert.That(File.ReadAllLines(file).Length, Is.GreaterThanOrEqualTo(10));
 		}
 
@@ -82,6 +82,31 @@ namespace KT.Logger.Tests
 			{
 				File.Delete(file);
 			}
+		}
+
+		private static bool Completed(int filesCount)
+		{
+			//waiting for the thread to complete
+
+			var files = Directory.GetFiles(Environment.CurrentDirectory, "ktLog*.txt");
+			
+			var completed = false;
+			var iterations = 0;
+			var maxIterations = 60;
+			while (!completed && iterations <= maxIterations)
+			{
+				Thread.Sleep(1000);
+
+				if (files.Length >= filesCount)
+				{
+					completed = true;
+					continue;
+				}
+
+				files = Directory.GetFiles(Environment.CurrentDirectory, "ktLog*.txt");
+				iterations++;
+			}
+			return completed;
 		}
 	}
 }

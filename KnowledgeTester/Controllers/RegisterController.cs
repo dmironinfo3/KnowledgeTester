@@ -26,7 +26,7 @@ namespace KnowledgeTester.Controllers
 			if (!ModelState.IsValid)
 				return View("Index");
 
-			if (ServicesFactory.GetService<IKtUsersService>().IsStudentExistent(pagemodel.Username))
+			if (ServicesFactory.GetService<IKtUsersService>().Exists(pagemodel.Username))
 			{
 				ViewBag.Message = "This username is already registered in our database!";
 				return View("Index");

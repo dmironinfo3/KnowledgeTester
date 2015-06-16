@@ -19,7 +19,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var val = db.GeneratedQuestions.Include(relatedObjects).DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
+				var val = db.GeneratedQuestions.Include(relatedObjects).AsEnumerable().DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
 				return val;
 			}
 		}
@@ -28,7 +28,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var val = db.GeneratedQuestions.Include(relatedObjects).Where(a => predicate(a));
+				var val = db.GeneratedQuestions.Include(relatedObjects).AsEnumerable().Where(a => predicate(a));
 				return val.ToArray();
 			}
 		}
@@ -37,7 +37,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var val = db.GeneratedQuestions.DefaultIfEmpty(null).FirstOrDefault(a => a.Id == entity.Id);
+				var val = db.GeneratedQuestions.AsEnumerable().DefaultIfEmpty(null).FirstOrDefault(a => a.Id == entity.Id);
 
 				if (val != null)
 				{
@@ -53,7 +53,16 @@ namespace KT.DB.CRUD
 
 		public void Delete(Predicate<GeneratedQuestion> predicate)
 		{
-			throw new Exception("Generated question cannot be deleted!");
+			using (var db = new KTEntities())
+			{
+				var questions = db.GeneratedQuestions.AsEnumerable().Where(a => predicate(a));
+
+				foreach (var question in questions)
+				{
+					db.GeneratedQuestions.DeleteObject(question);
+				}
+				db.SaveChanges();
+			}
 		}
 	}
 }

@@ -1,0 +1,17 @@
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\obj\Debug\KT.Services.Tests.csprojResolveAssemblyReference.cache
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.Tests.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.DTOs.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.ServiceInterfaces.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\nunit.framework.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.DB.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.DTOs.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.ServiceInterfaces.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.DB.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\obj\Debug\KT.Services.Tests.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\obj\Debug\KT.Services.Tests.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.Tests.dll.config
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.EmailSender.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.EmailSender.pdb

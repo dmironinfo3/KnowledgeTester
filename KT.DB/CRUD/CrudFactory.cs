@@ -10,14 +10,19 @@ namespace KT.DB.CRUD
 	{
 		public static ICrud<T> Get()
 		{
-			var repository = typeof(ICrud<T>)
-				.Assembly.GetTypes()
-				.FirstOrDefault(t => !t.IsAbstract);
+			
+			var repository = typeof (ICrud<>)
+				.Assembly.GetTypes().First(a=>a.GetInterfaces().Contains(typeof(ICrud<T>)));
 
 			if (repository != null)
 				return (ICrud<T>)Activator.CreateInstance(repository);
 
 			throw new Exception("Not implemented type!");
+		}
+
+		public static ISubscriptionsRepository GetSubscriptionsRepository()
+		{
+			return new SubscriptionsRepository();
 		}
 	}
 }

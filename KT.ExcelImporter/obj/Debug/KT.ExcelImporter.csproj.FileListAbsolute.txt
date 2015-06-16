@@ -1,9 +1,9 @@
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\obj\Debug\KT.ExcelImporter.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\KT.ExcelImporter.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\KT.ExcelImporter.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\EPPlus.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\KT.DTOs.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\KT.DTOs.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\bin\Debug\EPPlus.xml
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\obj\Debug\KT.ExcelImporter.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\obj\Debug\KT.ExcelImporter.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.ExcelImporter\obj\Debug\KT.ExcelImporter.pdb

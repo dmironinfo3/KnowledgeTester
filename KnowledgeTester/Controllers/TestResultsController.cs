@@ -11,7 +11,7 @@ using KT.ServiceInterfaces;
 
 namespace KnowledgeTester.Controllers
 {
-	public class TestResultsController : Controller
+	public class TestResultsController : BaseController
 	{
 		//
 		// GET: /TestResults/
@@ -19,7 +19,7 @@ namespace KnowledgeTester.Controllers
 		public ActionResult Index(Guid? id)
 		{
 			// user rights
-			if (!SessionWrapper.UserIsAdmin)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
@@ -46,6 +46,10 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult GetUsers(string name)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			var s = ServicesFactory.GetService<IKtUserTestsService>()
 				.GetTestResultRows(SessionWrapper.CurrentTestResultId).ToList();
 

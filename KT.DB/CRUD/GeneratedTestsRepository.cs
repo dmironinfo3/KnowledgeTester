@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace KT.DB.CRUD
 {
-	public class GeneratedTestsRepository: ICrud<GeneratedTest>
+	public class GeneratedTestsRepository : ICrud<GeneratedTest>
 	{
 		public GeneratedTest Create(GeneratedTest entity)
 		{
@@ -19,8 +19,14 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.GeneratedTests.Include(relatedObjects).DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
-				return test;
+				var test = db.GeneratedTests.Include(relatedObjects).AsEnumerable();
+
+				if (test.Any())
+				{
+					return test.DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
+				}
+
+				return null;
 			}
 		}
 
@@ -28,8 +34,12 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.GeneratedTests.Include(relatedObjects).Where(a => predicate(a));
-				return test.ToArray();
+				var test = db.GeneratedTests.Include(relatedObjects).AsEnumerable();
+				if (test.Any())
+				{
+					return test.Where(a => predicate(a)).ToArray();
+				}
+				return new GeneratedTest[] { };
 			}
 		}
 
@@ -53,7 +63,16 @@ namespace KT.DB.CRUD
 
 		public void Delete(Predicate<GeneratedTest> predicate)
 		{
-			throw new Exception("Generated test cannot be deleted!");
+			using (var db = new KTEntities())
+			{
+				var tests = db.GeneratedTests.AsEnumerable().Where(a => predicate(a));
+
+				foreach (var test in tests)
+				{
+					db.GeneratedTests.DeleteObject(test);
+				}
+				db.SaveChanges();
+			}
 		}
 	}
 }

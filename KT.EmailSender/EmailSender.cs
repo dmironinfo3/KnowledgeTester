@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Net.Mail;
 using KT.DTOs;
@@ -11,19 +12,22 @@ namespace KT.EmailSender
 	{
 		public void Send(Email dto)
 		{
-			var mail = new MailMessage(dto.From, dto.To);
-
-			var client = new SmtpClient
+			var mail = new MailMessage(dto.From, dto.To)
 			{
-				Port = dto.Port,
-				DeliveryMethod = dto.DeliverMethod,
-				UseDefaultCredentials = dto.UseDefaultCredentials,
-				Host = dto.Host
+				Subject = dto.Subject,
+				Body = dto.Body,
+				IsBodyHtml = true,
 			};
 
-			mail.Subject = dto.Subject;
-			mail.Body = dto.Body;
-			client.Send(mail);
+			var smtp = new SmtpClient
+			{
+				Host = dto.Host,
+				Port = dto.Port,
+				Credentials = new NetworkCredential(dto.From, dto.FromPassword),
+				EnableSsl = true
+			};
+
+			smtp.Send(mail);
 		}
 	}
 }

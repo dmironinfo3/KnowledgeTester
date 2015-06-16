@@ -9,12 +9,12 @@ namespace KT.Logger
 	{
 		public void Debug(string message, string username = "")
 		{
-			Create(Level.Error, message, username);
+			Create(Level.Debug, message, username);
 		}
 
 		public void Info(string message, string username = "")
 		{
-			Create(Level.Error, message, username);
+			Create(Level.Info, message, username);
 		}
 
 		public void Error(string message, string username = "", Exception ex = null)

@@ -31,5 +31,8 @@ namespace KT.ServiceInterfaces
 
 		[OperationContract]
 		TestDto[] GetAllOtherThan(string username);
+
+		[OperationContract]
+		int GetSubscriptionsFor(Guid id);
 	}
 }

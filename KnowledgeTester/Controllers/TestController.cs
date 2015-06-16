@@ -10,7 +10,7 @@ using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
-	public class TestController : Controller
+	public class TestController : BaseController
 	{
 		//
 		// GET: /Test/
@@ -18,7 +18,7 @@ namespace KnowledgeTester.Controllers
 		public ActionResult Index(Guid? id)
 		{
 			// user rights
-			if (!SessionWrapper.UserIsAdmin)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
@@ -53,6 +53,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Save(TestModel model)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			if (!ModelState.IsValid)
 			{
 				model.Subcategories = ServicesFactory.GetService<IKtSubcategoriesService>().GetAll().

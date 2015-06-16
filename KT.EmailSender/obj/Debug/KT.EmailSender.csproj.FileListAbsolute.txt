@@ -5,3 +5,4 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\KT
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\EmailTemplate.html

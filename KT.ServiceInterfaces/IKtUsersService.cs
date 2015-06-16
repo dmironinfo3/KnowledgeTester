@@ -18,10 +18,10 @@ namespace KT.ServiceInterfaces
 		UserDto GetByKey(string userName);
 
 		[OperationContract]
-		bool IsStudentExistent(string userName);
+		bool Exists(string userName);
 
 		[OperationContract]
-		string GetStudentHint(string userName);
+		string GetHint(string userName);
 
 		[OperationContract]
 		UserDto Insert(UserDto st);
@@ -34,8 +34,5 @@ namespace KT.ServiceInterfaces
 
 		[OperationContract]
 		void Unsubscribe(string username, Guid testId);
-
-		[OperationContract]
-		int GetSubscriptionsFor(Guid id);
 	}
 }

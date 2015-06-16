@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -8,6 +9,7 @@ using System.Text;
 using KT.DB;
 using KT.DB.CRUD;
 using KT.DTOs.Objects;
+using KT.EmailSender;
 using KT.ServiceInterfaces;
 using KT.Services.Mappers;
 
@@ -45,7 +47,7 @@ namespace KT.Services.Services
 
 			if (test != null && student != null)
 			{
-				var subCatQuestions = questionsRepository.ReadArray(a => a.SubcategoryId == test.SubcategoryId);
+				var subCatQuestions = questionsRepository.ReadArray(a => a.SubcategoryId == test.SubcategoryId, new[] { "Answers" });
 				var selectedQuestions = new List<Question>();
 
 				var rnd = new Random();
@@ -64,20 +66,20 @@ namespace KT.Services.Services
 					}
 				}
 
-				var st = new GeneratedTest
+				var generatedTest = new GeneratedTest
 				{
 					Id = Guid.NewGuid(),
 					IsFinished = false,
 					IsVerified = false,
-					User = student,
+					Username = student.Username,
 					MaxScore = test.QuestionCount.Value,
 					Score = 0,
-					Test = test
+					TestId = test.Id
 				};
 
-				st = Repository.Create(st);
+				generatedTest = Repository.Create(generatedTest);
 
-				SaveQuestions(st, selectedQuestions);
+				SaveQuestions(generatedTest.Id, selectedQuestions);
 
 				return (new GeneratedTestsMapper()).Map(GetTest(testId, username));
 			}
@@ -112,9 +114,26 @@ namespace KT.Services.Services
 			}
 		}
 
-		private void SendEmail(string username, Guid testId)
+		private void SendEmail(string instruct, string username, Guid generatedTestId)
 		{
-			//sending email;
+			var user = CrudFactory<User>.Get().Read(a => a.Username == username);
+			var test = CrudFactory<GeneratedTest>.Get().Read(a => a.Id == generatedTestId, new []{"Test"});
+			var instructor = CrudFactory<User>.Get().Read(a => a.Username == instruct);
+
+			var templateInfo = new EmailTemplateInfo()
+			{
+				LastName = user.LastName,
+				FirstName = user.FirstName,
+				MaxScore = test.MaxScore,
+				Score = test.Score,
+				ProfFirstName = instructor.FirstName,
+				ProfLastName = instructor.LastName,
+				TestName = test.Test.Name
+			};
+
+			var email = EmailBuilder.Build(user.Email, test.Test.Name, templateInfo);
+
+			EmailBuilder.GetSender().Send(email);
 		}
 
 		public bool IsValidInProgress(Guid testId, string username)
@@ -151,7 +170,9 @@ namespace KT.Services.Services
 
 		public TestRestultRowDto[] GetTestResultRows(Guid testId)
 		{
-			var tst = Repository.ReadArray(a => a.TestId == testId);
+			var relatedObjects = new[] { "User" };
+
+			var tst = Repository.ReadArray(a => a.TestId == testId, relatedObjects);
 
 			return tst.Select(t => new TestRestultRowDto()
 			{
@@ -203,7 +224,7 @@ namespace KT.Services.Services
 			}
 		}
 
-		public void Validate(Guid testId, string username)
+		public void Validate(string instructor, Guid testId, string username)
 		{
 			var tst = Repository.Read(a => a.TestId == testId && a.Username == username);
 
@@ -211,42 +232,42 @@ namespace KT.Services.Services
 			{
 				tst.IsVerified = true;
 				Repository.Update(tst);
-				SendEmail(username, testId);
+				SendEmail(instructor, username, tst.Id);
 			}
 		}
 
-		private void SaveQuestions(GeneratedTest st, IEnumerable<Question> selectedQuestions)
+		private void SaveQuestions(Guid generatedTestId, IEnumerable<Question> selectedQuestions)
 		{
 			var generatedQuestionRepository = CrudFactory<GeneratedQuestion>.Get();
 
 			foreach (var selectedQuestion in selectedQuestions)
 			{
-				var question = new GeneratedQuestion
+				var generatedQuestion = new GeneratedQuestion
 				{
 					Id = Guid.NewGuid(),
-					Question = selectedQuestion,
+					QuestionId = selectedQuestion.Id,
 					ArgumentText = String.Empty,
-					GeneratedTestId = st.Id
+					GeneratedTestId = generatedTestId
 				};
 
-				question = generatedQuestionRepository.Create(question);
+				generatedQuestionRepository.Create(generatedQuestion);
 
-				SaveAnswers(question, selectedQuestion.Answers);
+				SaveAnswers(generatedQuestion.Id, selectedQuestion.Answers);
 			}
 		}
 
-		private void SaveAnswers(GeneratedQuestion question, IEnumerable<Answer> entityCollection)
+		private void SaveAnswers(Guid generatedQuestionId, IEnumerable<Answer> selectedAnswers)
 		{
 			var generatedAnswersRepository = CrudFactory<GeneratedAnswer>.Get();
 
-			foreach (var answer in entityCollection)
+			foreach (var selectedAnswer in selectedAnswers)
 			{
 				var ans = new GeneratedAnswer()
 				{
 					Id = Guid.NewGuid(),
 					IsSelected = false,
-					AnswerId = answer.Id,
-					GeneratedQuestionId = question.Id
+					AnswerId = selectedAnswer.Id,
+					GeneratedQuestionId = generatedQuestionId
 				};
 
 				generatedAnswersRepository.Create(ans);
@@ -258,7 +279,7 @@ namespace KT.Services.Services
 			var relatedObjects = new[]
 			{
 				"GeneratedQuestions", "GeneratedQuestions.Question", "GeneratedQuestions.GeneratedAnswers",
-				"GeneratedQuestions.GeneratedAnswers.Answer", "User"
+				"GeneratedQuestions.GeneratedAnswers.Answer", "User", "Test"
 			};
 
 			var studentTest = Repository.Read(a => a.TestId.Equals(id) && a.Username.Equals(username), relatedObjects);

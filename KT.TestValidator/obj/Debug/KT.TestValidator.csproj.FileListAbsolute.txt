@@ -1,4 +1,0 @@
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.TestValidator\bin\Debug\KT.TestValidator.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.TestValidator\bin\Debug\KT.TestValidator.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.TestValidator\obj\Debug\KT.TestValidator.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.TestValidator\obj\Debug\KT.TestValidator.pdb

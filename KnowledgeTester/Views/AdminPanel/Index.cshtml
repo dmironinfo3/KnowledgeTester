@@ -90,10 +90,10 @@
         }
 
          function testResults() {
-            
-             var finished = isTestFinished();
-             if (finished === 'false') {
-                 alert("The test is not finised, please try again later!");
+             var finished = isTest('Finished');
+             
+             if (finished === false) {
+                 alert("The test is not finised, you cannnot view the results!");
                  return;
              }
             var id = getTestSelectedId();
@@ -101,6 +101,14 @@
          }
 
         function editTest() {
+            var scheduled = isTest('Scheduled');
+
+            if (scheduled === false) {
+                alert("You can not edit an 'In Progress' or 'Finished' test!");
+                return;
+            }
+
+
             document.location.href = '../Test/Index?id=' + getTestSelectedId();
         }
 
@@ -109,6 +117,15 @@
         }
 
         function deleteTest() {
+
+            var scheduled = isTest('Scheduled');
+
+            if (scheduled === false) {
+                alert("You can not delete an 'In Progress' or 'Finished' test!");
+                return;
+            }
+
+
             $.ajax({
                 url: '@Url.Action("DeleteTest", "AdminPanel")',
                 data: { id: getTestSelectedId() },
@@ -128,11 +145,12 @@
             return colData;
         }
 
-        function isTestFinished() {
+        function isTest(status) {
             var rowId = $("#jqGridTests").jqGrid('getGridParam', 'selrow');
             var rowData = jQuery("#jqGridTests").getRowData(rowId);
-            var colData = rowData['Finished'];
-            return colData;
+            var colData = rowData['Status'];
+
+            return colData === status;
         }
 
         $(document).ready(function() {
@@ -152,7 +170,7 @@
                     { label: 'Start Date', name: 'StartDate', width: 100, sortable: false },
                     { label: 'Subscriptions', name: 'Subscriptions', width: 100, sortable: false },
                     { label: 'Duration', name: 'Duration', width: 100, sortable: false },
-                    { label: 'Finished', name: 'Finished', width: 100, sortable: false }
+                    { label: 'Status', name: 'Status', width: 100, sortable: false }
                 ],
                 viewrecords: true,
                 width: 750,

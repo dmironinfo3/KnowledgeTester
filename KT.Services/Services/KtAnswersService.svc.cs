@@ -34,7 +34,7 @@ namespace KT.Services.Services
 			Repository.Delete(a => a.Id == id);
 		}
 
-		public void Save(Guid id, Guid questionId, string text, bool isCorrect)
+		public Guid Save(Guid id, Guid questionId, string text, bool isCorrect)
 		{
 			var ans = Repository.Read(a => a.Id == id);
 
@@ -43,6 +43,7 @@ namespace KT.Services.Services
 				ans.Text = text;
 				ans.IsCorrect = isCorrect;
 				Repository.Update(ans);
+				return ans.Id;
 			}
 			else
 			{
@@ -55,6 +56,7 @@ namespace KT.Services.Services
 				};
 
 				Repository.Create(ans);
+				return ans.Id;
 			}
 		}
 

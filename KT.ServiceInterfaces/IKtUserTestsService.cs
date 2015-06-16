@@ -39,6 +39,6 @@ namespace KT.ServiceInterfaces
 		void UpdateScore(Guid testId, string username, int score);
 
 		[OperationContract]
-		void Validate(Guid testId, string username);
+		void Validate(string instructor, Guid testId, string username);
 	}
 }

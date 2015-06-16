@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,7 @@
     <Compile Include="EmailBuilder.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="EmailSender.cs" />
+    <Compile Include="EmailTemplateInfo.cs" />
     <Compile Include="IEmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +53,11 @@
       <Project>{F6A8C081-B8AD-429C-833F-8A368D705280}</Project>
       <Name>KT.DTOs</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EmailTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

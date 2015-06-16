@@ -115,8 +115,15 @@ namespace KT.Services.Services
 		{
 			var all = GetAll().Where(a =>
 				!GetAllUpcoming(username).Select(b => b.Id).Contains(a.Id) &&
-					  !GetFinishedTests(username).Select(b => b.Id).Contains(a.Id));
+					  !GetFinishedTests(username).Select(b => b.Id).Contains(a.Id) && a.EndTime>=DateTime.Now);
 			return all.ToArray();
+		}
+
+		public int GetSubscriptionsFor(Guid id)
+		{
+			var relatedObjects = new[] { "Users" };
+			var test = Repository.Read(a => a.Id == id, relatedObjects);
+			return test.Users.Count;
 		}
 	}
 }

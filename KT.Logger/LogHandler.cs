@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using KT.Logger.ObserverPattern;
 
@@ -43,13 +44,13 @@ namespace KT.Logger
 		{
 			switch (lvl.ToUpper())
 			{
-					case "ERROR":
+				case "ERROR":
 					return Level.Error;
-					case "DEBUG":
+				case "DEBUG":
 					return Level.Debug;
-					case "INFO":
+				case "INFO":
 					return Level.Info;
-					default:
+				default:
 					return Level.Unknown;
 			}
 		}

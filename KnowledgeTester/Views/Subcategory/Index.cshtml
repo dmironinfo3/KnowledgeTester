@@ -43,6 +43,13 @@
             }
 
             function editQuestion() {
+                var usability = getQuestionSelectedUsability();
+
+                if (usability !== '0 %') {
+                    alert("You can not edit the question, as it's used in tests!");
+                    return;
+                }
+
                 document.location.href = '../../Question/Index?id=' + getQuestionSelectedId();
             }
 
@@ -51,6 +58,14 @@
             }
 
             function deleteQuestion() {
+
+                var usability = getQuestionSelectedUsability();
+
+                if (usability !== '0 %') {
+                    alert("You can not delete the question, as it's used in tests!");
+                    return;
+                }
+
                 $.ajax({
                     url: '@Url.Action("DeleteQuestion", "Subcategory")',
                     data: { id: getQuestionSelectedId() },
@@ -66,6 +81,13 @@
                 var rowId = $("#jqGridQuestions").jqGrid('getGridParam', 'selrow');
                 var rowData = jQuery("#jqGridQuestions").getRowData(rowId);
                 var colData = rowData['Id'];
+                return colData;
+            }
+
+            function getQuestionSelectedUsability() {
+                var rowId = $("#jqGridQuestions").jqGrid('getGridParam', 'selrow');
+                var rowData = jQuery("#jqGridQuestions").getRowData(rowId);
+                var colData = rowData['Usability'];
                 return colData;
             }
 

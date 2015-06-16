@@ -12,7 +12,7 @@ namespace KnowledgeTester.Models
 	{
 		public StudentPanelModel(UserDto dto)
 		{
-			DisplayName = dto.Username;
+			DisplayName = String.Format("{0} {1} ({2})", dto.FirstName, dto.LastName, dto.Username);
 
 			if (dto.Subscriptions != null && dto.Subscriptions.Any())
 			{

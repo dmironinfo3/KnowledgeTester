@@ -51,6 +51,7 @@
     <Compile Include="CRUD\GeneratedAnswerRepository.cs" />
     <Compile Include="CRUD\ICrud.cs" />
     <Compile Include="CRUD\QuestionsRepository.cs" />
+    <Compile Include="CRUD\SubscriptionsRepository.cs" />
     <Compile Include="CRUD\UsersRepository.cs" />
     <Compile Include="CRUD\GeneratedTestsRepository.cs" />
     <Compile Include="CRUD\SubcategoriesRepository.cs" />

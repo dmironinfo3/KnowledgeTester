@@ -10,7 +10,7 @@ using KnowledgeTester.Ninject;
 
 namespace KnowledgeTester.Controllers
 {
-	public class QuestionController : Controller
+	public class QuestionController : BaseController
 	{
 		//
 		// GET: /Question/
@@ -19,11 +19,12 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult Index(Guid? id)
 		{
-			// user rights
-			if (!SessionWrapper.UserIsAdmin)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
+			// user rights
+			
 
 			if (TempData["ModelInvalid"] != null)
 			{
@@ -63,6 +64,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Save(QuestionModel model)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			if (!ModelState.IsValid)
 			{
 				TempData["ModelInvalid"] = "The save was not performed. Please review the page fileds and save again.";
@@ -88,6 +93,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult AddNewAnswer(Guid id)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			ServicesFactory.GetService<IKtAnswersService>().AddEmpyFor(id);
 			return RedirectToAction("Index", "Question", new { id });
 		}
@@ -95,6 +104,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteAnswer(Guid id, Guid questionId)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			ServicesFactory.GetService<IKtAnswersService>().Delete(id);
 			return RedirectToAction("Index", "Question", new { id = questionId });
 		}

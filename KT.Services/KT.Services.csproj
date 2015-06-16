@@ -118,13 +118,13 @@
       <Project>{F6A8C081-B8AD-429C-833F-8A368D705280}</Project>
       <Name>KT.DTOs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KT.EmailSender\KT.EmailSender.csproj">
+      <Project>{918C0B08-477E-4BFA-AF0D-1F3E699E20D9}</Project>
+      <Name>KT.EmailSender</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KT.ServiceInterfaces\KT.ServiceInterfaces.csproj">
       <Project>{2419B4E5-7AF9-4BC8-84F6-104DA723BA03}</Project>
       <Name>KT.ServiceInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KT.Utils\KT.Utils.csproj">
-      <Project>{50BF3AA5-C709-4569-B724-F52BAB76D69A}</Project>
-      <Name>KT.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>64004</DevelopmentServerPort>
+          <DevelopmentServerPort>64646</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -19,7 +19,9 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var val = db.Users.Include(relatedObjects).DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
+				var val = db.Users.Include(relatedObjects).AsEnumerable().
+					DefaultIfEmpty(null).
+					FirstOrDefault(a => predicate(a));
 				return val;
 			}
 		}
@@ -28,7 +30,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var val = db.Users.Include(relatedObjects).Where(a => predicate(a));
+				var val = db.Users.Include(relatedObjects).AsEnumerable().Where(a => predicate(a));
 				return val.ToArray();
 			}
 		}
@@ -51,7 +53,16 @@ namespace KT.DB.CRUD
 
 		public void Delete(Predicate<User> predicate)
 		{
-			throw new Exception("User cannot be deleted!");
+			using (var db = new KTEntities())
+			{
+				var user = db.Users.AsEnumerable().Where(a => predicate(a));
+
+				foreach (var test in user)
+				{
+					db.Users.DeleteObject(test);
+				}
+				db.SaveChanges();
+			}
 		}
 	}
 }

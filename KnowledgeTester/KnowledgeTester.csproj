@@ -140,10 +140,12 @@
     <Compile Include="Code\KtExcelHandler.cs" />
     <Compile Include="Code\Log.cs" />
     <Compile Include="Code\Utils.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\TestResultsController.cs" />
     <Compile Include="Controllers\TestReviewController.cs" />
     <Compile Include="Helpers\EndDateValidator.cs" />
     <Compile Include="Helpers\QuestionsValidator.cs" />
+    <Compile Include="Helpers\UserRights.cs" />
     <Compile Include="Models\TestResultsModel.cs" />
     <Compile Include="Models\TestReviewAnswerModel.cs" />
     <Compile Include="Models\TestReviewModel.cs" />
@@ -443,7 +445,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51839</DevelopmentServerPort>
+          <DevelopmentServerPort>61101</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

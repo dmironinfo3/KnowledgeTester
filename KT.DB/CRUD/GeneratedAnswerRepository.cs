@@ -19,7 +19,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.GeneratedAnswers.Include(relatedObjects).DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
+				var test = db.GeneratedAnswers.Include(relatedObjects).AsEnumerable().DefaultIfEmpty(null).FirstOrDefault(a => predicate(a));
 				return test;
 			}
 		}
@@ -28,7 +28,7 @@ namespace KT.DB.CRUD
 		{
 			using (var db = new KTEntities())
 			{
-				var test = db.GeneratedAnswers.Include(relatedObjects).Where(a => predicate(a));
+				var test = db.GeneratedAnswers.Include(relatedObjects).AsEnumerable().Where(a => predicate(a));
 				return test.ToArray();
 			}
 		}
@@ -53,7 +53,16 @@ namespace KT.DB.CRUD
 
 		public void Delete(Predicate<GeneratedAnswer> predicate)
 		{
-			throw new Exception("Generated Answer cannot be deleted!");
+			using (var db = new KTEntities())
+			{
+				var answers = db.GeneratedAnswers.AsEnumerable().Where(a => predicate(a));
+
+				foreach (var answer in answers)
+				{
+					db.GeneratedAnswers.DeleteObject(answer);
+				}
+				db.SaveChanges();
+			}
 		}
 	}
 }

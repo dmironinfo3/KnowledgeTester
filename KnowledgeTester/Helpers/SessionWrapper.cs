@@ -94,6 +94,18 @@ namespace KnowledgeTester.Helpers
 			}
 		}
 
+		public static UserRights CurrentUserRights
+		{
+			get
+			{
+				if (User != null && UserIsAdmin)
+					return UserRights.Admin;
+				if (User != null)
+					return UserRights.User;
+				return UserRights.None;
+			}
+		}
+
 		internal static void Logout()
 		{
 			HttpContext.Current.Session.Clear();

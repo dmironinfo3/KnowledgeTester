@@ -13,7 +13,7 @@ using KT.ExcelImporter;
 
 namespace KnowledgeTester.Controllers
 {
-	public class SubcategoryController : Controller
+	public class SubcategoryController : BaseController
 	{
 		//
 		// GET: /Subcategory/
@@ -23,7 +23,7 @@ namespace KnowledgeTester.Controllers
 		public ActionResult Index(Guid? id)
 		{
 			// user rights
-			if (!SessionWrapper.UserIsAdmin)
+			if (!AdminAllowed)
 			{
 				return RedirectToAction("Index", "Home");
 			}
@@ -61,6 +61,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Save(SubcategoryModel model)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			if (!ModelState.IsValid)
 			{
 				return View("Index", model);
@@ -76,6 +80,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult DeleteQuestion(Guid id)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			ServicesFactory.GetService<IKtQuestionsService>().Delete(id);
 
 			return Json("Question is deleted!", JsonRequestBehavior.AllowGet);
@@ -83,6 +91,10 @@ namespace KnowledgeTester.Controllers
 
 		public ActionResult GetQuestions(string text)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			var s = new List<QuestionDto>();
 			if (!SessionWrapper.CurrentSubcategoryId.Equals(Guid.Empty))
 			{
@@ -104,7 +116,7 @@ namespace KnowledgeTester.Controllers
 						select new
 						{
 							Id = row.Id,
-							Text = row.Text.Substring(0, row.Text.Length < 25 ? row.Text.Length : 25) + (row.Text.Length < 25 ? string.Empty : "..."),
+							Text = row.Text.Substring(0, row.Text.Length < 75 ? row.Text.Length : 75) + (row.Text.Length < 75 ? string.Empty : "..."),
 							Multiple = row.MultipleResponse.ToString().ToLower(),
 							Usability = ServicesFactory.GetService<IKtQuestionsService>().GetUsability(row.Id) + " %"
 						}).ToArray()
@@ -116,6 +128,10 @@ namespace KnowledgeTester.Controllers
 		[HttpPost]
 		public ActionResult Upload(HttpPostedFileBase file)
 		{
+			if (!AdminAllowed)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			if (file != null)
 			{
 				if (file.ContentLength > 0)
