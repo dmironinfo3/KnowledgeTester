@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Net.Mail;
-using KT.DTOs;
 
 namespace KT.EmailSender
 {

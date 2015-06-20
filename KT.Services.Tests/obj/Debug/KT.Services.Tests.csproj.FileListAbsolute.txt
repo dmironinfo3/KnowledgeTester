@@ -15,3 +15,5 @@ D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\obj\Debug
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.Services.Tests.dll.config
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.EmailSender.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\KT.EmailSender.pdb
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\Ninject.dll
+D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.Services.Tests\bin\Debug\Ninject.xml

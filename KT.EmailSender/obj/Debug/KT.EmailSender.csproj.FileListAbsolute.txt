@@ -1,7 +1,5 @@
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\KT.EmailSender.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\KT.EmailSender.pdb
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\KT.DTOs.dll
-D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\bin\Debug\KT.DTOs.pdb
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.csprojResolveAssemblyReference.cache
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.dll
 D:\Personal Stuff\Facultate\DOTNET 2\KnowledgeTester\KT.EmailSender\obj\Debug\KT.EmailSender.pdb

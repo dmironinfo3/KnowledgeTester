@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text;
-using KT.DTOs;
 
 namespace KT.EmailSender
 {

@@ -49,12 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KT.DTOs\KT.DTOs.csproj">
-      <Project>{F6A8C081-B8AD-429C-833F-8A368D705280}</Project>
-      <Name>KT.DTOs</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="EmailTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
